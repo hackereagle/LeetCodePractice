@@ -1,0 +1,2 @@
+# LeetCodePractice
+LeetCode practicing codes
