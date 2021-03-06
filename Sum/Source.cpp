@@ -29,7 +29,7 @@ std::vector<int> twoSum(std::vector<int>& nums, int target)
 	return index;
 }
 
-void main()
+int main()
 {
 	int src[] = {2, 7, 11, 15};
 	//int src[] = {3, 2, 4};
@@ -37,5 +37,6 @@ void main()
 	std::vector<int> index = twoSum(nums, 9);
 	std::cout << "[" << index[0] << ", " << index[1] << "]" << std::endl;
 
-	system("pause");
+	getchar();
+	return EXIT_SUCCESS;
 }
