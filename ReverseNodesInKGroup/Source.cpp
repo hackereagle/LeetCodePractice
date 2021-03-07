@@ -22,9 +22,19 @@ ListNode* CreateTestData()
     return data;
 }
 
+bool IsListNodeEqual(ListNode* one, ListNode* other, int len)
+{
+    for(int i = 0; i < len; i++){
+        
+    }
+}
+
 void Example1Test(std::unique_ptr<ReverseNodeInKGroup>& obj, ListNode* data)
 {
+    obj->reverseKGroup(data, 2);
 
+    // make answer
+    ListNode *ans = new ListNode();
 }
 
 int main(int argc, char** argv)
