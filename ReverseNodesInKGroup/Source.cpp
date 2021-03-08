@@ -44,16 +44,22 @@ void Example1Test(std::unique_ptr<ReverseNodeInKGroup>& obj, ListNode* data)
 {
     ListNode* result = obj->reverseKGroup(data, 2);
 
-    // make answer
-    int* ansVal = new int[5]{2, 1, 3, 4, 5};
+    // make Example1Test answer
+    int len = 5;
+    int* ansVal = new int[len]{2, 1, 3, 4, 5};
     ListNode* ans = new ListNode(*(ansVal));
     ListNode* temp = ans;
-    for(int i = 0; i < 5 - 1; i++){
+    for(int i = 0; i < len - 1; i++){
         ans->next = new ListNode(*(ansVal + i + 1));
         ans = ans->next;
     }
 
-    static_assert(IsListNodeEqual(ans, result));
+    if(IsListNodeEqual(ans, result, len)){
+        std::cout << "Example1 is OK" << std::endl;
+    }
+    else{
+        std::cout << "Example1 is FAIL" << std::endl;
+    }
 }
 
 int main(int argc, char** argv)

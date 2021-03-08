@@ -10,5 +10,12 @@ ReverseNodeInKGroup::~ReverseNodeInKGroup()
 
 ListNode* ReverseNodeInKGroup::reverseKGroup(ListNode* head, int k)
 {
-    return nullptr;
+    ListNode* result = nullptr;
+    if(k > 1){
+
+    }
+    else{
+        result = head;
+    }
+    return result;
 }
