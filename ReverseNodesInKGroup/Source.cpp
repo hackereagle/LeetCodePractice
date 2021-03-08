@@ -24,17 +24,36 @@ ListNode* CreateTestData()
 
 bool IsListNodeEqual(ListNode* one, ListNode* other, int len)
 {
+    bool IsEqual = true;
+    ListNode* _one = one;
+    ListNode* _other = other;
     for(int i = 0; i < len; i++){
-        
+        if(_one->val != _other->val) {
+            IsEqual = false;
+            break;
+        }
+
+        _one = _one->next;
+        _other = _other->next;
     }
+
+    return IsEqual;
 }
 
 void Example1Test(std::unique_ptr<ReverseNodeInKGroup>& obj, ListNode* data)
 {
-    obj->reverseKGroup(data, 2);
+    ListNode* result = obj->reverseKGroup(data, 2);
 
     // make answer
-    ListNode *ans = new ListNode();
+    int* ansVal = new int[5]{2, 1, 3, 4, 5};
+    ListNode* ans = new ListNode(*(ansVal));
+    ListNode* temp = ans;
+    for(int i = 0; i < 5 - 1; i++){
+        ans->next = new ListNode(*(ansVal + i + 1));
+        ans = ans->next;
+    }
+
+    static_assert(IsListNodeEqual(ans, result));
 }
 
 int main(int argc, char** argv)

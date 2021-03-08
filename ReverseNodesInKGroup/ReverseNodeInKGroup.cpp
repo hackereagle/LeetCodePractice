@@ -8,6 +8,7 @@ ReverseNodeInKGroup::~ReverseNodeInKGroup()
 {
 }
 
-ReverseNodeInKGroup::ListNode* reverseKGroup(ListNode* head, int k)
+ListNode* ReverseNodeInKGroup::reverseKGroup(ListNode* head, int k)
 {
+    return nullptr;
 }
