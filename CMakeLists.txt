@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.4.0)
 set(PROJECT_NAME LeetCodePractice)
+project(${PROJECT_NAME})
 
 add_subdirectory(Sum)
 add_subdirectory(ReverseNodesInKGroup)
+add_subdirectory(Roman2Integer)
