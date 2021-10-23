@@ -75,10 +75,10 @@ int main(int argc, char** argv)
 {
 	std::unique_ptr<Roman2IntegerSolutionTesting> test = std::make_unique<Roman2IntegerSolutionTesting>();
 	test->TestInput_III_Output_3();
-	//test->TestInput_IV_Output_4();
-	//test->TestInput_IX_Output_9();
-	//test->TestInput_LVIII_Output_58();
-	//test->TestInput_MCMXCIV_Output_1994();
+	test->TestInput_IV_Output_4();
+	test->TestInput_IX_Output_9();
+	test->TestInput_LVIII_Output_58();
+	test->TestInput_MCMXCIV_Output_1994();
 
 	getchar();
 	return EXIT_SUCCESS;
