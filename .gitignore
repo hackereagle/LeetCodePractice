@@ -36,7 +36,7 @@ CMakeLists.txt.user
 CMakeFiles
 CMakeScripts
 Testing
-Makefile
+#Makefile
 cmake_install.cmake
 install_manifest.txt
 compile_commands.json
@@ -45,10 +45,7 @@ _deps
 
 # other
 build/
-Server/build/*
 *.jpg
-Client/DemoCommuniImage/Bin/*
-Client/DemoCommuniImage/Bin/
 *.pdb
 .exe.config
 
