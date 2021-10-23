@@ -12,6 +12,7 @@ public:
     ListNode* reverseKGroup(ListNode* head, int k);
 
 private:
+    ListNode* reverseKElements(ListNode* head, int k);
 };
 
 
