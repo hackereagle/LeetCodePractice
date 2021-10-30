@@ -1,6 +1,7 @@
 #ifndef _ASSERT_CLASS_H_
 #define _ASSERT_CLASS_H_
 
+#include <iostream>
 #include <memory>
 
 class AssertClass
