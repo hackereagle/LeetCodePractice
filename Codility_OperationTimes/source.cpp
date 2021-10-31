@@ -44,7 +44,7 @@ public:
 		std::cout << "times: " << times << std::endl;
 		std::cout << "elapsed time: " << elapsed << "ms" << std::endl;
 
-		AssertClass::GetInstance().Assert(times == 5, "TestInput_011100_Output_28");
+		AssertClass::GetInstance().Assert(times == 5, "TestInput_111_Output_5");
 		AssertClass::GetInstance().Assert(elapsed <= 6.0 && elapsed >= 0, "Computing time in 6ms.");
 	}
 
@@ -61,7 +61,7 @@ public:
 		std::cout << "times: " << times << std::endl;
 		std::cout << "elapsed time: " << elapsed << "ms" << std::endl;
 
-		AssertClass::GetInstance().Assert(times == 22, "TestInput_011100_Output_28");
+		AssertClass::GetInstance().Assert(times == 22, "TestInput_1111010101111_Output_22");
 		AssertClass::GetInstance().Assert(elapsed <= 6.0 && elapsed >= 0, "Computing time in 6ms.");
 	}
 

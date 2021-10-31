@@ -9,6 +9,7 @@ public:
 	OperationTimes();
 	~OperationTimes();
 	int Solution(std::string S);
+	int Solution_DoBinOperation(std::string S);
 
 private:
 };
