@@ -48,6 +48,7 @@ build/
 *.jpg
 *.pdb
 .exe.config
+TestOperationTimes
 
 
 # relative C sharp
