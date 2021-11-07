@@ -1,25 +1,20 @@
-TARGET  = helloworld
-SRC_DIR = ./
-INC_DIR = ./ ../CommomModules
+CC          = g++
+CFLAGS      = -Wall
+CXXFLAGS    =  -c -g -Ddebug
+BIN_DIR     = .
+INCS        = -I./ -I../CommomModules/
 
-CFLAGS += -I$(INC_DIR)
-SRC     = $(wildcard $(SRC_DIR)*.c)
-OBJ     = $(SRC:%.c=%.o) #$(patsubst %.c, %.o, $(SRC))
-DEP     = $(SRC:%.c=%.d) #$(patsubst %.o, %.d, $(OBJ))
+all: TestFindMinAmplitude
+	make clean
 
-.PHONY: clean
+main: main.cpp
+	$(CC) $(CXXFLAGS) main.cpp $(INCS) -o $(BIN_DIR)/main.o
 
-$(TARGET) : $(OBJ)
-    $(CC) $(CFLAGS) $^ -o $@
+FindMinAmplitude: FindMinAmplitude.cpp
+	$(CC)  $(CXXFLAGS) FindMinAmplitude.cpp $(INCS) -o $(BIN_DIR)/FindMinAmplitude.o
 
-# Include all .d files
--include $(DEP)
+TestFindMinAmplitude: $(BIN_DIR)/main.o $(BIN_DIR)/FindMinAmplitude.o
+	$(CC) $(BIN_DIR)/main.o $(BIN_DIR)/FindMinAmplitude.o -o $(BIN_DIR)/TestFindMinAmplitude
 
-# Build target for every single object file.
-# The potential dependency on header files is covered by calling `-include $(DEP)`.
-%.o : %.c
-    $(CC) $(CFLAGS) -MMD -c $< -o $@
-
-## clean
 clean:
-    rm -f $(TARGET) $(OBJ) $(DEP)
+	rm $(BIN_DIR)/*.o
