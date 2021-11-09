@@ -10,7 +10,7 @@ FindMinAmplitude::~FindMinAmplitude()
 int FindMinAmplitude::Solution(std::vector<int> A, int K)
 {
 	// initialize result.
-	int min_amp = 1410065407;
+	int min_amp = 1 << 30;
 
 	size_t len = A.size();
 	if(K > len){
