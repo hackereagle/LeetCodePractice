@@ -49,6 +49,7 @@ build/
 *.pdb
 .exe.config
 TestOperationTimes
+TestFindMinAmplitude
 
 
 # relative C sharp
