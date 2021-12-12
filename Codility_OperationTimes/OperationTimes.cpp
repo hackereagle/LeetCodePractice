@@ -39,7 +39,19 @@ int OperationTimes::Solution(std::string S)
 
 }
 
-int OperationTimes::Solution_firstVer(std::string S)
+
+// OperationTimes_firstVer
+OperationTimes_firstVer::OperationTimes_firstVer()
+{
+
+}
+
+OperationTimes_firstVer::~OperationTimes_firstVer()
+{
+
+}
+
+int OperationTimes_firstVer::Solution(std::string S)
 {
 	int times = 0;
 
@@ -68,7 +80,19 @@ int OperationTimes::Solution_firstVer(std::string S)
 
 }
 
-int OperationTimes::Solution_wxVer(std::string S)
+
+// OperationTimes_wxVer
+OperationTimes_wxVer::OperationTimes_wxVer()
+{
+
+}
+
+OperationTimes_wxVer::~OperationTimes_wxVer()
+{
+
+}
+
+int OperationTimes_wxVer::Solution(std::string S)
 {
 	int times = 0;
 #if 1

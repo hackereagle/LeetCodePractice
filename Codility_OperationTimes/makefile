@@ -1,6 +1,6 @@
 CC          = g++
 CFLAGS      = -Wall
-CXXFLAGS        =  -c -g -Ddebug
+CXXFLAGS    =  -c -g -Ddebug
 BIN_DIR     = .
 
 all: TestOperationTimes

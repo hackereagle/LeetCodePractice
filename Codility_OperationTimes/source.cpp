@@ -1,5 +1,6 @@
 #include <memory>
 #include <iostream>
+#include "IOperationTimes.hpp"
 #include "OperationTimes.hpp"
 #include "../CommomModules/AssertClass.hpp"
 #include "../CommomModules/TimeCounter.hpp"
@@ -7,9 +8,25 @@
 class TestOperationTimesClass
 {
 public:
-	TestOperationTimesClass() 
+	TestOperationTimesClass(std::string method = "") 
 	{
-		this->mSolution = std::make_unique<OperationTimes>();
+		if(method == "wx")
+		{
+			this->mMetohd = "Wx verion";
+			this->mSolution = std::make_unique<OperationTimes_wxVer>();
+		}
+		else if(method == "first")
+		{
+			this->mMetohd = "My first version";
+			this->mSolution = std::make_unique<OperationTimes_firstVer>();
+		}
+		else
+		{
+			this->mMetohd = "My best verion";
+			this->mSolution = std::make_unique<OperationTimes>();
+		}
+		
+		std::cout << "Test method: \t" << this->mMetohd << std::endl;
 	}
 
 	~TestOperationTimesClass() {}
@@ -83,8 +100,8 @@ public:
 	}
 
 private:
-	std::unique_ptr<OperationTimes> mSolution;
-
+	std::unique_ptr<IOperationTimes> mSolution;
+	std::string mMetohd;
 };
 
 int main(int argc, char** argv)
