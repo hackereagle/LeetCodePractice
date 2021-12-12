@@ -50,6 +50,7 @@ build/
 .exe.config
 TestOperationTimes
 TestFindMinAmplitude
+TestFindSmallestUniqueSubstring
 
 
 # relative C sharp
