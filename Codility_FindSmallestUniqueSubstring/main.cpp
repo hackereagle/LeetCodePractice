@@ -17,6 +17,7 @@ public:
 		}
 		else{
 			// Optimize fault! it not be faster.
+			// I gauss that it maybe cause by unordered_map.find and unordered_map.erase method.
 			this->mMethod = "Optimize by erasing not unique substring as iterate string version";
 			this->mSolution = std::make_unique<FindSmallestUniqueSubstring_OptimalByEraseNotUnique>();
 		}
