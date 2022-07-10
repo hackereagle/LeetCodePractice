@@ -10,7 +10,7 @@
             "request": "launch",
             //"program": "${workspaceFolder}/build/ReverseNodesInKGroup/ReverseListNodeInKGroup",
             //"program": "${workspaceFolder}/build/Roman2Integer/Roman2Integer",
-            "program": "${workspaceFolder}/Codility_OperationTimes/TestOperationTimes",
+            "program": "${workspaceFolder}/build/LongestConsecutiveSequence/LongestConsecutiveSequence",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
