@@ -13,20 +13,18 @@ public:
         //int maxArea = 0;
 
         int len = height.size();
-        for(int i = 0; i < len; i++){
-            for(int j = i + 1; j < len; j++){
-				//int area = this->CalculateArea(i, height[i], j, height[j]);
-				//maxArea = area > maxArea ? area : maxArea;
-				Rect temp = Rect(i, height[i], j, height[j]);
-				if(temp.width > maxRect.width || temp.height > maxRect.height){
-					int area = temp.width * temp.height;
-					if (area > maxRect.area){
-						maxRect.width = temp.width;
-						maxRect.height = temp.height;
-						maxRect.area = area;
-					}
+        for(int i = 0, j = len - 1; i < j; i++, j--){
+			//int area = this->CalculateArea(i, height[i], j, height[j]);
+			//maxArea = area > maxArea ? area : maxArea;
+			Rect temp = Rect(i, height[i], j, height[j]);
+			//if(temp.width > maxRect.width || temp.height > maxRect.height){
+				int area = temp.width * temp.height;
+				if (area > maxRect.area){
+					maxRect.width = temp.width;
+					maxRect.height = temp.height;
+					maxRect.area = area;
 				}
-            }
+			//}
         }
 		return maxRect.area;
     }
