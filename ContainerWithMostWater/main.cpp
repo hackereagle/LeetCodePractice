@@ -23,11 +23,12 @@ public:
 					if (area > maxRect.area){
 						maxRect.width = temp.width;
 						maxRect.height = temp.height;
+						maxRect.area = area;
 					}
 				}
             }
         }
-		return maxArea;
+		return maxRect.area;
     }
 
 private:
