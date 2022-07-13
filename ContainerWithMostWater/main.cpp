@@ -13,16 +13,20 @@ public:
 
         int len = height.size();
         for(int left = 0, right = len - 1; left < right; ){
-			//int area = this->CalculateArea(i, height[i], j, height[j]);
 			int w = right - left;
 			int h = 0;
 			if(height[right] > height[left]){
 				h = height[left];
 				left = left + 1;
 			}
+			else if(height[right] < height[left]){
+				h = height[right];
+				right = right - 1;
+            }
 			else{
 				h = height[right];
 				right = right - 1;
+                left = left + 1;
 			}
 			int area = w * h;
 			maxArea = area > maxArea ? area : maxArea;
@@ -31,20 +35,6 @@ public:
     }
 
 private:
-    int CalculateArea(int pos1, int height1, int pos2, int height2)
-    {
-        int width = Abs(pos2 - pos1);
-        int height = height2 > height1 ? height1 : height2;
-        return width * height;
-    }
-
-    static int Abs(int num)
-    {
-        int ret = num;
-        if(num < 0)
-            ret = ~num | 1;
-        return num;
-    }
 };
 
 class TestContainerWithMostWater
