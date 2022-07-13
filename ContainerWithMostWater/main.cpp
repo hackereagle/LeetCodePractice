@@ -9,64 +9,28 @@ class ContainerWithMostWater
 {
 public:
     int Solution(std::vector<int>& height) {
-		Rect maxRect = Rect();
-        //int maxArea = 0;
+        int maxArea = 0;
 
         int len = height.size();
-        for(int i = 0, j = len - 1; i < j; i++, j--){
+        for(int left = 0, right = len - 1; left < right; ){
 			//int area = this->CalculateArea(i, height[i], j, height[j]);
-			//maxArea = area > maxArea ? area : maxArea;
-			Rect temp = Rect(i, height[i], j, height[j]);
-			//if(temp.width > maxRect.width || temp.height > maxRect.height){
-				int area = temp.width * temp.height;
-				if (area > maxRect.area){
-					maxRect.width = temp.width;
-					maxRect.height = temp.height;
-					maxRect.area = area;
-				}
-			//}
+			int w = right - left;
+			int h = 0;
+			if(height[right] > height[left]){
+				h = height[left];
+				left = left + 1;
+			}
+			else{
+				h = height[right];
+				right = right - 1;
+			}
+			int area = w * h;
+			maxArea = area > maxArea ? area : maxArea;
         }
-		return maxRect.area;
+		return maxArea;
     }
 
 private:
-	typedef struct _rect
-	{
-		_rect() = default;
-		_rect(int x1, int y1, int x2, int y2)
-		{
-			width = Abs(x2 - x1);
-			height = y1 > y2 ? y2 : y1;
-		}
-		_rect(int w, int h, int a)
-		{
-			width = w;
-			height = h;
-			area = a;
-		}
-
-		int width = 0;
-		int height = 0;
-		int area = 0;
-
-		bool operator==(const _rect& rect2) const
-		{
-			bool s1 = width == rect2.width && height == rect2.height;
-			bool s2 = height == rect2.width && width == rect2.height;
-			return s1 || s2;
-		}
-	}Rect;
-
-	struct RectHash
-	{
-		std::size_t operator()(const Rect &rect) const
-		{
-			std::size_t h1 = std::hash<int>()(rect.width);
-			std::size_t h2 = std::hash<int>()(rect.height);
-			return h1 ^ h2;
-		}
-	};
-
     int CalculateArea(int pos1, int height1, int pos2, int height2)
     {
         int width = Abs(pos2 - pos1);
@@ -154,6 +118,27 @@ public:
 		AssertClass::GetInstance().Assert(maxArea == 50000000, "maxArea = %d, elapsed time = %lfms", maxArea, time);
 	}
 
+	void TestInput_1_1_1_1_1_1_1_6_1_6_1_Output_12()
+	{
+		std::vector<int> input;
+		input.push_back(1);
+		input.push_back(1);
+		input.push_back(1);
+		input.push_back(1);
+		input.push_back(1);
+		input.push_back(1);
+		input.push_back(1);
+		input.push_back(6);
+		input.push_back(1);
+		input.push_back(6);
+		input.push_back(1);
+
+		TimeCounter::GetInstance().SetStartCountPoint();
+		int maxArea = this->mSolution.Solution(input);
+		double time = TimeCounter::GetInstance().GetElapsedTime();
+		AssertClass::GetInstance().Assert(maxArea == 12, "maxArea = %d, elapsed time = %lfms", maxArea, time);
+	}
+
 private:
 	ContainerWithMostWater mSolution;
 
@@ -186,6 +171,7 @@ int main(int argc, char** argv)
 	test.TestInput_1_1_Output_1();
 	test.TestInput_1_1_1_1_1_1_1_1_1_5_4_Output_10();
 	test.TestInput_LargeData_Output_();
+	test.TestInput_1_1_1_1_1_1_1_6_1_6_1_Output_12();
 	getchar();
 	return EXIT_SUCCESS;
 }
