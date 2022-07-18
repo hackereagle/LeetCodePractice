@@ -1,5 +1,8 @@
+#pragma once
 #include <iostream>
 #include <vector>
+
+#define CONVERT_ARRAY_2_LINK_LIST(arr) ConvertArrayToLinkList((arr), sizeof((arr)) / sizeof((arr)[0]))
 
 struct ListNode {
 	int val;
@@ -41,13 +44,12 @@ inline ListNode* ConvertVector2LinkList(std::vector<int> arr)
 	return head;
 }
 
-inline ListNode* ConvertArray2LinkList(int* arr)
+inline ListNode* ConvertArrayToLinkList(int arr[], int count)
 {
 	ListNode *head = nullptr;
 	ListNode **it = &head;
-	int len = sizeof(arr) / sizeof(int);
-	if(len > 0){
-		for(int i = 0; i < len; i++){
+	if(count > 0){
+		for(int i = 0; i < count; i++){
 			if(!*it)
 				*it = new ListNode(*(arr + i));
 			else{

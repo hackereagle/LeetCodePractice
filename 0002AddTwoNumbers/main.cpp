@@ -71,7 +71,7 @@ public:
 	void TestInput_2_4_3_And_5_6_7_Output_7_0_8()
 	{
 		int arr[] = {2, 4, 3};
-		ListNode* input1 = ConvertArray2LinkList(arr);
+		ListNode* input1 = CONVERT_ARRAY_2_LINK_LIST(arr);
 		PrintList(input1);
 	}
 
