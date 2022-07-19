@@ -29,6 +29,9 @@ public:
                 }
                 else
                     carry = 0;
+                
+                l1 = l1->next;
+                l2 = l2->next;
             }
             else if(l1 != nullptr){
                 temp->val = carry > 0 ? l1->val + 1 : l1->val;
@@ -38,6 +41,7 @@ public:
                 } 
                 else 
                     carry = 0;
+                l1 = l1->next;
             }
             else if(l2 != nullptr){ 
                 temp->val = carry > 0 ? l2->val + 1 : l2->val; 
@@ -47,16 +51,15 @@ public:
                 } 
                 else 
                     carry = 0;
+                l2 = l2->next;
             }
 
             cur->next = temp;
             cur = cur->next;
 
-            l1 = l1->next;
-            l2 = l2->next;
         }
 
-        if(carry == 1)
+        if(carry > 0)
             cur->next = new ListNode(1);
         
         return head.next;
@@ -174,8 +177,8 @@ int main(int argc, char** argv)
 	test.TestInput_2_4_3_And_5_6_4_Output_7_0_8();
     test.TestInput_0_And_0_Output_0();
     test.TestInput_9_9_9_9_9_9_9_And_9_9_9_9_Output_8_9_9_9_0_0_0_1();
-    // test.TestInput_Empty_And_Empty_Output_Empty();
-    // test.TestInput_Empty_And_1_2_3_Output_1_2_3();
+    test.TestInput_Empty_And_Empty_Output_Empty();
+    test.TestInput_Empty_And_1_2_3_Output_1_2_3();
 	getchar();
 	return EXIT_SUCCESS;
 }
