@@ -72,7 +72,12 @@ public:
 	{
 		int arr[] = {2, 4, 3};
 		ListNode* input1 = CONVERT_ARRAY_2_LINK_LIST(arr);
-		PrintList(input1);
+		int arr2[] = {5, 6, 7};
+		ListNode* input2 = CONVERT_ARRAY_2_LINK_LIST(arr2);
+
+        ListNode* result = mSolution.AddTwoNumbers(input1, input2);
+        PrintList(result);
+        
 	}
 
 	void TestInput_0_And_0_Output_0()
