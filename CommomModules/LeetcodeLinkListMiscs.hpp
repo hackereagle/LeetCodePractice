@@ -83,11 +83,17 @@ inline bool IsTwoLinkListEqual(ListNode* l1, ListNode* l2)
 
 inline void ReleaseList(ListNode* &head)
 {
+	if(!head)
+		return;
+
 	ListNode* cur = head;
 	while(cur != nullptr){
 		ListNode* temp = cur->next;
-		if(cur != nullptr)
+		if(cur != nullptr){
+			cur->next = nullptr;
 			delete cur;
+			cur = nullptr;
+		}
 		cur = temp;
 	}
 }
