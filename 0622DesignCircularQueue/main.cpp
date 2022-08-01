@@ -110,6 +110,11 @@ public:
 		PrintVector<std::string>(result);
 
 		AssertClass::GetInstance().Assert(IsTwoVectorEqual(result, answer));
+		if(obj)
+		{
+			delete obj;
+			obj = nullptr;
+		}
 	}
 
 protected:

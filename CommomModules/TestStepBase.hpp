@@ -24,7 +24,6 @@ protected:
 			std::vector<std::string>::iterator it = ret.begin();
 			for(int i = 0; i < len1; i++){
 				*(it + i) = ConductMethod(obj, step.at(i), params.at(i));
-				std::cout << *(it + i) ;
 			}
 			std::cout << std::endl;
 		}
