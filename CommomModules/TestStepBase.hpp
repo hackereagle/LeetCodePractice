@@ -19,9 +19,8 @@ protected:
 		std::vector<std::string> ret;
 		size_t len1 = step.size();
 		size_t len2 = params.size();
-		std::cout << len1 << ", " << len2 << std::endl;
 		if(len1 == len2){
-			ret.reserve(len1);
+			ret.resize(len1);
 			std::vector<std::string>::iterator it = ret.begin();
 			for(int i = 0; i < len1; i++){
 				*(it + i) = ConductMethod(obj, step.at(i), params.at(i));

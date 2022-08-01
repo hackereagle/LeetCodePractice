@@ -62,7 +62,7 @@ template<class T>
 inline std::vector<T> ConvertArrayToVector(T arr[], int count)
 {
 	std::vector<T> ret;
-	ret.reserve(count);
+	ret.resize(count);
 	typename std::vector<T>::iterator it = ret.begin();
 	for(int i = 0; i < count; i++){
 		*(it + i) = arr[i];

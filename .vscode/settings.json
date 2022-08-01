@@ -50,6 +50,9 @@
         "list": "cpp",
         "map": "cpp",
         "ratio": "cpp",
-        "cinttypes": "cpp"
+        "cinttypes": "cpp",
+        "bit": "cpp",
+        "condition_variable": "cpp",
+        "mutex": "cpp"
     }
 }

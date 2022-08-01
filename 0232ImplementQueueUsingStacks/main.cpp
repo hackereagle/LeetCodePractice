@@ -63,6 +63,13 @@ public:
 	{
 	}
 
+protected:
+    virtual std::string ConductMethod(void** obj, std::string method, std::vector<std::string> param) override
+    {
+        std::string ret;
+        return ret;
+    }
+
 
 private:
 
