@@ -11,13 +11,22 @@ struct TreeNode
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
 
-inline TreeNode* ConvertArray2Tree(int* array, int count)
+inline TreeNode* ConvertVector2Tree(std::vector<std::string> tree)
 {
     TreeNode* root = 0;
+    size_t len = tree.size();
+
     return root;
 }
 
-void ReleaseTree(TreeNode* node)
+inline std::vector<std::string> ConvertTree2Vector(TreeNode* root)
+{
+    std::vector<std::string> tree;
+
+    return tree;
+}
+
+inline void ReleaseTree(TreeNode* node)
 {
     if(node){
         ReleaseTree(node->left);
