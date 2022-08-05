@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <queue>
 #include "AssertClass.hpp"
 #include "VectorMiscs.hpp"
 #include "LeetcodeTreeMiscs.hpp"
@@ -14,11 +15,38 @@ public:
 	~Solution()
 	{}
 
-	void flatten(TreeNode* root) {
-        
-    }
-
-private:
+	void flatten(TreeNode* root) { 
+        if(root){ 
+            std::queue<TreeNode*> treeNodes; 
+            GetAllNodesOfTreePreorder(root, treeNodes); 
+            //std::cout << "========================" << std::endl; 
+            AppendToNodeRight(root, treeNodes); 
+        } 
+    } 
+     
+private: 
+    void GetAllNodesOfTreePreorder(TreeNode* node, std::queue<TreeNode*> &treeNodes) 
+    { 
+        if(node){ 
+            //std::cout << node->val << "," << std::endl; 
+            treeNodes.push(node); 
+            GetAllNodesOfTreePreorder(node->left, treeNodes); 
+            GetAllNodesOfTreePreorder(node->right, treeNodes); 
+        } 
+    } 
+     
+    void AppendToNodeRight(TreeNode* node, std::queue<TreeNode*> &treeNodes) 
+    { 
+        treeNodes.pop(); 
+        while(!treeNodes.empty()){ 
+            //std::cout << node->val << "," << std::endl; 
+            node->left = nullptr; 
+            node->right = treeNodes.front(); 
+            node = node->right; 
+            treeNodes.pop(); 
+        } 
+        //std::cout << node->val << "," << std::endl; 
+    } 
 };
 
 class TestFlattenBinaryTreeToLinkedList
