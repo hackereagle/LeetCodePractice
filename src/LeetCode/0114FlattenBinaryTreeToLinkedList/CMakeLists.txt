@@ -1,10 +1,8 @@
 cmake_minimum_required(VERSION 3.14.0)
-set(PROJECT_NAME LongestConsecutiveSequence)
+set(PROJECT_NAME FlattenBinaryTreeToLinkedList)
 project(${PROJECT_NAME})
 
-message(STATUS "In LongestConsecutiveSequence: ${PROJECT_SOURCE_DIR}")
-#include_directories(${PROJECT_SOURCE_DIR}/CommomModules)
-include_directories(${PROJECT_SOURCE_DIR}/../CommomModules)
+include_directories(${PROJECT_SOURCE_DIR}/../../CommomModules)
 
 aux_source_directory(. DIR_SRC)
 add_executable(${PROJECT_NAME} ${DIR_SRC})

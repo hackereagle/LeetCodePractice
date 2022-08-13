@@ -1,8 +1,9 @@
 cmake_minimum_required(VERSION 3.14.0)
-set(PROJECT_NAME DesignCircularQueue)
+set(PROJECT_NAME ContainerWithMostWater)
 project(${PROJECT_NAME})
 
-include_directories(${PROJECT_SOURCE_DIR}/../CommomModules)
+message(STATUS "In ContainerWithMostWater: ${PROJECT_SOURCE_DIR}")
+include_directories(${PROJECT_SOURCE_DIR}/../../CommomModules)
 
 aux_source_directory(. DIR_SRC)
 add_executable(${PROJECT_NAME} ${DIR_SRC})
