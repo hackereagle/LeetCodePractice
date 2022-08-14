@@ -1,3 +1,5 @@
+#pragma once
+
 #include "LeetcodeTreeMiscs.hpp"
 
 class TestLeetcodeTreeMiscsClass
