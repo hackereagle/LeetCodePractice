@@ -9,9 +9,6 @@
 class Solution
 {
 public:
-	Solution()
-	{}
-
 	~Solution()
 	{}
 
@@ -119,9 +116,30 @@ public:
         std::vector<std::string> answer = ConvertArrayToVector<std::string>(arr, sizeof(arr) / sizeof(std::string));
 
         std::vector<std::string> result = this->mSolution.letterCombinations(input);
+        AssertClass::GetInstance().Assert(IsTwoVectorSimilar(result, answer));
+    }
+
+    void Test_Input_Empty()
+    {
+        std::cout << "========= Test input empty =========" << std::endl;
+        std::string input = "";
+        std::string arr[] = {};
+        std::vector<std::string> answer = ConvertArrayToVector<std::string>(arr, sizeof(arr) / sizeof(std::string));
+
+        std::vector<std::string> result = this->mSolution.letterCombinations(input);
         AssertClass::GetInstance().Assert(IsTwoVectorEqual(result, answer));
     }
 
+    void Test_Input_2()
+    {
+        std::cout << "========= Test input 2 =========" << std::endl;
+        std::string input = "2";
+        std::string arr[] = {"a", "b", "c"};
+        std::vector<std::string> answer = ConvertArrayToVector<std::string>(arr, sizeof(arr) / sizeof(std::string));
+
+        std::vector<std::string> result = this->mSolution.letterCombinations(input);
+        AssertClass::GetInstance().Assert(IsTwoVectorSimilar(result, answer));
+    }
 
 private:
 	Solution mSolution;
@@ -131,6 +149,9 @@ private:
 int main(int argc, char** argv)
 {
 	TestLetterCombinations test;
+    test.Test_Input_23();
+    test.Test_Input_Empty();
+    test.Test_Input_2();
 	getchar();
 	return EXIT_SUCCESS;
 }

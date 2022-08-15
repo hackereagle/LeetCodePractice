@@ -105,6 +105,9 @@ private:
 int main(int argc, char** argv)
 {
 	TestIntToRoman test;
+    test.Test_input_58_Output_LVIII();
+    test.Test_input_3_Output_III();
+    test.Test_input_1994_Output_MCMXCIV();
 	getchar();
 	return EXIT_SUCCESS;
 }

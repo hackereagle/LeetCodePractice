@@ -46,7 +46,10 @@ inline bool IsTwoVectorEqual(std::vector<T> vec1, std::vector<T>vec2)
 	bool isEqual = false;
 	if(IsAcceptType<T>()){
 		size_t len1 = vec1.size(), len2 = vec2.size();
-		if(len1 == len2){
+		if(len1 == 0 && len2 == 0){
+			isEqual = true;
+		}
+		else if(len1 == len2){
 			typename std::vector<T>::iterator it1 = vec1.begin(), e1 = vec1.end();
 			for(typename std::vector<T>::iterator it2 = vec2.begin(); it1 != e1; it1++, it2++){
 				if(*it1 != *it2){

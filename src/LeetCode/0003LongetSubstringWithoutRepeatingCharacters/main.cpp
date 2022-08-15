@@ -81,6 +81,9 @@ private:
 int main(int argc, char** argv)
 {
 	TestLengthOfLongestSubstring test;
+    test.Test_abcabcbb_Output_3();
+    test.Test_bbbbb_Output_1();
+    test.Test_pwwkew_Output_1();
 	getchar();
 	return EXIT_SUCCESS;
 }
