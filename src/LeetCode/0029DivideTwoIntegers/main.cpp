@@ -17,7 +17,8 @@ public:
     }
 
     int divide(int dividend, int divisor) {
-        
+        int quotient = 0;
+        return quotient;
     }
 
 private:
