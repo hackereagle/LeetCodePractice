@@ -1,6 +1,8 @@
 #pragma once
 #include <string>
 #include <vector>
+#include <memory>
+#include <string.h>
 
 struct TreeNode 
 {
@@ -12,30 +14,90 @@ struct TreeNode
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
 
-// The function is using in Leetcode tree problem
-inline TreeNode* ConvertLeetcodeArray2Tree(std::string* tree, int count)
+inline TreeNode* CreateBinaryTreeNodeFromArray(int *arr, int len, int idx)
 {
-    TreeNode* root = 0;
+    TreeNode* node = new TreeNode(*(arr + idx));
 
-	for(int i = 0; i < count; i++){
-
-        if(!root){
-
-            root = new TreeNode();
-        }
-
+    int lIdx = (idx * 2) + 1;
+    if(lIdx < len){
+        node->left = CreateBinaryTreeNodeFromArray(arr, len, lIdx);
     }
 
-    return root;
+    int rIdx = (idx * 2) + 2;
+    if(rIdx < len){
+        node->right = CreateBinaryTreeNodeFromArray(arr, len, rIdx);
+    }
+
+    return node;
 }
 
 // The function is using in Leetcode tree problem
-inline TreeNode* ConvertLeetcodeVector2Tree(std::vector<std::string> tree)
+inline TreeNode* ConvertLeetcodeArray2BinaryTree(int* arr, int len)
 {
-    TreeNode* root = 0;
-    size_t len = tree.size();
+    return CreateBinaryTreeNodeFromArray(arr, len, 0);
+}
 
-    return root;
+// The function is using in Leetcode tree problem
+inline TreeNode* ConvertLeetcodeVector2BinaryTree(std::vector<int> vec)
+{
+    TreeNode* node = nullptr;
+    int len = vec.size();
+    if(len > 0){
+        int* arr = new int[len];
+        memset(arr, 0, sizeof(int) * len); 
+        for(int i = 0; i < len; i++){ 
+            *(arr + i) = vec.at(i); 
+        } 
+     
+        node = CreateBinaryTreeNodeFromArray(arr, len, 0); 
+        delete [] arr;
+    }
+
+    return node; 
+}
+
+inline void CollectAllNodes(TreeNode* node, std::vector<std::vector<TreeNode*>> &vec)
+{
+    std::vector<TreeNode*> temp;
+    if(vec.size() == 0){
+        temp.push_back(node);
+    }
+    else{
+        int nullCount = 0;
+        int index = vec.size() - 1;
+        for(auto e : vec[index]){
+            temp.push_back(e->left);
+            if(e->left == nullptr)
+                nullCount = nullCount + 1;
+
+            temp.push_back(e->right);
+            if(e->right == nullptr)
+                nullCount = nullCount + 1;
+        }
+
+        if(nullCount == temp.size())
+            return;
+    }
+    vec.push_back(temp);
+
+    CollectAllNodes(node, vec);
+}
+
+inline void PrintBinaryTree(TreeNode* root)
+{
+    std::vector<std::vector<TreeNode*>> nodes;
+    CollectAllNodes(root, nodes);
+
+    for(auto v : nodes){
+        for(auto e : v){
+            if(e != nullptr)
+                std::cout << e->val << " ";
+            else
+                std::cout << "n ";
+        }
+        std::cout << std::endl;
+    }
+    std::cout << std::endl;
 }
 
 inline std::vector<std::string> ConvertTree2Vector(TreeNode* root)
