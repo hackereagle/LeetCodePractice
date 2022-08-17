@@ -1,5 +1,7 @@
 #pragma once
 
+#include <iostream>
+#include <string>
 #include "LeetcodeTreeMiscs.hpp"
 
 class TestLeetcodeTreeMiscsClass
@@ -13,9 +15,9 @@ public:
 
 	void TestCreateTreeWithArrayAndRelease()
 	{
-		int arr[] = {1, 2, 3, 4, 5, 6, 7};
+		std::string arr[] = {"1", "2", "3", "4", "5", "6", "7"};
 
-		TreeNode* root = ConvertLeetcodeArray2BinaryTree(arr, sizeof(arr) / sizeof(int));
+		TreeNode* root = ConvertLeetcodeArray2BinaryTree(arr, sizeof(arr) / sizeof(std::string));
 		PrintBinaryTree(root);
 
 		ReleaseTree(root);

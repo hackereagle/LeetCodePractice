@@ -14,36 +14,40 @@ struct TreeNode
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
 
-inline TreeNode* CreateBinaryTreeNodeFromArray(int *arr, int len, int idx)
+inline TreeNode* CreateBinaryTreeNodeFromArray(std::string *arr, int len, int idx)
 {
-    TreeNode* node = new TreeNode(*(arr + idx));
+    TreeNode* node = nullptr;
+    if(*(arr + idx) != "null"){
+        int val = atoi((arr + idx)->c_str());
+        node = new TreeNode(val);
 
-    int lIdx = (idx * 2) + 1;
-    if(lIdx < len){
-        node->left = CreateBinaryTreeNodeFromArray(arr, len, lIdx);
-    }
+        int lIdx = (idx * 2) + 1;
+        if(lIdx < len){
+            node->left = CreateBinaryTreeNodeFromArray(arr, len, lIdx);
+        }
 
-    int rIdx = (idx * 2) + 2;
-    if(rIdx < len){
-        node->right = CreateBinaryTreeNodeFromArray(arr, len, rIdx);
+        int rIdx = (idx * 2) + 2;
+        if(rIdx < len){
+            node->right = CreateBinaryTreeNodeFromArray(arr, len, rIdx);
+        }
     }
 
     return node;
 }
 
 // The function is using in Leetcode tree problem
-inline TreeNode* ConvertLeetcodeArray2BinaryTree(int* arr, int len)
+inline TreeNode* ConvertLeetcodeArray2BinaryTree(std::string* arr, int len)
 {
     return CreateBinaryTreeNodeFromArray(arr, len, 0);
 }
 
 // The function is using in Leetcode tree problem
-inline TreeNode* ConvertLeetcodeVector2BinaryTree(std::vector<int> vec)
+inline TreeNode* ConvertLeetcodeVector2BinaryTree(std::vector<std::string> vec)
 {
     TreeNode* node = nullptr;
     int len = vec.size();
     if(len > 0){
-        int* arr = new int[len];
+        std::string* arr = new std::string[len];
         memset(arr, 0, sizeof(int) * len); 
         for(int i = 0; i < len; i++){ 
             *(arr + i) = vec.at(i); 
