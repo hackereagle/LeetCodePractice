@@ -1,10 +1,9 @@
 #include <iostream>
 #include <vector>
-#include <map>
+#include <unordered_map>
 #include <string>
 #include "AssertClass.hpp"
 #include "VectorMiscs.hpp"
-
 
 class Solution
 {
@@ -16,97 +15,66 @@ public:
     {
     }
 
-    int divide(int dividend, int divisor) {
-        typedef long long int int64; 
-        int64 quotient = 0; 
-        int64 countBase = 1; 
-        int64 _dividend = static_cast<long long int>(dividend); 
-        int64 _divisor = static_cast<long long int>(divisor); 
-        bool isResultNegtive = false; 
-        if(_dividend < 0 ^ _divisor < 0){ 
-            isResultNegtive = true; 
-        } 
-        _dividend = _dividend < 0 ? ((~_dividend) + 1) : _dividend; 
-        _divisor = _divisor < 0 ? ((~_divisor) + 1) : _divisor; 
-
-        for(int i = 31; i > -1; i--){ 
-            if(_dividend >= (_divisor << i)){ 
-                int64 temp = _divisor << i; 
-                _dividend = _dividend - temp; 
-                quotient = quotient + (1 << i); 
+    std::vector<std::vector<int>> subsets(std::vector<int>& nums) 
+    {
+        std::vector<std::vector<int>> ret; 
+        std::vector<int>::iterator begin = nums.begin(); 
+        int probCount = (1 << nums.size()); 
+        //std::cout << "len = " << probCount << std::endl; 
+         
+        for(int i = 0; i < probCount; i++){ 
+            int flag = i; 
+            std::vector<int> temp; 
+            for(int bit = 0; flag; bit++){ 
+                //std::cout << "flag = " << flag << std::endl; 
+                if(flag & 1){ 
+                    temp.push_back(*(begin + bit)); 
+                } 
+                flag = flag >> 1; 
             } 
+            ret.push_back(temp); 
         } 
          
-        if(isResultNegtive & (quotient > 0)){ 
-            quotient = ~quotient + 1; 
-        } 
-
-        if(!isResultNegtive & (quotient < 0)){ 
-            quotient = ~quotient + 1; 
-        } 
-        if(quotient >= (((int64)1 << 31) - 1)){ 
-            quotient = ((int64)1 << 31) - 1; 
-        } 
-         
-        return quotient;
+        return ret;
     }
 
 private:
 };
 
-class TestDivide
+class TestSubset
 {
 public:
-	TestDivide()
+	TestSubset()
 	{}
 
-	~TestDivide()
+	~TestSubset()
 	{}
 
-    void Test_Input_10_3_Output_3()
+    void Test_Input_1_2_3()
     {
-        std::cout << "========= Test input 10 and 3 output 3 =========" << std::endl;
-        int dividend = 10, divisor = 3;
+        std::cout << "========= Test input [1, 2, 3] =========" << std::endl;
+        int arr[] = {1, 2, 3};
+        std::vector<int> input = ConvertArrayToVector(arr, sizeof(arr) / sizeof(int));
+        std::vector<std::vector<int>> answer;
 
-        int result = this->mSolution.divide(dividend, divisor);
-        AssertClass::GetInstance().Assert(result == 3);
+        std::vector<std::vector<int>> result = this->mSolution.subsets(input);
+        PrintVector<std::vector<int>>(result);
+        // TODO: Implement std::vector<std::vector<int>> IsTowVectorSimilar, please refer to https://jimmy-shen.medium.com/stl-map-unordered-map-with-a-vector-for-the-key-f30e5f670bae
+        //AssertClass::GetInstance().Assert(result == 3);
     }
 
-    void Test_Input_7_minus_3_Output_minus_2()
+    void Test_Input_0()
     {
-        std::cout << "========= Test input 7 and -3 output -2 =========" << std::endl;
-        int dividend = 7, divisor = -3;
+        std::cout << "========= Test input [0] =========" << std::endl;
+        int arr[] = {0};
+        std::vector<int> input = ConvertArrayToVector(arr, sizeof(arr) / sizeof(int));
+        std::vector<std::vector<int>> answer;
 
-        int result = this->mSolution.divide(dividend, divisor);
-        AssertClass::GetInstance().Assert(result == -2);
+        std::vector<std::vector<int>> result = this->mSolution.subsets(input);
+        // TODO: Implement std::vector<std::vector<int>> IsTowVectorSimilar, please refer to https://jimmy-shen.medium.com/stl-map-unordered-map-with-a-vector-for-the-key-f30e5f670bae
+        //AssertClass::GetInstance().Assert(result == -2);
     }
 
-    void Test_Input_minus_1_1_Output_minus_1()
-    {
-        std::cout << "========= Test input -1 and 1 output -1 =========" << std::endl;
-        int dividend = -1, divisor = 1;
-
-        int result = this->mSolution.divide(dividend, divisor);
-        AssertClass::GetInstance().Assert(result == -1);
-    }
-
-    void Test_Input_minus_2147483648_1_Output_minus_2147483648()
-    {
-        std::cout << "========= Test input -2147483648 and 1 output -2147483648 =========" << std::endl;
-        int dividend = -2147483648, divisor = 1;
-
-        int result = this->mSolution.divide(dividend, divisor);
-        AssertClass::GetInstance().Assert(result == -2147483648);
-    }
-
-    void Test_Input_minus_2147483648_minus_1_Output_2147483647()
-    {
-        std::cout << "========= Test input -2147483648 and -1 output 2147483647 =========" << std::endl;
-        int dividend = -2147483647, divisor = -1;
-
-        int result = this->mSolution.divide(dividend, divisor);
-        AssertClass::GetInstance().Assert(result == 2147483647);
-    }
 
 private:
 	Solution mSolution;
@@ -115,12 +83,13 @@ private:
 
 int main(int argc, char** argv)
 {
-	TestDivide test;
-    test.Test_Input_10_3_Output_3();
-    test.Test_Input_7_minus_3_Output_minus_2();
-    test.Test_Input_minus_1_1_Output_minus_1();
-    test.Test_Input_minus_2147483648_1_Output_minus_2147483648();
-    test.Test_Input_minus_2147483648_minus_1_Output_2147483647();
+    //std::vector<int> a, b;
+    //a.push_back(1);
+    //a.push_back(2);
+    //b.push_back(1);
+    //b.push_back(2);
+    //std::unordered_map<std::vector<int>, int> m;
+	TestSubset test;
 	getchar();
 	return EXIT_SUCCESS;
 }
