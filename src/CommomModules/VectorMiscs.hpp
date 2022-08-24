@@ -35,28 +35,31 @@ inline void PrintVector(std::vector<T> vec)
 		}
 		std::cout << "]" <<std::endl;
 	}
-	else if(std::is_same<T, std::vector<int>>::value){
-		int len = vec.size();
-		std::cout << "[";
-		for(int i = 0; i < len; i++){
-			if(i > 0)
-				std::cout << ", ";
-
-			std::cout << "[";
-			int _len = vec[i].size();
-			if(_len > 0){
-				std::cout << vec[i];
-				for(int j = 1; j < _len; j++){
-					std::cout << ", " << vec[j];
-				}
-			}
-			std::cout << "]";
-		}
-		std::cout << "]" <<std::endl;
-	}
 	else{
 		std::cout << "PrintVector could not print this type" << std::endl;
 	}
+}
+
+template<>
+inline void PrintVector<std::vector<int>>(std::vector<std::vector<int>> vec)
+{
+	int len = vec.size();
+	std::cout << "[";
+	for(int i = 0; i < len; i++){
+		if(i > 0)
+			std::cout << ", ";
+
+		std::cout << "[";
+		int _len = vec[i].size();
+		if(_len > 0){
+			std::cout << vec[i][0];
+			for(int j = 1; j < _len; j++){
+				std::cout << ", " << vec[i][j];
+			}
+		}
+		std::cout << "]";
+	}
+	std::cout << "]" <<std::endl;
 }
 
 template<class T>
@@ -132,49 +135,54 @@ inline bool IsTwoVectorSimilar(std::vector<T> vec1, std::vector<T>vec2)
 			isSimilar = false;
 		}
 	}
-	else if(std::is_same<T, std::vector<std::vector<int>>>::value){
-		size_t len1 = vec1.size(), len2 = vec2.size();
-		if(len1 == len2){
-			// TODO: Implement std::vector<std::vector<int>> IsTowVectorSimilar, please refer to https://jimmy-shen.medium.com/stl-map-unordered-map-with-a-vector-for-the-key-f30e5f670bae
-			std::unordered_map<T, int> count;
-			for(typename std::vector<T>::iterator it1 = vec1.begin(), e1 = vec1.end(); it1 != e1; it1++){
-				if(count.find(*it1) == count.end()){
-					count[*it1] = 1;
-				}
-				else{
-					count[*it1] = count[*it1] + 1;
-				}
-			}
-
-			for(typename std::vector<T>::iterator it2 = vec2.begin(), e2 = vec2.end(); it2 != e2; it2++){
-				if(count.find(*it2) == count.end()){
-					count[*it2] = 1;
-					break;
-				}
-				else{
-					count[*it2] = count[*it2] + 1;
-				}
-			}
-
-			for(typename std::unordered_map<T, int>::iterator p = count.begin(), e = count.end(); p != e; p++){
-				if(p->second & 0x1){
-					isSimilar = false;
-					break;
-				}
-				else{
-					isSimilar = true;
-				}
-			}
-		}
-		else{
-			isSimilar = false;
-		}
-	}
 	else{
 		isSimilar = false;
 	}
 	return isSimilar;
 }
+
+// template<>
+// inline bool IsTwoVectorSimilar<std::vector<int>>(std::vector<std::vector<int>> vec1, std::vector<std::vector<int>>vec2)
+// {
+// 	bool isSimilar = false;
+// 	size_t len1 = vec1.size(), len2 = vec2.size();
+// 	if(len1 == len2){
+// 		// TODO: Implement std::vector<std::vector<int>> IsTowVectorSimilar, please refer to https://jimmy-shen.medium.com/stl-map-unordered-map-with-a-vector-for-the-key-f30e5f670bae
+// 		std::unordered_map<std::vector<int>, int> count;
+// 		for(std::vector<std::vector<int>>::iterator it1 = vec1.begin(), e1 = vec1.end(); it1 != e1; it1++){
+// 			if(count.find(*it1) == count.end()){
+// 				count[*it1] = 1;
+// 			}
+// 			else{
+// 				count[*it1] = count[*it1] + 1;
+// 			}
+// 		}
+
+// 		for(typename std::vector<std::vector<int>>::iterator it2 = vec2.begin(), e2 = vec2.end(); it2 != e2; it2++){
+// 			if(count.find(*it2) == count.end()){
+// 				count[*it2] = 1;
+// 				break;
+// 			}
+// 			else{
+// 				count[*it2] = count[*it2] + 1;
+// 			}
+// 		}
+
+// 		for(typename std::unordered_map<std::vector<int>, int>::iterator p = count.begin(), e = count.end(); p != e; p++){
+// 			if(p->second & 0x1){
+// 				isSimilar = false;
+// 				break;
+// 			}
+// 			else{
+// 				isSimilar = true;
+// 			}
+// 		}
+// 	}
+// 	else{
+// 		isSimilar = false;
+// 	}
+// 	return isSimilar;
+// }
 
 template<class T>
 inline std::vector<T> ConvertArrayToVector(T arr[], int count)

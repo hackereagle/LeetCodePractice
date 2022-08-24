@@ -90,6 +90,7 @@ int main(int argc, char** argv)
     //b.push_back(2);
     //std::unordered_map<std::vector<int>, int> m;
 	TestSubset test;
+    test.Test_Input_1_2_3();
 	getchar();
 	return EXIT_SUCCESS;
 }
