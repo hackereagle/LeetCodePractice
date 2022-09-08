@@ -49,21 +49,54 @@ public:
     void Test_Input_1_2_3_4_Output_2_1_3_4()
     {
         std::cout << "========= Test input [1, 2, 3, 4] and output [2, 1, 4, 3] =========" << std::endl;
-        int n = 1;
+		int arr[] = {1, 2, 3, 4};
+		ListNode* input = CONVERT_ARRAY_2_LINK_LIST(arr);
+		int arr2[] = {2, 1, 4, 3};
+		ListNode* ans = CONVERT_ARRAY_2_LINK_LIST(arr2);
+
+		ListNode* result = mSolution.swapPairs(input);
+		PrintList(result);
+
+		AssertClass::GetInstance().Assert(IsTwoLinkListEqual(result, ans));
+
+		ReleaseList(input);
+		ReleaseList(ans);
 
     }
 
     void Test_Input_Empty_Output_Empty()
     {
         std::cout << "========= Test input [] and output [] =========" << std::endl;
-        int n = 1;
+		int arr[] = {};
+		ListNode* input = CONVERT_ARRAY_2_LINK_LIST(arr);
+		int arr2[] = {};
+		ListNode* ans = CONVERT_ARRAY_2_LINK_LIST(arr2);
+
+		ListNode* result = mSolution.swapPairs(input);
+		PrintList(result);
+
+		AssertClass::GetInstance().Assert(IsTwoLinkListEqual(result, ans));
+
+		ReleaseList(input);
+		ReleaseList(ans);
 
     }
 
     void Test_Input_1_Output_1()
     {
         std::cout << "========= Test input [1] and output [1] =========" << std::endl;
-        int n = 1;
+		int arr[] = {1};
+		ListNode* input = CONVERT_ARRAY_2_LINK_LIST(arr);
+		int arr2[] = {1};
+		ListNode* ans = CONVERT_ARRAY_2_LINK_LIST(arr2);
+
+		ListNode* result = mSolution.swapPairs(input);
+		PrintList(result);
+
+		AssertClass::GetInstance().Assert(IsTwoLinkListEqual(result, ans));
+
+		ReleaseList(input);
+		ReleaseList(ans);
 
     }
 

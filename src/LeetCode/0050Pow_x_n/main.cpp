@@ -51,21 +51,34 @@ public:
     void Test_Input_2_10_Output_1024()
     {
         std::cout << "========= Test input x = 2.0 and n = 10, output 1024.0 =========" << std::endl;
-        int n = 1;
+        double x = 2.0;
+        int n = 10;
 
+        double ret = this->mSolution.myPow(x, n);
+
+        AssertClass::GetInstance().Assert(IsTwoDoubleEqual(ret, 1024.0), "resutl = %lf", ret);
     }
 
     void Test_Input_2_1_3_Output_9_261()
     {
         std::cout << "========= Test input x = 2.1 and n = 3, output 9.261 =========" << std::endl;
-        int n = 1;
+        double x = 2.1;
+        int n = 3;
 
+        double ret = this->mSolution.myPow(x, n);
+
+        AssertClass::GetInstance().Assert(IsTwoDoubleEqual(ret, 9.261), "resutl = %lf", ret);
     }
 
     void Test_Input_2_negative_2_Output_0_25()
     {
         std::cout << "========= Test input x = 2.0 and n = -2, output 0.25 =========" << std::endl;
-        int n = 1;
+        double x = 2.0;
+        int n = -2;
+
+        double ret = this->mSolution.myPow(x, n);
+
+        AssertClass::GetInstance().Assert(IsTwoDoubleEqual(ret, 0.25), "resutl = %lf", ret);
 
     }
 

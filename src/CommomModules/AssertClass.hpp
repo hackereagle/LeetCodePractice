@@ -4,6 +4,7 @@
 #include <iostream>
 #include <memory>
 #include <stdarg.h>
+#include <cmath>
 
 class AssertClass
 {
@@ -72,4 +73,21 @@ private:
 };
 
 std::unique_ptr<AssertClass> AssertClass::mInstant;
+
+// refer to https://en.cppreference.com/w/cpp/types/numeric_limits/epsilon
+template<class T>
+typename std::enable_if<!std::numeric_limits<T>::is_integer, bool>::type
+    almost_equal(T x, T y, int ulp)
+{
+    // the machine epsilon has to be scaled to the magnitude of the values used
+    // and multiplied by the desired precision in ULPs (units in the last place)
+    return std::fabs(x-y) <= std::numeric_limits<T>::epsilon() * std::fabs(x+y) * ulp
+        // unless the result is subnormal
+        || std::fabs(x-y) < std::numeric_limits<T>::min();
+}
+
+inline bool IsTwoDoubleEqual(double r, double l)
+{
+	return almost_equal(r, l, 15);
+}
 #endif //_ASSERT_CLASS_H_
