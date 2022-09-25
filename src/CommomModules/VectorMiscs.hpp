@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <unordered_map>
+#include "StringMiscs.hpp"
 
 template<class T>
 inline bool IsAcceptType()
@@ -192,6 +193,27 @@ inline std::vector<T> ConvertArrayToVector(T arr[], int count)
 	typename std::vector<T>::iterator it = ret.begin();
 	for(int i = 0; i < count; i++){
 		*(it + i) = arr[i];
+	}
+
+	return ret;
+}
+
+inline std::vector<int> ConvertStringToVector(std::string input)
+{
+	std::vector<int> ret;
+	bool isFormat = false;
+	isFormat = input[0] == '[';
+	isFormat = isFormat & (input[input.size() - 1] == ']');
+	if(isFormat){
+		std::string nums = input.substr(1, input.size() - 2);
+		std::vector<std::string> temp = SplitStringViaComma(nums);
+		//PrintVector(temp);
+		for(auto s : temp){
+			ret.push_back(std::stoi(s));
+		}
+	}
+	else{
+		std::cout << "input was not vector format!" << std::endl;
 	}
 
 	return ret;
