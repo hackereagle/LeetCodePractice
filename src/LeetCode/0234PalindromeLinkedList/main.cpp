@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <stack>
 #include "AssertClass.hpp"
 #include "VectorMiscs.hpp"
 #include "LeetcodeLinkListMiscs.hpp"
@@ -23,8 +24,26 @@ public:
 	~Solution()
 	{}
 
-	bool isPalindrome(ListNode* head) {
-        
+	bool isPalindrome(ListNode* head) 
+	{
+        bool ret = true; 
+        std::stack<int> reversNodes; 
+        ListNode* cur = head; 
+        while(cur){ 
+            reversNodes.push(cur->val); 
+            cur = cur->next; 
+        }  
+        cur = head; 
+        while(cur){ 
+            if(reversNodes.top() != cur->val){ 
+                ret = false; 
+                break; 
+            } 
+            reversNodes.pop(); 
+            cur = cur->next; 
+        } 
+         
+        return ret;
     }
 
 private:
