@@ -3,6 +3,7 @@
 #include <vector>
 #include <string>
 #include <unordered_map>
+#include <queue>
 #include "StringMiscs.hpp"
 
 class Node {
@@ -42,15 +43,15 @@ inline Node* CreateAdjListHelper(int nodeOrder, std::vector<std::vector<std::str
     return node;
 }
 
-inline Node* CrateAdjList(std::string g)
+inline Node* CreateAdjList(std::string g)
 {
-    std::vector<std::string> nodes = SplitString(g, ",");
+    // erase "[[" and "]]"
+    g.erase(0, 2);
+    g.erase(g.size() - 2, 2);
+
+    std::vector<std::string> nodes = SplitString(g, "],[");
     std::vector<std::vector<std::string>> nodeLists;
     for(auto n : nodes){
-        // erase "[" and "]"
-        n.erase(0, 1);
-        n.erase(n.size() - 1, 1);
-
         nodeLists.push_back(SplitString(n, ","));
     }
 
@@ -60,7 +61,33 @@ inline Node* CrateAdjList(std::string g)
 
 inline void PrintAdjList(Node* startNode)
 {
+    std::unordered_map<Node*, bool> visisted;
+    std::queue<Node*> nexts;
+    nexts.push(startNode);
+
     std::cout << "{";
-    // node 1 -> 2, 3
+    // using BFS
+    while(!nexts.empty()){
+        Node* cur = nexts.front();
+        nexts.pop();
+
+        if(visisted.find(cur) == visisted.end()){
+            visisted.insert(std::pair<Node*, bool>(cur, true));
+
+            std::cout << "node " << cur->val << "->";
+            size_t len = cur->neighbors.size();
+            for(int i = 0; i < len; i++){
+                std::cout << cur->neighbors[i]->val;
+
+                if(visisted.find(cur->neighbors[i]) == visisted.end())
+                    nexts.push(cur->neighbors[i]);
+
+                if(i < len - 1)
+                    std::cout << ", ";
+                else
+                    std::cout << std::endl;
+            }
+        }
+    }
     std::cout << "}" << std::endl;
 }

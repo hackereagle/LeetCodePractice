@@ -3,17 +3,20 @@
 #include <string>
 #include "LeetCodeGraphMiscs.hpp"
 
-class TestLeetcodeGraphMisc
+class TestLeetcodeGraphMiscClass
 {
 public:
-	TestLeetcodeGraphMisc()
+	TestLeetcodeGraphMiscClass()
 	{}
 
-	~TestLeetcodeGraphMisc()
+	~TestLeetcodeGraphMiscClass()
 	{}
 
 	void TestGenerateAdjList()
 	{
 		std::string adj = "[[2,4],[1,3],[2,4],[1,3]]";
+
+		Node* graph = CreateAdjList(adj);
+		PrintAdjList(graph);
 	}
 };
