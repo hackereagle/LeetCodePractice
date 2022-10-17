@@ -27,15 +27,40 @@ public:
 class Solution
 {
 public:
-	Solution()
-	{}
-
-	~Solution()
-	{}
-
-    Node* cloneGraph(Node* node) {
-        
+	Solution() 
+    { 
+        memset((void*)&this->mNodes[0], 0, sizeof(Node*) * 100); 
     }
+
+    ~Solution() 
+    { 
+        /*for(int i = 0; i < 100; i++){ 
+            if(this->mNodes[i]){ 
+                delete this->mNodes[i]; 
+                this->mNodes[i] = nullptr; 
+            } 
+        }*/ 
+    }
+
+    Node* cloneGraph(Node* node) { 
+        Node* ret = nullptr; 
+        if(node){ 
+            ret = this->mNodes[node->val - 1]; 
+            if(!ret){ 
+                ret = new Node(); 
+                ret->val = node->val; 
+                this->mNodes[node->val - 1] = ret; 
+                 
+                for(auto n : node->neighbors){ 
+                    Node* newNode = cloneGraph(n); 
+                    ret->neighbors.push_back(newNode); 
+                } 
+            } 
+        } 
+        return ret; 
+    } 
+private: 
+    Node* mNodes[100];
 
 private:
 };
