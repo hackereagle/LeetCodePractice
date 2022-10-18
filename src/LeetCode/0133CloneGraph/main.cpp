@@ -76,38 +76,38 @@ public:
 
 	void TestInput_2_4_1_3_2_4_1_3_Output()
 	{
-        std::cout << "===== input = [[2,4], [1,3], [2,4], [1, 3]], output = [[2,4], [1,3], [2,4], [1, 3]] =====" << std::endl;
-		int arr[] = {1, 2, 2, 1};
-		Node* input = nullptr;
+        std::cout << "\n===== input = [[2,4],[1,3],[2,4],[1,3]], output = [[2,4], [1,3], [2,4], [1, 3]] =====" << std::endl;
+		Node* input = CreateAdjList("[[2,4],[1,3],[2,4],[1,3]]");
 
         Node* result = mSolution.cloneGraph(input);
-        //AssertClass::GetInstance().Assert(result == ans);
+        PrintAdjList(result);
+        AssertClass::GetInstance().Assert(result != input);
 
-        //ReleaseList(input);
+        ReleaseAdjList(result);
 	}
 
 	void TestInput_Node_Empty_Output()
 	{
-        std::cout << "===== input = [[]], output = [[]] =====" << std::endl;
-		int arr[] = {1, 2, 2, 1};
-		Node* input = nullptr;
+        std::cout << "\n===== input = [[]], output = [[]] =====" << std::endl;
+		Node* input = CreateAdjList("[[]]");
 
         Node* result = mSolution.cloneGraph(input);
-        //AssertClass::GetInstance().Assert(result == ans);
+        PrintAdjList(result);
+        AssertClass::GetInstance().Assert(result == nullptr);
 
-        //ReleaseList(input);
+        ReleaseAdjList(result);
 	}
 
 	void TestInput_Empty_Graph_Output()
 	{
-        std::cout << "===== input = [], output = [] =====" << std::endl;
-		int arr[] = {1, 2, 2, 1};
-		Node* input = nullptr;
+        std::cout << "\n===== input = [], output = [] =====" << std::endl;
+		Node* input = CreateAdjList("[]");
 
         Node* result = mSolution.cloneGraph(input);
-        //AssertClass::GetInstance().Assert(result == ans);
+        PrintAdjList(result);
+        AssertClass::GetInstance().Assert(result == nullptr);
 
-        //ReleaseList(input);
+        ReleaseAdjList(result);
 	}
 
 private:

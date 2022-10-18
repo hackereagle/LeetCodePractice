@@ -45,22 +45,36 @@ inline Node* CreateAdjListHelper(int nodeOrder, std::vector<std::vector<std::str
 
 inline Node* CreateAdjList(std::string g)
 {
+    if(g == "[]" || g.size() < 2){
+        return nullptr;
+    }
+
     // erase "[[" and "]]"
     g.erase(0, 2);
     g.erase(g.size() - 2, 2);
 
-    std::vector<std::string> nodes = SplitString(g, "],[");
-    std::vector<std::vector<std::string>> nodeLists;
-    for(auto n : nodes){
-        nodeLists.push_back(SplitString(n, ","));
-    }
+    if(g.size() > 1){
+        std::vector<std::string> nodes = SplitString(g, "],[");
+        std::vector<std::vector<std::string>> nodeLists;
+        for(auto n : nodes){
+            nodeLists.push_back(SplitString(n, ","));
+        }
 
-	std::unordered_map<int, Node*> table;
-    return CreateAdjListHelper(1, nodeLists, table);
+        std::unordered_map<int, Node*> table;
+        return CreateAdjListHelper(1, nodeLists, table);
+    }
+    else{
+        return nullptr;
+    }
 }
 
 inline void PrintAdjList(Node* startNode)
 {
+    if(!startNode){
+        std::cout << "{}" << std::endl;
+        return;
+    }
+
     std::unordered_map<Node*, bool> visisted;
     std::queue<Node*> nexts;
     nexts.push(startNode);
@@ -90,4 +104,38 @@ inline void PrintAdjList(Node* startNode)
         }
     }
     std::cout << "}" << std::endl;
+}
+
+inline void ReleaseAdjList(Node* &node)
+{
+    if(node){
+        std::unordered_map<Node*, bool> visisted;
+        std::unordered_map<int, Node*> allNodes;
+        std::queue<Node*> nexts;
+        nexts.push(node);
+
+        // using BFS
+        while(!nexts.empty()){
+            Node* cur = nexts.front();
+            nexts.pop();
+
+            if(visisted.find(cur) == visisted.end()){
+                visisted.insert(std::pair<Node*, bool>(cur, true));
+                allNodes.insert(std::pair<int, Node*>(cur->val, cur));
+
+                size_t len = cur->neighbors.size();
+                for(int i = 0; i < len; i++){
+                    if(visisted.find(cur->neighbors[i]) == visisted.end()){
+                        nexts.push(cur->neighbors[i]);
+                    }
+                }
+            }
+        }
+
+        for(std::unordered_map<int, Node*>::iterator it = allNodes.begin(); 
+            it != allNodes.end(); it++){
+                delete it->second;
+                it->second = nullptr;
+        }
+    }
 }
