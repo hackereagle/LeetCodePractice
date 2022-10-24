@@ -25,10 +25,9 @@ public:
 
     // Decodes your encoded data to tree. 
     TreeNode* deserialize(std::string data) { 
-        std::cout << data << std::endl; 
+        //std::cout << data << std::endl; 
         TreeNode* ret = nullptr; 
         std::queue<std::string> arr = this->SplitString(data, ","); 
-        std::cout << arr.size() << std::endl; // debug
         return this->CreateTree(arr); 
     } 
 
@@ -51,7 +50,6 @@ private:
          
         std::string s = q.front(); 
         q.pop(); 
-        std::cout << "In CreateTree: " << s << std::endl; // debug
         if(s != "null"){ 
             node = new TreeNode(std::stoi(s)); 
             node->left = this->CreateTree(q); 
@@ -78,7 +76,6 @@ public:
         TreeNode *root = ConvertLeetcodeVector2BinaryTree(temp);
 
         TreeNode* result = this->mSolution.deserialize(this->mSolution.serialize(root));
-        std::cout << "yo" << std::endl;
         AssertClass::GetInstance().Assert(IsTwoTreeEqual(root, result), "Two tree is equal!");
     }
 
