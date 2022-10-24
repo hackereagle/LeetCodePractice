@@ -113,7 +113,14 @@ inline std::vector<std::string> ConvertTree2Vector(TreeNode* root)
 
 inline bool IsTwoTreeEqual(TreeNode* l, TreeNode* r)
 {
-    if(l->val != r->val){
+    if (l == nullptr && r == nullptr) {
+        return true;
+    }
+    else if (l == nullptr && r != nullptr ||
+             l != nullptr && r == nullptr) {
+        return false;
+    }
+    else if (l->val != r->val) {
         return false;
     }
 
