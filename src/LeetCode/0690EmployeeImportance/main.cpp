@@ -72,51 +72,62 @@ private:
     }
 };
 
-class TestSubset
+class TestGetImportance
 {
 public:
-	TestSubset()
+	TestGetImportance()
 	{}
 
-	~TestSubset()
+	~TestGetImportance()
 	{}
 
     void Example1()
     {
         std::cout << "Input: employees = [[1,5,[2,3]],[2,3,[]],[3,3,[]]], id = 1; Output: 11" << std::endl;
-        std::vector<Employee*> employees({{1,5,{2,3}},{2,3,{}},{3,3,{}}});
+        std::vector<Employee*> employees;
+        employees.push_back(new Employee(1,5,{2,3}));
+        employees.push_back(new Employee(2,3,{}));
+        employees.push_back(new Employee(3,3,{}));
         int id = 1;
 
         int result = this->mSolution.getImportance(employees, id);
         AssertClass::GetInstance().Assert(result == 11);
+        ReleaseEmployee(employees);
     }
 
     void Example2()
     {
         std::cout << "Input: employees = [[1,2,[5]],[5,-3,[]]], id = 5; Output: -3" << std::endl;
         std::vector<Employee*> employees;
+        employees.push_back(new Employee(1,2,{5}));
+        employees.push_back(new Employee(5,-3,{}));
         int id = 5;
 
         int result = this->mSolution.getImportance(employees, id);
         AssertClass::GetInstance().Assert(result == -3);
+        ReleaseEmployee(employees);
     }
 
 
 private:
 	Solution mSolution;
 
+    void ReleaseEmployee(std::vector<Employee*> &emps)
+    {
+        for(auto e : emps){
+            if(e){
+                delete e;
+                e = nullptr;
+            }
+        }
+    }
 };
 
 int main(int argc, char** argv)
 {
-    //std::vector<int> a, b;
-    //a.push_back(1);
-    //a.push_back(2);
-    //b.push_back(1);
-    //b.push_back(2);
-    //std::unordered_map<std::vector<int>, int> m;
-	TestSubset test;
-    test.Test_Input_1_2_3();
+	TestGetImportance test;
+    test.Example1();
+    test.Example2();
 	getchar();
 	return EXIT_SUCCESS;
 }
