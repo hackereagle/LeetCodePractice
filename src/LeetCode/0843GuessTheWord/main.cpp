@@ -122,8 +122,9 @@ public:
         int allowedGuesses = 10;
         Master master(secret, allowedGuesses);
 
+        int len = words.size();
 		this->mSolution.findSecretWord(words, master);
-        std::cout << "total guess times = " << master.GuessTimes() << std::endl;
+        std::cout << "total words = " << len << ", guess times = " << master.GuessTimes() << std::endl;
 		AssertClass::GetInstance().Assert(master.IsAllowTimes());
 	}
 
@@ -135,8 +136,9 @@ public:
         int allowedGuesses = 10;
         Master master(secret, allowedGuesses);
 
+        int len = words.size();
 		this->mSolution.findSecretWord(words, master);
-        std::cout << "total guess times = " << master.GuessTimes() << std::endl;
+        std::cout << "total words = " << len << ", guess times = " << master.GuessTimes() << std::endl;
 		AssertClass::GetInstance().Assert(master.IsAllowTimes());
 	}
 
@@ -148,8 +150,9 @@ public:
         int allowedGuesses = 10;
         Master master(secret, allowedGuesses);
 
+        int len = words.size();
 		this->mSolution.findSecretWord(words, master);
-        std::cout << "total guess times = " << master.GuessTimes() << std::endl;
+        std::cout << "total words = " << len << ", guess times = " << master.GuessTimes() << std::endl;
 		AssertClass::GetInstance().Assert(master.IsAllowTimes());
 	}
 
@@ -161,8 +164,9 @@ public:
         int allowedGuesses = 10;
         Master master(secret, allowedGuesses);
 
+        int len = words.size();
 		this->mSolution.findSecretWord(words, master);
-        std::cout << "total guess times = " << master.GuessTimes() << std::endl;
+        std::cout << "total words = " << len << ", guess times = " << master.GuessTimes() << std::endl;
 		AssertClass::GetInstance().Assert(master.IsAllowTimes());
 	}
 
