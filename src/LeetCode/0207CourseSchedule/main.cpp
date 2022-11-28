@@ -82,13 +82,24 @@ public:
 
     void Example1()
     {
-        std::cout << "\nInput: recipes = [bread], ingredients = [[yeast,flour]], supplies = [yeast,flour,corn] ;Output: [bread]" <<std::endl;
         int numCourses = 10;
         std::vector<std::vector<int>> prerequisites({{1, 0}});
+        std::cout << "\ntotal class = " << numCourses << ", prerequisites = [[1, 0]]. It can finish courses!" << std::endl;;
 
         bool result = this->mSolution.canFinish(numCourses, prerequisites);
 
-        AssertClass::GetInstance().Assert(result);
+        AssertClass::GetInstance().Assert(result == true);
+    }
+
+    void Example2()
+    {
+        int numCourses = 10;
+        std::vector<std::vector<int>> prerequisites({{1, 0}, {0, 1}});
+        std::cout << "\ntotal class = " << numCourses << ", prerequisites = [[1, 0], [0, 1]]. It cannot finish courses!" << std::endl;;
+
+        bool result = this->mSolution.canFinish(numCourses, prerequisites);
+
+        AssertClass::GetInstance().Assert(result == false);
     }
 
 
@@ -101,6 +112,7 @@ int main(int argc, char** argv)
 {
 	TestCanFinish test;
     test.Example1();
+    test.Example2();
 	getchar();
 	return EXIT_SUCCESS;
 }
