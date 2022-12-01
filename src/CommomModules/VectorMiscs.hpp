@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <string>
+#include <sstream>
 #include <vector>
 #include <unordered_map>
 #include "StringMiscs.hpp"
@@ -23,44 +24,98 @@ inline bool IsAcceptType()
 }
 
 template<class T>
-inline void PrintVector(std::vector<T> vec)
+inline std::string Vector2Str(std::vector<T> vec)
 {
+	std::ostringstream ret;
 	if(IsAcceptType<T>()){
-		std::cout << "[";
+		ret << "[";
 		int len = vec.size();
 		if(len > 0){
-			std::cout << vec[0];
+			ret << vec[0];
 			for(int i = 1; i < len; i++){
-				std::cout << ", " << vec[i];
+				ret << ", " << vec[i];
 			}
 		}
-		std::cout << "]" <<std::endl;
+		ret << "]";
 	}
 	else{
-		std::cout << "PrintVector could not print this type" << std::endl;
+		ret << "PrintVector could not print this type";
 	}
+
+	return ret.str();
+}
+
+template<class T>
+inline void PrintVector(std::vector<T> vec)
+{
+	// if(IsAcceptType<T>()){
+	// 	std::cout << "[";
+	// 	int len = vec.size();
+	// 	if(len > 0){
+	// 		std::cout << vec[0];
+	// 		for(int i = 1; i < len; i++){
+	// 			std::cout << ", " << vec[i];
+	// 		}
+	// 	}
+	// 	std::cout << "]" <<std::endl;
+	// }
+	// else{
+	// 	std::cout << "PrintVector could not print this type" << std::endl;
+	// }
+
+	std::string str = Vector2Str(vec);
+	std::cout << str << std::endl;
+}
+
+template<>
+inline std::string Vector2Str<std::vector<int>>(std::vector<std::vector<int>> vec)
+{
+	std::ostringstream ret;
+
+	int len = vec.size();
+	ret << "[";
+	for(int i = 0; i < len; i++){
+		if(i > 0)
+			ret << ", ";
+
+		ret << "[";
+		int _len = vec[i].size();
+		if(_len > 0){
+			ret << vec[i][0];
+			for(int j = 1; j < _len; j++){
+				ret << ", " << vec[i][j];
+			}
+		}
+		ret << "]";
+	}
+	ret << "]";
+
+	return ret.str();
 }
 
 template<>
 inline void PrintVector<std::vector<int>>(std::vector<std::vector<int>> vec)
 {
-	int len = vec.size();
-	std::cout << "[";
-	for(int i = 0; i < len; i++){
-		if(i > 0)
-			std::cout << ", ";
+	//int len = vec.size();
+	//std::cout << "[";
+	//for(int i = 0; i < len; i++){
+	//	if(i > 0)
+	//		std::cout << ", ";
 
-		std::cout << "[";
-		int _len = vec[i].size();
-		if(_len > 0){
-			std::cout << vec[i][0];
-			for(int j = 1; j < _len; j++){
-				std::cout << ", " << vec[i][j];
-			}
-		}
-		std::cout << "]";
-	}
-	std::cout << "]" <<std::endl;
+	//	std::cout << "[";
+	//	int _len = vec[i].size();
+	//	if(_len > 0){
+	//		std::cout << vec[i][0];
+	//		for(int j = 1; j < _len; j++){
+	//			std::cout << ", " << vec[i][j];
+	//		}
+	//	}
+	//	std::cout << "]";
+	//}
+	//std::cout << "]" <<std::endl;
+
+	std::string str = Vector2Str(vec);
+	std::cout << str << std::endl;
 }
 
 template<class T>

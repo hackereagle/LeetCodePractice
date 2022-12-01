@@ -74,28 +74,17 @@ public:
 	
 	void Example1()
 	{
-		std::string steps[] = {"MyCircularQueue", "enQueue", "enQueue", "enQueue", "enQueue", "Rear", "isFull", "deQueue", "enQueue", "Rear"};
-		std::vector<std::string> inputStep = ConvertArrayToVector<std::string>(steps, sizeof(steps) / sizeof(std::string));
+		std::vector<std::string> inputStep({"Solution", "shuffle", "reset", "shuffle"});
 		PrintVector<std::string>(inputStep);
-		std::vector<std::vector<std::string>> params;
-		params.push_back({"3"});
-		params.push_back({"1"});
-		params.push_back({"2"});
-		params.push_back({"3"});
-		params.push_back({"4"});
-		params.push_back({});
-		params.push_back({});
-		params.push_back({});
-		params.push_back({"4"});
-		params.push_back({});
-		std::string expected[] = {"null", "true", "true", "true", "false", "3", "true", "true", "true", "4"};
-		std::vector<std::string> answer = ConvertArrayToVector<std::string>(expected, sizeof(expected) / sizeof(std::string));
+		std::vector<std::vector<std::string>> params({{"[1, 2, 3]"}, {}, {}, {}});
+		std::vector<std::string> answer({"null", "[3, 1, 2]", "[1, 2, 3]", "[1, 3, 2]"});
 
 		Solution* obj = nullptr;
 		std::vector<std::string> result = this->ExecuteScript((void**)&obj, inputStep, params);
 		PrintVector<std::string>(result);
 
-		AssertClass::GetInstance().Assert(IsTwoVectorEqual(result, answer));
+		// TODO: need simillar checking feature
+		//AssertClass::GetInstance().Assert(IsTwoVectorEqual(result, answer));
 		if(obj)
 		{
 			delete obj;
@@ -109,34 +98,17 @@ protected:
 		std::string ret;
 		if("Solution" == method){
 			std::string k_str = param.at(0);
-			int k = atoi(k_str.c_str());
-			*obj = (void*)(new MyCircularQueue(k));
+			std::vector<int> input = ConvertStringToVector(k_str);
+			*obj = (void*)(new Solution(input));
 			ret = "null";
 		}
-		else if("Front" == method){
-			int r = ((MyCircularQueue*)*obj)->Front();
-			ret = std::to_string(r);
+		else if("reset" == method){
+			std::vector<int> r = ((Solution*)*obj)->reset();
+			ret = Vector2Str(r);
 		}
-		else if("Rear" == method){
-			int r = ((MyCircularQueue*)*obj)->Rear();
-			ret = std::to_string(r);
-		}
-		else if("enQueue" == method){
-			int value = atoi(param[0].c_str());
-			bool r = ((MyCircularQueue*)*obj)->enQueue(value);
-			ret = r ? "true" : "false";
-		}
-		else if("deQueue" == method){
-			bool r = ((MyCircularQueue*)*obj)->deQueue();
-			ret = r ? "true" : "false";
-		}
-		else if("isEmpty" == method){
-			bool r = ((MyCircularQueue*)*obj)->isEmpty();
-			ret = r ? "true" : "false";
-		}
-		else if("isFull" == method){
-			bool r = ((MyCircularQueue*)*obj)->isFull();
-			ret = r ? "true" : "false";
+		else if("shuffle" == method){
+			std::vector<int> r = ((Solution*)*obj)->shuffle();
+			ret = Vector2Str(r);
 		}
 
 		return ret;
@@ -148,7 +120,7 @@ private:
 
 int main(int argc, char** argv)
 {
-	TestMyCircularQueue test;
+	TestShuffleArray test;
 	test.Example1();
 	getchar();
 	return EXIT_SUCCESS;
