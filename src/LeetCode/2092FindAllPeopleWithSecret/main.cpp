@@ -109,13 +109,49 @@ public:
 
     void Example3()
     {
-        std::cout << "========= Test total 6 person and meetings = [[1,2,5],[2,3,8],[1,5,10]], first person = 1 =========" << std::endl;
-        int n = 6;
-        std::vector<std::vector<int>> meetings({{1,2,5},{2,3,8},{1,5,10}});
+        std::cout << "========= Test total 5 person and meetings = [[3,4,2],[1,2,1],[2,3,1]], first person = 1 =========" << std::endl;
+        int n = 5;
+        std::vector<std::vector<int>> meetings({{3,4,2},{1,2,1},{2,3,1}});
         int firstPerson = 1;
 
         std::vector<int> result = this->mSolution.findAllPeople(n, meetings, firstPerson);
-        std::vector<int> ans({0,1,2,3,5});
+        std::vector<int> ans({0,1,2,3,4});
+        AssertClass::GetInstance().Assert(IsTwoVectorSimilar(result, ans));
+    }
+
+    void Example4()
+    {
+        std::cout << "========= Test total 11 person and meetings = [[5,1,4],[0,4,18]], first person = 1 =========" << std::endl;
+        int n = 11;
+        std::vector<std::vector<int>> meetings({{5,1,4},{0,4,18}});
+        int firstPerson = 1;
+
+        std::vector<int> result = this->mSolution.findAllPeople(n, meetings, firstPerson);
+        std::vector<int> ans({0, 1, 4, 5});
+        AssertClass::GetInstance().Assert(IsTwoVectorSimilar(result, ans));
+    }
+
+    void Example5()
+    {
+        std::cout << "========= Test total 5 person and meetings = [[1,4,3],[0,4,3]], first person = 3 =========" << std::endl;
+        int n = 5;
+        std::vector<std::vector<int>> meetings({{1,4,3},{0,4,3}});
+        int firstPerson = 3;
+
+        std::vector<int> result = this->mSolution.findAllPeople(n, meetings, firstPerson);
+        std::vector<int> ans({0, 1, 3, 4});
+        AssertClass::GetInstance().Assert(IsTwoVectorSimilar(result, ans));
+    }
+
+    void Example6()
+    {
+        std::cout << "========= Test total 4 person and meetings = [[3,1,3],[1,2,2],[0,3,3]], first person = 3 =========" << std::endl;
+        int n = 4;
+        std::vector<std::vector<int>> meetings({{3,1,3},{1,2,2},{0,3,3}});
+        int firstPerson = 3;
+
+        std::vector<int> result = this->mSolution.findAllPeople(n, meetings, firstPerson);
+        std::vector<int> ans({0,1,3});
         AssertClass::GetInstance().Assert(IsTwoVectorSimilar(result, ans));
     }
 
@@ -128,6 +164,11 @@ int main(int argc, char** argv)
 {
 	TestFindAllPeople test;
     test.Example1();
+    test.Example2();
+    test.Example3();
+    test.Example4();
+    test.Example5();
+    test.Example6();
 	getchar();
 	return EXIT_SUCCESS;
 }

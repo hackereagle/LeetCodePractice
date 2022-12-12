@@ -34,7 +34,7 @@
         {
             "label": "compile",
             "type": "shell",
-            "command": "time -p cmake --build build",
+            "command": "time cmake --build build",
             "group": "build",
             "options": {
                 "cwd": "${workspaceFolder}"
