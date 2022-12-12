@@ -125,15 +125,14 @@ public:
 	{
 		std::vector<std::string> inputStep({"Twitter", "postTweet", "getNewsFeed", "follow", "postTweet", "getNewsFeed", "unfollow", "getNewsFeed"});
 		PrintVector<std::string>(inputStep);
-		std::vector<std::vector<std::string>> params({{"[1, 2, 3]"}, {}, {}, {}});
-		std::vector<std::string> answer({"null", "[3, 1, 2]", "[1, 2, 3]", "[1, 3, 2]"});
+		std::vector<std::vector<std::string>> params({{}, {"1", "5"}, {"1"}, {"1", "2"}, {"2", "6"}, {"1"}, {"1", "2"}, {"1"}});
+		std::vector<std::string> answer({"null", "null", "[5]", "null", "null", "[6, 5]", "null", "[5]"});
 
 		Twitter* obj = nullptr;
 		std::vector<std::string> result = this->ExecuteScript((void**)&obj, inputStep, params);
 		PrintVector<std::string>(result);
 
-		// TODO: need simillar checking feature
-		//AssertClass::GetInstance().Assert(IsTwoVectorEqual(result, answer));
+		AssertClass::GetInstance().Assert(IsTwoVectorEqual(result, answer));
 		if(obj)
 		{
 			delete obj;
@@ -146,25 +145,31 @@ protected:
 	{
 		std::string ret;
 		if("Twitter" == method){
-			std::string k_str = param.at(0);
-			std::vector<int> input = ConvertStringToVector(k_str);
 			*obj = (void*)(new Twitter());
 			ret = "null";
 		}
 		else if("postTweet" == method){
-			int postId = param.at(0);
-			((Twitter*)*obj)->postTweet();
+			int userId = std::stoi(param.at(0));
+            int tweetId = std::stoi(param.at(1));
+			((Twitter*)*obj)->postTweet(userId, tweetId);
+            ret = "null";
 		}
 		else if("getNewsFeed" == method){
-			std::vector<int> r = ((Twitter*)*obj)->getNewsFeed();
+            int userId = std::stoi(param.at(0));
+			std::vector<int> r = ((Twitter*)*obj)->getNewsFeed(userId);
 			ret = Vector2Str(r);
 		}
 		else if("follow" == method){
-			std::vector<int> r = ((Twitter*)*obj)->follow();
+            int followerId = std::stoi(param.at(0));
+            int followeeId = std::stoi(param.at(1));
+			((Twitter*)*obj)->follow(followerId, followeeId);
+            ret = "null";
 		}
 		else if("unfollow" == method){
-			std::vector<int> r = ((Twitter*)*obj)->unfollow();
-			ret = Vector2Str(r);
+            int followerId = std::stoi(param.at(0));
+            int followeeId = std::stoi(param.at(1));
+			((Twitter*)*obj)->unfollow(followerId, followeeId);
+			ret = "null";
 		}
 
 		return ret;
