@@ -54,7 +54,8 @@
             "label": "Rebuild project(Debug)",
             "type": "shell",
             //"command": "rm -r build; mkdir build; time -p cmake -E chdir build/ cmake -DCMAKE_BUILD_TYPE=Debug ..; time -p cmake --build build/ --parallel -j4",
-            "command": "rm -r build; mkdir build; time -p cmake -E chdir build/ cmake -DCMAKE_BUILD_TYPE=Debug ..; time -p cmake --build build/",
+            //"command": "rm -r build; mkdir build; time -p cmake -E chdir build/ cmake -DCMAKE_BUILD_TYPE=Debug ..; time -p cmake --build build/",
+            "command": "rm -r build; mkdir build; time cmake -E chdir build/ cmake -DCMAKE_BUILD_TYPE=Debug ..; time cmake --build build/",
             "problemMatcher": [],
             "group": "build",
             "options": {
