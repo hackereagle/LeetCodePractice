@@ -1,7 +1,6 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include <map>
 #include "AssertClass.hpp"
 #include "VectorMiscs.hpp"
 
