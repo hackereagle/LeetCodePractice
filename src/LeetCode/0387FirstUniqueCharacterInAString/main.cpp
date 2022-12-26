@@ -14,76 +14,75 @@ public:
     ~Solution()
     {}
 
-    std::string findReplaceString(std::string s, std::vector<int>& indices, std::vector<std::string>& sources, std::vector<std::string>& targets) 
-    {
-        std::string res = "";
-
-        std::map<int, std::vector<std::string>> table; 
-        int len = indices.size(); 
+    int firstUniqChar(std::string s) {
+        int index = -1; 
+        std::unordered_map<char, std::vector<int>> table; 
+        size_t len = s.size(); 
         for (int i = 0; i < len; i++) { 
-            std::vector<std::string> data; 
-            data.push_back(sources[i]); 
-            data.push_back(targets[i]); 
-            table.insert(std::pair<int,std::vector<std::string>>(indices[i], data)); 
-        }
-
-        int index = 0; 
-        for (auto it = table.begin(), end = table.end(); it != end; it++){ 
-            // copied characters until reach indices 
-            size_t copyLen = it->first - index; 
-            res = res + s.substr(index, copyLen); 
-            index = index + copyLen; 
-            if (s.substr(it->first, it->second[0].size()) == it->second[0]) { 
-                // if occur sources, replace source with target 
-                res = res + it->second[1]; 
-                index = index + it->second[0].size(); 
+            if (table.find(s[i]) == table.end()) { 
+                std::vector<int> indices; 
+                indices.push_back(i); 
+                table.insert(std::pair<char, std::vector<int>>(s[i], indices)); 
             } 
-        }
-
-        if (index < s.size()){ 
-            res = res + s.substr(index, len - index - 1); 
+            else { 
+                table[s[i]].push_back(i); 
+            } 
         } 
-         
-        return res;
+
+        int minIndex = 999999; 
+        for (auto b = table.begin(); b != table.end(); b++) { 
+            if (b->second.size() == 1) { 
+                if (b->second[0] < minIndex) 
+                    minIndex = b->second[0]; 
+            } 
+        } 
+
+        if (minIndex != 999999) 
+            index = minIndex; 
+
+        return index;
     }
+
 };
 
-class TestFindReplaceString
+class TestFirstUniqChar
 {
 public:
-	TestFindReplaceString()
+	TestFirstUniqChar()
 	{}
 
-	~TestFindReplaceString()
+	~TestFirstUniqChar()
 	{}
 
-    void Example1()
+    void Input_leetcode_Output_0()
     {
-        std::string s = "abcd";
-        std::vector<int> indices({0, 2});
-        std::vector<std::string> sources({"a", "cd"});
-        std::vector<std::string> targets({"eee", "ffff"});
-        std::cout << "\ninput string = " << s << ", indeices = [0, 2], sources = [\"a\", \"cd\"], targets = [\"eee\", \"ffff\"]" << std::endl;;
+        std::cout << "Test input leetcode and output 0" << std::endl;;
+        std::string s = "leetcode";
 
-        std::string result = this->mSolution.findReplaceString(s, indices, sources, targets);
+        int result = this->mSolution.firstUniqChar(s);
 
-        AssertClass::GetInstance().Assert(result == "eeebffff");
+        AssertClass::GetInstance().Assert(result == 0);
     }
 
-    void Example2()
+    void Input_loveleetcode_Output_0()
     {
-        std::string s = "abcd";
-        std::vector<int> indices({0, 2});
-        std::vector<std::string> sources({"ab", "ec"});
-        std::vector<std::string> targets({"eee", "ffff"});
-        std::cout << "\ninput string = " << s << ", indeices = [0, 2], sources = [\"a\", \"cd\"], targets = [\"eee\", \"ffff\"]" << std::endl;;
+        std::cout << "Test input loveleetcode and output 2" << std::endl;;
+        std::string s = "loveleetcode";
 
-        std::string result = this->mSolution.findReplaceString(s, indices, sources, targets);
+        int result = this->mSolution.firstUniqChar(s);
 
-        AssertClass::GetInstance().Assert(result == "eeecd");
-
+        AssertClass::GetInstance().Assert(result == 2);
     }
 
+    void Input_aabb_Output_0()
+    {
+        std::cout << "Test input aabb and output 2" << std::endl;;
+        std::string s = "aabb";
+
+        int result = this->mSolution.firstUniqChar(s);
+
+        AssertClass::GetInstance().Assert(result == -1);
+    }
 
 private:
 	Solution mSolution;
@@ -92,9 +91,10 @@ private:
 
 int main(int argc, char** argv)
 {
-	TestFindReplaceString test;
-    test.Example1();
-    test.Example2();
+	TestFirstUniqChar test;
+    test.Input_leetcode_Output_0();
+    test.Input_loveleetcode_Output_0();
+    test.Input_aabb_Output_0();
 	getchar();
 	return EXIT_SUCCESS;
 }
