@@ -1,4 +1,5 @@
 #include <iostream>
+#include <algorithm>
 #include <vector>
 #include <unordered_map>
 #include <list>
@@ -118,10 +119,63 @@ public:
 	
 	void Example1()
 	{
-		std::string steps[] = {"MyCircularQueue", "enQueue", "enQueue", "enQueue", "enQueue", "Rear", "isFull", "deQueue", "enQueue", "Rear"};
-		std::vector<std::string> inputStep;
-		std::vector<std::vector<std::string>> params;
-		std::vector<std::string> answer;
+		std::vector<std::string> inputStep({"LFUCache", "put", "put", "get", "put", "get", "get", "put", "get", "get", "get"});
+		std::vector<std::vector<std::string>> params({{"2"}, {"1", "1"}, {"2", "2"}, {"1"}, {"3", "3"}, {"2"}, {"3"}, {"4", "4"}, {"1"}, {"3"}, {"4"}});
+		std::vector<std::string> answer({"null", "null", "null", "1", "null", "-1", "3", "null", "-1", "3", "4"});
+
+		LFUCache* obj = nullptr;
+		std::vector<std::string> result = this->ExecuteScript((void**)&obj, inputStep, params);
+		PrintVector<std::string>(result);
+
+		AssertClass::GetInstance().Assert(IsTwoVectorEqual(result, answer));
+		if(obj)
+		{
+			delete obj;
+			obj = nullptr;
+		}
+	}
+
+	void Example2()
+	{
+		std::vector<std::string> inputStep({"LFUCache","put","get"});
+		std::vector<std::vector<std::string>> params({{"0"},{"0","0"},{"0"}});
+		std::vector<std::string> answer({"null", "null", "-1"});
+
+		LFUCache* obj = nullptr;
+		std::vector<std::string> result = this->ExecuteScript((void**)&obj, inputStep, params);
+		PrintVector<std::string>(result);
+
+		AssertClass::GetInstance().Assert(IsTwoVectorEqual(result, answer));
+		if(obj)
+		{
+			delete obj;
+			obj = nullptr;
+		}
+	}
+
+	void Example3()
+	{
+		std::vector<std::string> inputStep({"LFUCache","put","put","put","put","get","get","get","get","put","get","get","get","get","get"});
+		std::vector<std::vector<std::string>> params({{"3"},{"1","1"},{"2","2"},{"3","3"},{"4","4"},{"4"},{"3"},{"2"},{"1"},{"5","5"},{"1"},{"2"},{"3"},{"4"},{"5"}});
+		std::vector<std::string> answer({"null", "null", "null", "null", "null", "4", "3", "2", "-1", "null", "-1", "2", "3", "-1", "5"});
+
+		LFUCache* obj = nullptr;
+		std::vector<std::string> result = this->ExecuteScript((void**)&obj, inputStep, params);
+		PrintVector<std::string>(result);
+
+		AssertClass::GetInstance().Assert(IsTwoVectorEqual(result, answer));
+		if(obj)
+		{
+			delete obj;
+			obj = nullptr;
+		}
+	}
+
+	void Example4()
+	{
+		std::vector<std::string> inputStep({"LFUCache","put","get","put","get","get"});
+		std::vector<std::vector<std::string>> params({{"1"},{"2","1"},{"2"},{"3","2"},{"2"},{"3"}});
+		std::vector<std::string> answer({"null", "null", "1", "null", "-1", "2"});
 
 		LFUCache* obj = nullptr;
 		std::vector<std::string> result = this->ExecuteScript((void**)&obj, inputStep, params);
@@ -168,6 +222,9 @@ int main(int argc, char** argv)
 {
 	TestLfuCache test;
 	test.Example1();
+	test.Example2();
+	test.Example3();
+	test.Example4();
 	getchar();
 	return EXIT_SUCCESS;
 }
