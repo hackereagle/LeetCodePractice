@@ -19,32 +19,41 @@ public:
         
         size_t len = points.size();
         std::vector<Point*> ps(len, nullptr);
-        for (int i = 0; i < len; i++)
+        for (int i = 0; i < len; i++) {
             ps[i] = new Point(points[i][0], points[i][1]);
+            //std::cout << ps[i]->ToString() << std::endl; // debug
+        }
 
-        std::unordered_map<Point*, bool> visited;
         std::vector<Rect> rects;
         for (int i = 0; i < len; i++) {
             Point* p1 = ps[i];
-            visited.insert(std::pair<Point*, bool>(p1, true));
             
             for (int j = 0; j < len; j++) {
                 Point* p2 = ps[j];
-                if (visited.find(p2) != visited.end() && !visited[p2]) {
-                    Rect tmp = this->FindRectangle(p1, p2, ps, visited);
-                    rects.push_back(tmp);
+                if (p2 != p1) {
+                    //std::cout << "p1 = " << p1->ToString() << ", p2 = " << p2->ToString() << std::endl; // debug
+
+                    Rect tmp = this->FindRectangle(p1, p2, ps);
+                    if (tmp.IsCompleteRect()) {
+                        rects.push_back(tmp);
+                    }
                 }
             }
         }
 
         for (auto r : rects) {
-            if (r.IsComplete()) {
-                double s1 = sqrt((r.Sides[0].X * r.Sides[0].X) + (r.Sides[0].Y * r.Sides[0].Y));
-                double s2 = sqrt((r.Sides[1].X * r.Sides[1].X) + (r.Sides[1].Y * r.Sides[1].Y));
-                double area = s1 * s2;
-                res = res > area ? area : res;
-            }
+            double s1 = sqrt((r.Sides[0].X * r.Sides[0].X) + (r.Sides[0].Y * r.Sides[0].Y));
+            double s2 = sqrt((r.Sides[1].X * r.Sides[1].X) + (r.Sides[1].Y * r.Sides[1].Y));
+            double area = s1 * s2;
+            //std::cout << "rectangle " << r.ToString() << ": s1 = " << s1 << ", s2 = " << s2 << ", area = " << area << std::endl; // debug
+            if (area != 0 && res > area)
+                res = area;
+            
         }
+
+        // avoid no find any rectangle
+        if (res == std::numeric_limits<double>::max())
+            res = 0;
 
         for (int i = 0; i < len; i++) {
             if (ps[i]) {
@@ -66,135 +75,163 @@ private:
             this->X = x;
             this->Y = y;
         }
+
+        _point ScaleWith(int scale)
+        {
+            _point ret(this->X, this->Y);
+            ret.X = X * scale;
+            ret.Y = Y * scale;
+            return ret;
+        }
+
+        bool IsEqual(const _point r)
+        {
+            return (this->X == r.X) && (this->Y == r.Y);
+        }
+
+        std::string ToString()
+        {
+            std::ostringstream ss;
+            ss << "[" << X << ", " << Y << "]";
+            return ss.str();
+        }
     } Point;
     typedef Point Vector;
 
     typedef struct _rect
     {
         std::vector<Vector> Sides;
+        std::vector<Point*> Points;
 
         bool IsCompleteRect()
         {
             return (Sides.size() == 4);
         }
+
+        std::string ToString()
+        {
+            std::ostringstream ss;
+            ss << "[";
+            for (auto const s : Sides)
+                ss << " [" << s.X << ", " << s.Y << "]";
+            ss << "]";
+
+            return ss.str();
+        }
     }Rect;
 
     int InnerProduct(Vector v1, Vector v2)
     {
-        return (v1.X * v2.X) + (v2.Y * v2.Y);
+        return (v1.X * v2.X) + (v1.Y * v2.Y);
     }
 
-    Rect FindRectangle(Point* p1, Point* p2, std::vector<Point*> ps, std::unordered_map<Point*, bool> vsted)
+    Rect FindRectangle(Point* p1, Point* p2, std::vector<Point*> ps)
     {
         Rect res;
         res.Sides.push_back(Vector(p2->X - p1->X, p2->Y - p1->Y));
         Point* beginPoint = p1;
 
+        std::unordered_map<Point*, bool> vsted;
         vsted[p1] = true;
         vsted[p2] = true;
 
         for (int i = 0; i < ps.size(); i++) {
             if (!vsted[ps[i]]) {
                 Point* p3 = ps[i];
-                int inrpd = InnerProduct (Vector(p2->X - p1->X, p2->X - p1->Y), Vector(p3->X - p2->X, p3->Y - p2->Y);
+                int inrpd = InnerProduct (res.Sides.back(), Vector(p3->X - p2->X, p3->Y - p2->Y));
+                //std::cout << "\tIn FindRectangle: p1 = " << p1->ToString() << ", p2 = " << p2->ToString() << ", p3 = " << p3->ToString() << ", inrpd = " << inrpd << std::endl; // debug
                 if (inrpd == 0) {
                     res.Sides.push_back(Vector(p3->X - p2->X, p3->Y - p2->Y));
                     p1 = p2;
                     p2 = p3;
                 }
+                //std::cout << "\t\trect = " << res.ToString() << std::endl; // debug
             }
 
             if (res.Sides.size() == 3) {
+                //std::cout << "\t\tfind a complete rectangle candidate!" << std::endl; // debug
                 Vector lastSide = Vector(beginPoint->X - p2->X, beginPoint->Y - p2->Y);
-                if (InnerProduct(res.Sides[0], lastSide) == -1) {
+                Vector opLastSide = lastSide.ScaleWith(-1);
+                if (lastSide.IsEqual(res.Sides[1]) || opLastSide.IsEqual(res.Sides[1])) {
                    res.Sides.push_back(lastSide);
+                   //std::cout << "\t\tfind a complete rectangle: " << res.ToString() << std::endl; // debug
                 }
                 break;
             }
         }
         
         return res;
-    }   
+    }
 
 };
 
-class TestValidUtf8
+class TestMinAreaFreeRect
 {
 public:
-	TestValidUtf8()
+	TestMinAreaFreeRect()
 	{}
 
-	~TestValidUtf8()
+	~TestMinAreaFreeRect()
 	{}
 
-    void Input_197_130_1_Output_true()
+    void Example1()
     {
-        std::cout << "Test input [197,130,1] and output true" << std::endl;;
-        std::vector<int> input({197, 130, 1});
+        std::cout << "Test input [[1,2],[2,1],[1,0],[0,1]] and minimum rectangle area = 2.0" << std::endl;
+        std::vector<std::vector<int>> input({{1,2},{2,1},{1,0},{0,1}});
 
-        bool result = this->mSolution.validUtf8(input);
+        double result = this->mSolution.minAreaFreeRect(input);
 
-        AssertClass::GetInstance().Assert(result == true);
+        AssertClass::GetInstance().Assert(IsTwoDoubleEqual(result, 2.0));
     }
 
-    void Input_235_140_4_Output_false()
+    void Example2()
     {
-        std::cout << "Test input [235,140,4] and output false" << std::endl;;
-        std::vector<int> input({235,140,4});
+        std::cout << "Test input [[0,1],[2,1],[1,1],[1,0],[2,0]] and minimum rectangle area = 1.0" << std::endl;;
+        std::vector<std::vector<int>> input({{0,1},{2,1},{1,1},{1,0},{2,0}});
 
-        bool result = this->mSolution.validUtf8(input);
+        double result = this->mSolution.minAreaFreeRect(input);
 
-        AssertClass::GetInstance().Assert(result == false);
+        AssertClass::GetInstance().Assert(IsTwoDoubleEqual(result, 1.0));
     }
 
-    void Input_237_Output_false()
+    void Example3()
     {
-        std::cout << "Test input [237] and output false" << std::endl;;
-        std::vector<int> input({237});
+        std::cout << "Test input [[0,3],[1,2],[3,1],[1,3],[2,1]] and minimum rectangle area = 0.0" << std::endl;;
+        std::vector<std::vector<int>> input({{0,3},{1,2},{3,1},{1,3},{2,1}});
 
-        bool result = this->mSolution.validUtf8(input);
+        double result = this->mSolution.minAreaFreeRect(input);
 
-        AssertClass::GetInstance().Assert(result == false);
+        AssertClass::GetInstance().Assert(IsTwoDoubleEqual(result, 0.0));
     }
 
-    void Input_230_136_145_Output_true()
+    void BigRectangleIncludeSmallRectangle()
     {
-        std::cout << "Test input [230,136,145] and output true" << std::endl;;
-        std::vector<int> input({230,136,145});
+        std::cout << "Test bigger rectangle include small rectangle: input [[0,0],[0,2],[1,0],[1,1],[2,2],[2,1],[2,0]]  and minimum rectangle area = 1.0" << std::endl;
+        std::vector<std::vector<int>> input({{0,0},{0,2},{1,0},{1,1},{2,2},{2,1},{2,0}});
 
-        bool result = this->mSolution.validUtf8(input);
+        double result = this->mSolution.minAreaFreeRect(input);
 
-        AssertClass::GetInstance().Assert(result == true);
+        AssertClass::GetInstance().Assert(IsTwoDoubleEqual(result, 1.0));
     }
 
-    void Input_145_Output_false()
+    void ThreeSidePrependicularAndLastSideNot()
     {
-        std::cout << "Test input [145] and output false" << std::endl;;
-        std::vector<int> input({145});
+        std::cout << "Test three side prependicular and last side not: input [[1,2], [3,2], [3,0], [0,0]]  and minimum rectangle area = 0.0" << std::endl;
+        std::vector<std::vector<int>> input({{1,2}, {3,2}, {3,0}, {0,0}});
 
-        bool result = this->mSolution.validUtf8(input);
+        double result = this->mSolution.minAreaFreeRect(input);
 
-        AssertClass::GetInstance().Assert(result == false);
+        AssertClass::GetInstance().Assert(IsTwoDoubleEqual(result, 0.0));
     }
 
-    void Input_240_162_138_147_Output_true()
+    void Example4()
     {
-        std::cout << "Test input [240, 162, 138, 147] and output true" << std::endl;;
-        std::vector<int> input({240, 162, 138, 147});
+        std::cout << "Test input [[3,1],[1,1],[0,1],[2,1],[3,3],[3,2],[0,2],[2,3]] and minimum rectangle area = 2.0" << std::endl;
+        std::vector<std::vector<int>> input({{3,1},{1,1},{0,1},{2,1},{3,3},{3,2},{0,2},{2,3}});
 
-        bool result = this->mSolution.validUtf8(input);
+        double result = this->mSolution.minAreaFreeRect(input);
 
-        AssertClass::GetInstance().Assert(result == true);
-    }
-
-    void Input_248_130_130_130_Output_true()
-    {
-        std::cout << "Test input [240, 162, 138, 147] and output true" << std::endl;;
-        std::vector<int> input({240, 162, 138, 147});
-
-        bool result = this->mSolution.validUtf8(input);
-
-        AssertClass::GetInstance().Assert(result == true);
+        AssertClass::GetInstance().Assert(IsTwoDoubleEqual(result, 2.0));
     }
 
 private:
@@ -204,14 +241,13 @@ private:
 
 int main(int argc, char** argv)
 {
-	TestValidUtf8 test;
-    test.Input_197_130_1_Output_true();
-    test.Input_235_140_4_Output_false();
-    test.Input_237_Output_false();
-    test.Input_230_136_145_Output_true();
-    test.Input_145_Output_false();
-    test.Input_240_162_138_147_Output_true();
-    test.Input_248_130_130_130_Output_true();
+	TestMinAreaFreeRect test;
+    test.Example1();
+    test.Example2();
+    test.Example3();
+    test.BigRectangleIncludeSmallRectangle();
+    test.ThreeSidePrependicularAndLastSideNot();
+    test.Example4();
 	getchar();
 	return EXIT_SUCCESS;
 }

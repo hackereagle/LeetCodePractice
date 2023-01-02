@@ -150,6 +150,49 @@ public:
         AssertClass::GetInstance().Assert(result == answer);
     }
 
+    void Example2()
+    {
+        std::cout << "Test input \"3[a2[c]]\" and output \"accaccacc\"" << std::endl;;
+        std::string input = "3[a2[c]]";
+        std::string answer = "accaccacc";
+
+        std::string result = this->mSolution.decodeString(input);
+
+        AssertClass::GetInstance().Assert(result == answer);
+    }
+
+    void Example3()
+    {
+        std::cout << "Test input \"2[abc]3[cd]ef\" and output \"abcabccdcdcdef\"" << std::endl;;
+        std::string input = "2[abc]3[cd]ef";
+        std::string answer = "abcabccdcdcdef";
+
+        std::string result = this->mSolution.decodeString(input);
+
+        AssertClass::GetInstance().Assert(result == answer);
+    }
+
+    void Example4()
+    {
+        std::cout << "Test input \"10[aaa2[c]]\" and output \"aaaccaaaccaaaccaaaccaaaccaaaccaaaccaaaccaaaccaaacc\"" << std::endl;;
+        std::string input = "10[aaa2[c]]";
+        std::string answer = "aaaccaaaccaaaccaaaccaaaccaaaccaaaccaaaccaaaccaaacc";
+
+        std::string result = this->mSolution.decodeString(input);
+
+        AssertClass::GetInstance().Assert(result == answer);
+    }
+
+    void Example5()
+    {
+        std::cout << "Test input \"3[z]2[2[y]pq4[2[jk]e1[f]]]ef\" and output \"zzzyypqjkjkefjkjkefjkjkefjkjkefyypqjkjkefjkjkefjkjkefjkjkefef\"" << std::endl;;
+        std::string input = "3[z]2[2[y]pq4[2[jk]e1[f]]]ef";
+        std::string answer = "zzzyypqjkjkefjkjkefjkjkefjkjkefyypqjkjkefjkjkefjkjkefjkjkefef";
+
+        std::string result = this->mSolution.decodeString(input);
+
+        AssertClass::GetInstance().Assert(result == answer);
+    }
 
 private:
 	Solution mSolution;
@@ -160,6 +203,10 @@ int main(int argc, char** argv)
 {
     TestDecodeString test;
     test.Example1();
+    test.Example2();
+    test.Example3();
+    test.Example4();
+    test.Example5();
 	getchar();
 	return EXIT_SUCCESS;
 }
