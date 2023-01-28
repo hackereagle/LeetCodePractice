@@ -5,6 +5,7 @@
 #include <vector>
 #include <unordered_map>
 #include "StringMiscs.hpp"
+#include "OtherMiscs.hpp"
 
 template<class T>
 inline bool IsAcceptType()
@@ -12,8 +13,7 @@ inline bool IsAcceptType()
 	bool isAcceptType = false;
 	if(std::is_same<T, int>::value ||
 	   std::is_same<T, float>::value ||
-	   std::is_same<T, double>::value ||
-	   std::is_same<T, std::string>::value){
+	   std::is_same<T, double>::value){
 		isAcceptType = true;
 	}
 	else{
@@ -27,7 +27,17 @@ template<class T>
 inline std::string Vector2Str(std::vector<T> vec)
 {
 	std::ostringstream ret;
-	if(IsAcceptType<T>()){
+	if(std::is_same<T, std::string>::value){
+		ret << "[";
+		int len = vec.size();
+		if(len > 0){
+			for(int i = 0; i < len; i++){
+				ret << FIRST_ELE_AND_OTHER_ELE_PRIFIX(i, "", ", ") << "\"" << vec[i] << "\"";
+			}
+		}
+		ret << "]";
+	}
+	else if(IsAcceptType<T>()){
 		ret << "[";
 		int len = vec.size();
 		if(len > 0){
