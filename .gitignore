@@ -51,6 +51,7 @@ build/
 TestOperationTimes
 TestFindMinAmplitude
 TestFindSmallestUniqueSubstring
+.DS_Store
 
 
 # relative C sharp
