@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <vector>
+#include <sstream>
 
 #define CONVERT_ARRAY_2_LINK_LIST(arr) ConvertArrayToLinkList((arr), sizeof((arr)) / sizeof((arr)[0]))
 
@@ -12,19 +13,38 @@ struct ListNode {
 	ListNode(int x, ListNode *next) : val(x), next(next) {}
 };
 
-inline void PrintList(ListNode *head)
+inline std::string List2Str(ListNode *head)
 {
+	std::ostringstream ss;
+
 	ListNode **disp = &head;
-	std::cout << "[";
+	ss << "[";
 	if(*disp){
-		std::cout << (*disp)->val;
+		ss << (*disp)->val;
 		*disp = (*disp)->next;
 		while(*disp){
-			std::cout << ", " << (*disp)->val;
+			ss << ", " << (*disp)->val;
 			*disp = (*disp)->next;
 		}
 	}
-	std::cout << "]" << std::endl;;
+	ss << "]";
+	return ss.str();
+}
+
+inline void PrintList(ListNode *head)
+{
+	// ListNode **disp = &head;
+	// std::cout << "[";
+	// if(*disp){
+	// 	std::cout << (*disp)->val;
+	// 	*disp = (*disp)->next;
+	// 	while(*disp){
+	// 		std::cout << ", " << (*disp)->val;
+	// 		*disp = (*disp)->next;
+	// 	}
+	// }
+	// std::cout << "]" << std::endl;
+	std::cout << List2Str(head) << std::endl;
 }
 
 inline ListNode* ConvertVector2LinkList(std::vector<int> arr)
