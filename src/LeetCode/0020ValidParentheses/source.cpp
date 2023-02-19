@@ -52,13 +52,13 @@ public:
     }
 };
 
-class TestThreeSum
+class TestIsValid
 {
 public:
-	TestThreeSum()
+	TestIsValid()
 	{}
 
-	~TestThreeSum()
+	~TestIsValid()
 	{}
 
 	void Example1()
@@ -117,7 +117,7 @@ private:
 
 int main(int argc, char** argv)
 {
-	TestThreeSum test;
+	TestIsValid test;
 	test.Example1();
 	test.Example2();
 	test.Example3();

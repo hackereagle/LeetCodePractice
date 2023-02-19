@@ -50,6 +50,13 @@ public:
 
 		ReleaseTree(root1);
 		ReleaseTree(root2);
+	}
+
+	void TestCreateLeftistTree()
+	{
+
+		// verify via check each level
+		std::vector<std::vector<TreeNode*>> targetLevels;
 
 	}
 };

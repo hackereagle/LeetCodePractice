@@ -62,13 +62,13 @@ private:
 	}ParenInfon;
 };
 
-class TestThreeSum
+class TestLongestValidParentheses
 {
 public:
-	TestThreeSum()
+	TestLongestValidParentheses()
 	{}
 
-	~TestThreeSum()
+	~TestLongestValidParentheses()
 	{}
 
 	void Example1()
@@ -176,7 +176,7 @@ private:
 
 int main(int argc, char** argv)
 {
-	TestThreeSum test;
+	TestLongestValidParentheses test;
 	test.Example1();
 	test.Example2();
 	test.Example3();
