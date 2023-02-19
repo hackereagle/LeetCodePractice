@@ -125,6 +125,16 @@ public:
 		AssertClass::GetInstance().Assert(reslut == 20);
 	}
 
+	void Example6()
+	{
+		std::vector<std::vector<int>> input({{0,0},{0,1},{5,0},{5,1}});
+		std::cout << "===== Test input " << Vector2Str(input) << ", output 0 =====" << std::endl;
+
+		int reslut = this->mSolution.numberOfBoomerangs(input);
+
+		AssertClass::GetInstance().Assert(reslut == 0);
+	}
+
 private:
 	Solution mSolution;
 };
@@ -137,6 +147,7 @@ int main(int argc, char** argv)
 	test.Example3();
 	test.Example4();
 	test.Example5();
+	test.Example6();
 	getchar();
 	return EXIT_SUCCESS;
 }
