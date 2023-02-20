@@ -65,13 +65,13 @@ private:
 
 #define CONVERT_BOOL_2_STR(x) ((x) ? "true" : "false")
 
-class TestIsValid
+class TestStoneGame
 {
 public:
-	TestIsValid()
+	TestStoneGame()
 	{}
 
-	~TestIsValid()
+	~TestStoneGame()
 	{}
 
 	void Example1()
@@ -113,7 +113,7 @@ private:
 
 int main(int argc, char** argv)
 {
-	TestIsValid test;
+	TestStoneGame test;
 	test.Example1();
 	test.Example2();
 	test.Example3();
