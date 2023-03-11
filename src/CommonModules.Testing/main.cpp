@@ -2,6 +2,7 @@
 #include "TestLeetcodeTreeMiscsClass.hpp"
 #include "TestVectorMiscsClass.hpp"
 #include "TestLeetcodeGraphMiscsClass.hpp"
+#include "TestStopWatch.hpp"
 
 int main(int argc, char** argv)
 {
@@ -11,13 +12,17 @@ int main(int argc, char** argv)
 	// testVectorMiscsClass.TestCheckingTwoVectorSimilar();
 	// testVectorMiscsClass.TestCheckingTwoVectorNotSimilar();
 
-	TestLeetcodeTreeMiscsClass testLeetcodeTreeMiscsClass;
-	testLeetcodeTreeMiscsClass.TestCreateTreeWithArrayAndRelease();
-	testLeetcodeTreeMiscsClass.TestCheckingTwoTreeEqual();
-	testLeetcodeTreeMiscsClass.TestCheckingTwoTreeNotEqual();
+	// TestLeetcodeTreeMiscsClass testLeetcodeTreeMiscsClass;
+	// testLeetcodeTreeMiscsClass.TestCreateTreeWithArrayAndRelease();
+	// testLeetcodeTreeMiscsClass.TestCheckingTwoTreeEqual();
+	// testLeetcodeTreeMiscsClass.TestCheckingTwoTreeNotEqual();
 
 	// TestLeetcodeGraphMiscClass testLeetcodeGraphMiscClass;
 	// testLeetcodeGraphMiscClass.TestGenerateAdjList();
+
+	TestStopWatch testStopWatch;
+	testStopWatch.TestCallStopWatchOnce();
+	testStopWatch.TestCallStopWatchMultiple();
 
 	getchar();
 	return EXIT_SUCCESS;

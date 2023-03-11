@@ -1,3 +1,4 @@
+// This is legacy version stop watch. Please use StopWatch class.
 #ifndef _TIME_COUNTER_H_
 #define _TIME_COUNTER_H_
 
