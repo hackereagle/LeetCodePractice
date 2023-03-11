@@ -13,12 +13,14 @@ public:
 
 	~UniquePathsIIUsingBfsClass() {}
 
-	int uniquePathsWithObstacles(std::vector<std::vector<int>> &obstacleGrid) override {
+	int uniquePathsWithObstacles(std::vector<std::vector<int>>& obstacleGrid) {
 		int count = 0;
 
 		Point goal(obstacleGrid[0].size() - 1, obstacleGrid.size() - 1);
 		std::queue<Point> next;
-		next.push(Point(0, 0));
+		if (obstacleGrid[0][0] == 0)
+			next.push(Point(0, 0));
+			
 		while (next.size() > 0) {
 			Point cur = next.front();
 			next.pop();

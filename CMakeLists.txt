@@ -73,8 +73,6 @@ add_subdirectory(src/LeetCode/0199BinaryTreeRightSideView)
 # add_subdirectory(src/LeetCode/0095UniqueBinarySearchTreesII)
 # add_subdirectory(src/LeetCode/0287FindTheDuplicateNumber)
 # add_subdirectory(src/LeetCode/0224BasicCalculator)
-
-# this not compile success
-# add_subdirectory(src/LeetCode/0063UniquePathsII)
+add_subdirectory(src/LeetCode/0063UniquePathsII)
 add_subdirectory(src/LeetCode/0070ClimbingStairs)
 add_subdirectory(src/CommonModules.Testing)

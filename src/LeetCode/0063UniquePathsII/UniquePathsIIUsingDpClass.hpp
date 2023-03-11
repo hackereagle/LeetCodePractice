@@ -8,8 +8,8 @@
 class UniquePathsIIUsingDpClass : public IUniquePathsII
 {
 public:
-	UniquePathsIIUsingDpClass();
-	~UniquePathsIIUsingDpClass();
+	UniquePathsIIUsingDpClass() {}
+	~UniquePathsIIUsingDpClass() {}
 
 	int uniquePathsWithObstacles(std::vector<std::vector<int>> &obstacleGrid) override { 
 		std::vector<std::vector<int>> dp(obstacleGrid.size(), std::vector<int>(obstacleGrid[0].size(), - 1)); 

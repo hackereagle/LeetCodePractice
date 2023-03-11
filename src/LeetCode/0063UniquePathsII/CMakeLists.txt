@@ -2,8 +2,6 @@ cmake_minimum_required(VERSION 3.14.0)
 set(PROJECT_NAME UniquePathsII)
 project(${PROJECT_NAME})
 
-set(CMAKE_CXX_FLAGS " -lstdc++ ${CMAKE_CXX_FLAGS}")
-
 include_directories(${PROJECT_SOURCE_DIR}/../../CommomModules)
 
 aux_source_directory(. DIR_SRC)

@@ -34,13 +34,13 @@ public:
 		// Arrange
 		std::vector<std::vector<int>> obstacleGrid({{0,0,0},{0,1,0},{0,0,0}});
 		int expected = 2;
-		std::cout << "===== Test input \"" << Vector2Str(obstacleGrid) << "\", output " << expected << "=====" << std::endl;
+		std::cout << "===== Test input \"" << Vector2Str(obstacleGrid) << "\", output " << expected << " =====" << std::endl;
 
 		// Act
-		int reslut = this->mSolutions[(int)this->mMethod]->uniquePathsWithObstacles(obstacleGrid);
+		int result = this->mSolutions[(int)this->mMethod]->uniquePathsWithObstacles(obstacleGrid);
 
 		// Assert
-		AssertClass::GetInstance().Assert(reslut == expected);
+		AssertClass::GetInstance().Assert(result == expected);
 	}
 
 	void Example2()
@@ -48,13 +48,13 @@ public:
 		// Arrange
 		std::vector<std::vector<int>> obstacleGrid({{0,1},{0,0}});
 		int expected = 1;
-		std::cout << "===== Test input \"" << Vector2Str(obstacleGrid) << "\", output " << expected << "=====" << std::endl;
+		std::cout << "===== Test input \"" << Vector2Str(obstacleGrid) << "\", output " << expected << " =====" << std::endl;
 
 		// Act
-		int reslut = this->mSolutions[(int)this->mMethod]->uniquePathsWithObstacles(obstacleGrid);
+		int result = this->mSolutions[(int)this->mMethod]->uniquePathsWithObstacles(obstacleGrid);
 
 		// Assert
-		AssertClass::GetInstance().Assert(reslut == expected);
+		AssertClass::GetInstance().Assert(result == expected);
 	}
 
 	void Example3()
@@ -62,13 +62,13 @@ public:
 		// Arrange
 		std::vector<std::vector<int>> obstacleGrid({{1}});
 		int expected = 0;
-		std::cout << "===== Test input \"" << Vector2Str(obstacleGrid) << "\", output " << expected << "=====" << std::endl;
+		std::cout << "===== Test input \"" << Vector2Str(obstacleGrid) << "\", output " << expected << " =====" << std::endl;
 
 		// Act
-		int reslut = this->mSolutions[(int)this->mMethod]->uniquePathsWithObstacles(obstacleGrid);
+		int result = this->mSolutions[(int)this->mMethod]->uniquePathsWithObstacles(obstacleGrid);
 
 		// Assert
-		AssertClass::GetInstance().Assert(reslut == expected);
+		AssertClass::GetInstance().Assert(result == expected);
 	}
 
 	void Example4()
@@ -103,14 +103,14 @@ public:
 													{0,1,0,0,0,0,0,1,0,0,0,0,0,0,1,1,1,0},
 													{1,0,1,0,1,0,0,0,0,0,0,1,1,0,0,0,0,1},
 													{1,0,0,0,0,0,1,1,0,0,0,1,0,0,0,0,0,0}});
-		int expected = 0;
-		std::cout << "===== Test input \"" << Vector2Str(obstacleGrid) << "\", output " << expected << "=====" << std::endl;
+		int expected = 13594824;
+		std::cout << "===== Test input \"" << Vector2Str(obstacleGrid) << "\", output " << expected << " =====" << std::endl;
 
 		// Act
-		int reslut = this->mSolutions[(int)this->mMethod]->uniquePathsWithObstacles(obstacleGrid);
+		int result = this->mSolutions[(int)this->mMethod]->uniquePathsWithObstacles(obstacleGrid);
 
 		// Assert
-		AssertClass::GetInstance().Assert(reslut == expected);
+		AssertClass::GetInstance().Assert(result == expected);
 	}
 
 private:
