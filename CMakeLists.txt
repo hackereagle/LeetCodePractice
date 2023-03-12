@@ -9,10 +9,13 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_VERBOSE_MAKEFILE OFF) # opened if want to debug dependency
 set(CMAKE_RULE_MESSAGES ON)
 
-# add_subdirectory(src/LeetCode/Sum)
-# add_subdirectory(src/LeetCode/ReverseNodesInKGroup)
-# add_subdirectory(src/LeetCode/Roman2Integer)
-# add_subdirectory(src/LeetCode/LongestConsecutiveSequence)
+# add_subdirectory(src/LeetCode/0001Sum)
+
+# It is not finished.
+# add_subdirectory(src/LeetCode/0025ReverseNodesInKGroup)
+
+# add_subdirectory(src/LeetCode/0013Roman2Integer)
+# add_subdirectory(src/LeetCode/0128LongestConsecutiveSequence)
 # add_subdirectory(src/LeetCode/0011ContainerWithMostWater)
 # add_subdirectory(src/LeetCode/0004MedianOfTwoSortedArray)
 # add_subdirectory(src/LeetCode/0002AddTwoNumbers)
@@ -66,7 +69,7 @@ set(CMAKE_RULE_MESSAGES ON)
 # add_subdirectory(src/LeetCode/0083RemoveDuplicatesFromSortedList)
 # add_subdirectory(src/LeetCode/0020ValidParentheses)
 # add_subdirectory(src/LeetCode/0032LongestValidParentheses)
-add_subdirectory(src/LeetCode/0199BinaryTreeRightSideView)
+# add_subdirectory(src/LeetCode/0199BinaryTreeRightSideView)
 # add_subdirectory(src/LeetCode/0447NumberOfBoomerangs)
 # add_subdirectory(src/LeetCode/1509MinimumDifferenceBetweenLargestAndSmallestValueInThreeMoves)
 # add_subdirectory(src/LeetCode/0877StoneGame)
