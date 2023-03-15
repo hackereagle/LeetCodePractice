@@ -4,8 +4,8 @@
 #include <vector>
 #include <string>
 #include "LeetCodeGraphMiscs.hpp"
-#include "LeetCodeLinkListMiscs.hpp"
-#include "LeetCodeTreeMiscs.hpp"
+#include "LeetcodeLinkListMiscs.hpp"
+#include "LeetcodeTreeMiscs.hpp"
 
 enum class LTestTupleType : int
 {
