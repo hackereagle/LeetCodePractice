@@ -29,20 +29,7 @@ class LTestTuple
 public:
 	~LTestTuple()
 	{
-		if (this->mTreeRootValue) {
-			delete this->mTreeRootValue;
-			this->mTreeRootValue = nullptr;
-		}
-
-		if (this->mGraphValue) {
-			delete this->mGraphValue;
-			this->mGraphValue = nullptr;
-		}
-
-		if (this->mListHeadValue) {
-			delete this->mListHeadValue;
-			this->mListHeadValue = nullptr;
-		}
+		this->Release();
 	}
 	
 	// Copy Constructor
@@ -53,15 +40,23 @@ public:
 	LTestTuple(LTestTuple &&tup)
 	{}
 
-	LTestTuple(int val)
+	// Here are all constructor
+	LTestTuple(int val, std::string paramName = "")
 	{
 		this->mType = LTestTupleType::IntType;
 		this->mIValue = val;
+		this->mParameterName = paramName;
 	}
 
+	// Here are all getter
 	LTestTupleType GetType()
 	{
 		return this->mType;
+	}
+
+	std::string& GetParameterName()
+	{
+		return this->mParameterName;
 	}
 
 	int GetIntValue()
@@ -79,6 +74,8 @@ public:
 
 private:
 	LTestTupleType mType = LTestTupleType::None;	
+	std::string mParameterName = "";
+	// values
 	int mIValue = 0.0;
 	double mDValue = 0.0;
 	std::string mSValue = "";
@@ -91,4 +88,23 @@ private:
 	ListNode* mListHeadValue = nullptr;
 	TreeNode* mTreeRootValue = nullptr;
 	Node* mGraphValue = nullptr;
+
+	void Release()
+	{
+		if (this->mTreeRootValue) {
+			delete this->mTreeRootValue;
+			this->mTreeRootValue = nullptr;
+		}
+
+		if (this->mGraphValue) {
+			delete this->mGraphValue;
+			this->mGraphValue = nullptr;
+		}
+
+		if (this->mListHeadValue) {
+			delete this->mListHeadValue;
+			this->mListHeadValue = nullptr;
+		}
+
+	}
 };
