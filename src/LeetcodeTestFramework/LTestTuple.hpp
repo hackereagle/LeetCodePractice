@@ -27,6 +27,24 @@ enum class LTestTupleType : int
 class LTestTuple
 {
 public:
+	~LTestTuple()
+	{
+		if (this->mTreeRootValue) {
+			delete this->mTreeRootValue;
+			this->mTreeRootValue = nullptr;
+		}
+
+		if (this->mGraphValue) {
+			delete this->mGraphValue;
+			this->mGraphValue = nullptr;
+		}
+
+		if (this->mListHeadValue) {
+			delete this->mListHeadValue;
+			this->mListHeadValue = nullptr;
+		}
+	}
+	
 	// Copy Constructor
 	LTestTuple(LTestTuple &tup)
 	{}
