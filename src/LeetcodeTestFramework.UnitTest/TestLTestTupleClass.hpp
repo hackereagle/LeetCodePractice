@@ -19,4 +19,6 @@ TEST(TestLTestTupleClass, TestLTestTupleIntConstructor)
 	EXPECT_EQ(tuple.GetParameterName(), paramName);
 }
 
-// Here need to test allocation. Checking two address whether same(should difference) after copy constructor.
+// TODO: Here need to test different constructor with different type
+
+// TODO: Here need to test allocation as test LinkList, Graph and Tree types. Checking two address whether same(should difference) after copy constructor.
