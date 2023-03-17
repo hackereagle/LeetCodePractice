@@ -46,6 +46,7 @@ public:
 	#endif
 		this->mParameterName = tup.GetParameterName();
 		this->mType = tup.GetType();
+		// TODO: copy other value
 		this->mListHeadValue = CopyListNode(tup.GetListHead());
 		this->mGraphValue = CopyGraph(tup.GetGraph());
 		this->mTreeRootValue = CopyTree(tup.GetTreeRoot());
