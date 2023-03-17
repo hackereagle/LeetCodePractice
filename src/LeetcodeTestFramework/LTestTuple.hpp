@@ -116,4 +116,43 @@ inline std::string GetParameterValueWithString(LTestTuple &tuple)
 	if (LTestTupleType::IntType == tuple.GetType()) {
 		ret = std::to_string(tuple.GetIntValue());
 	}
+	else if (LTestTupleType::Int1DArrType == tuple.GetType()) {
+		throw "GetParameterValueWithString not implement this type of LTestTuple";
+	}
+	else if (LTestTupleType::Int2DArrType == tuple.GetType()) {
+		throw "GetParameterValueWithString not implement this type of LTestTuple";
+	}
+	else if (LTestTupleType::DoubleType == tuple.GetType()) {
+		throw "GetParameterValueWithString not implement this type of LTestTuple";
+	}
+	else if (LTestTupleType::Double1DArrType == tuple.GetType()) {
+		throw "GetParameterValueWithString not implement this type of LTestTuple";
+	}
+	else if (LTestTupleType::Double2DArrType == tuple.GetType()) {
+		throw "GetParameterValueWithString not implement this type of LTestTuple";
+	}
+	else if (LTestTupleType::StrType == tuple.GetType()) {
+		throw "GetParameterValueWithString not implement this type of LTestTuple";
+	}
+	else if (LTestTupleType::Str1DArrType == tuple.GetType()) {
+		throw "GetParameterValueWithString not implement this type of LTestTuple";
+	}
+	else if (LTestTupleType::Str2DArrType == tuple.GetType()) {
+		throw "GetParameterValueWithString not implement this type of LTestTuple";
+	}
+	else if (LTestTupleType::GraphType == tuple.GetType()) {
+		throw "GetParameterValueWithString not implement this type of LTestTuple";
+	}
+	else if (LTestTupleType::LinkListType == tuple.GetType()) {
+		throw "GetParameterValueWithString not implement this type of LTestTuple";
+	}
+	else if (LTestTupleType::TreeType == tuple.GetType()) {
+		throw "GetParameterValueWithString not implement this type of LTestTuple";
+	}
+	else if (LTestTupleType::Int1DArrType == tuple.GetType()) {
+		throw "GetParameterValueWithString not implement this type of LTestTuple";
+	}
+	else{
+		throw "GetParameterValueWithString not implement this type of LTestTuple";
+	}
 }
