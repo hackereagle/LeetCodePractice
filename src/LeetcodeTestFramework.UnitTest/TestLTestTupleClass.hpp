@@ -1,5 +1,6 @@
 #pragma once
 
+#include <iostream>
 #include <string>
 #include <gtest/gtest.h>
 #include "LTestTuple.hpp"
@@ -42,4 +43,20 @@ TEST(TestLTestTupleClass, TestLTestTupleListHeadCopy)
 
 	// assert
 	EXPECT_NE(copied.GetListHead(), org.GetListHead());
+}
+
+// Other testing
+TEST(TestLTestTupleClass, TestOverloadStreamOperator)
+{
+	// arrange
+	LTestTuple tup(123, "Test");
+
+	// act
+	std::ostringstream ss;
+	ss << tup;
+	std::string str = ss.str();
+	std::cout << str << std::endl;
+
+	// assert
+	EXPECT_EQ(str, "Test: 123");
 }

@@ -7,6 +7,9 @@
 #include "LeetcodeLinkListMiscs.hpp"
 #include "LeetcodeTreeMiscs.hpp"
 
+class LTestTuple;
+std::string GetParameterValueWithString(LTestTuple &tuple);
+
 enum class LTestTupleType : int
 {
 	None,
@@ -109,6 +112,11 @@ public:
 	TreeNode* GetTreeRoot()
 	{
 		return this->mTreeRootValue;
+	}
+
+	friend std::ostream &operator<<(std::ostream &os, LTestTuple &tup)
+	{
+		return os << tup.GetParameterName() << ": " << GetParameterValueWithString(tup);
 	}
 
 private:
