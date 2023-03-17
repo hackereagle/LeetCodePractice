@@ -63,6 +63,13 @@ public:
 		this->mParameterName = paramName;
 	}
 
+	LTestTuple(std::vector<int> val, std::string paramName = "")
+	{
+		this->mType = LTestTupleType::Int1DArrType;
+		this->mI1DArrValue = val;
+		this->mParameterName = paramName;
+	}
+
 	LTestTuple(ListNode* head, std::string paramName = "")
 	{
 		this->mType = LTestTupleType::LinkListType;

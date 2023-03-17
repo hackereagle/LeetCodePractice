@@ -1,6 +1,7 @@
 #include <iostream>
 #include <gtest/gtest.h>
 #include "TestLTestTupleClass.hpp"
+#include "TestLeetcodeTester.hpp"
 
 int main(int argc, char** argv)
 {
