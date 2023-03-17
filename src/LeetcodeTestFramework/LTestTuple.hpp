@@ -49,12 +49,12 @@ public:
 	}
 
 	// Here are all getter
-	LTestTupleType GetType()
+	LTestTupleType GetType() const
 	{
 		return this->mType;
 	}
 
-	std::string& GetParameterName()
+	const std::string& GetParameterName()
 	{
 		return this->mParameterName;
 	}
@@ -108,3 +108,12 @@ private:
 
 	}
 };
+
+inline std::string GetParameterValueWithString(LTestTuple &tuple)
+{
+	std::string ret = "";
+
+	if (LTestTupleType::IntType == tuple.GetType()) {
+		ret = std::to_string(tuple.GetIntValue());
+	}
+}
