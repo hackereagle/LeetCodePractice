@@ -29,12 +29,24 @@ class LTestTuple
 public:
 	~LTestTuple()
 	{
+	/*#ifdef _UNIT_TEST_
+		std::cout << "LTestTuple deconstructor be called! " << this->mParameterName << " be destroyed!" << std::endl;
+	#endif*/
 		this->Release();
 	}
 	
 	// Copy Constructor
 	LTestTuple(LTestTuple &tup)
-	{}
+	{
+	#ifdef _UNIT_TEST_
+		std::cout << "LTestTuple copy constructor be called!" << std::endl;
+	#endif
+		this->mParameterName = tup.GetParameterName();
+		this->mType = tup.GetType();
+		this->mListHeadValue = CopyListNode(tup.GetListHead());
+		this->mGraphValue = CopyGraph(tup.GetGraph());
+		this->mTreeRootValue = CopyTree(tup.GetTreeRoot());
+	}
 
 	// Move Constructor
 	LTestTuple(LTestTuple &&tup)
@@ -45,6 +57,13 @@ public:
 	{
 		this->mType = LTestTupleType::IntType;
 		this->mIValue = val;
+		this->mParameterName = paramName;
+	}
+
+	LTestTuple(ListNode* head, std::string paramName = "")
+	{
+		this->mType = LTestTupleType::LinkListType;
+		this->mListHeadValue = head;
 		this->mParameterName = paramName;
 	}
 
@@ -72,6 +91,26 @@ public:
 		return this->mI1DArrValue;
 	}
 
+	std::vector<std::vector<int>> &GetInt2DArray()
+	{
+		return this->mI2DArrValue;
+	}
+
+	ListNode* GetListHead()
+	{
+		return this->mListHeadValue;
+	}
+
+	Node* GetGraph()
+	{
+		return this->mGraphValue;
+	}
+
+	TreeNode* GetTreeRoot()
+	{
+		return this->mTreeRootValue;
+	}
+
 private:
 	LTestTupleType mType = LTestTupleType::None;	
 	std::string mParameterName = "";
@@ -91,22 +130,12 @@ private:
 
 	void Release()
 	{
-		if (this->mTreeRootValue) {
-			delete this->mTreeRootValue;
-			this->mTreeRootValue = nullptr;
-		}
-
-		if (this->mGraphValue) {
-			delete this->mGraphValue;
-			this->mGraphValue = nullptr;
-		}
-
-		if (this->mListHeadValue) {
-			delete this->mListHeadValue;
-			this->mListHeadValue = nullptr;
-		}
+		ReleaseTree(this->mTreeRootValue);
+		ReleaseAdjList(this->mGraphValue);
+		ReleaseList(this->mListHeadValue);
 
 	}
+
 };
 
 inline std::string GetParameterValueWithString(LTestTuple &tuple)
@@ -155,4 +184,5 @@ inline std::string GetParameterValueWithString(LTestTuple &tuple)
 	else{
 		throw "GetParameterValueWithString not implement this type of LTestTuple";
 	}
+	return ret;
 }

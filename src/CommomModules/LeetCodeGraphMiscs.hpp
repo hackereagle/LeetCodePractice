@@ -139,3 +139,11 @@ inline void ReleaseAdjList(Node* &node)
         }
     }
 }
+
+inline Node* CopyGraph(Node* node)
+{
+    if (!node)
+        return nullptr;
+    
+    throw "CopyGraph not be implement";
+}

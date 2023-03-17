@@ -139,3 +139,11 @@ inline void ReleaseTree(TreeNode* node)
         delete node;
     }
 }
+
+inline TreeNode* CopyTree(TreeNode* root)
+{
+    if (!root)
+        return nullptr;
+    
+    throw "CopyTree not be implement";
+}

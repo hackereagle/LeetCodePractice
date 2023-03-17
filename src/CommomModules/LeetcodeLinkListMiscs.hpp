@@ -117,3 +117,21 @@ inline void ReleaseList(ListNode* &head)
 		cur = temp;
 	}
 }
+
+inline ListNode* CopyListNode(ListNode* head)
+{
+	ListNode* ret = nullptr;
+	if (head) {
+		ret = new ListNode(head->val);
+
+		ListNode* cur = ret;
+		head = head->next;
+		while (head) {
+			cur->next = new ListNode(head->val);
+
+			head = head->next;
+			cur = cur->next;
+		}
+	}
+	return ret;
+}
