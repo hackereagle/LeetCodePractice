@@ -46,7 +46,24 @@ public:
 	#endif
 		this->mParameterName = tup.GetParameterName();
 		this->mType = tup.GetType();
-		// TODO: copy other value
+
+		std::cout << "1" << std::endl; // debug
+		this->mIValue = tup.GetIntValue();
+		// TODO: All vector were return vector reference. So need to copy vector instead of assign.
+		this->mI1DArrValue = tup.GetInt1DArray();
+		this->mI2DArrValue = tup.GetInt2DArray();
+
+		std::cout << "2" << std::endl; // debug
+		this->mDValue = tup.GetDoubleValue();
+		this->mD1DArrValue = tup.GetDouble1DArray();
+		this->mD2DArrValue = tup.GetDouble2DArray();
+
+		std::cout << "3" << std::endl; // debug
+		this->mSValue = tup.GetStrValue();
+		this->mS1DArrValue = tup.GetStr1DArray();
+		this->mS2DArrValue = tup.GetStr2DArray();
+
+		std::cout << "4" << std::endl;
 		this->mListHeadValue = CopyListNode(tup.GetListHead());
 		this->mGraphValue = CopyGraph(tup.GetGraph());
 		this->mTreeRootValue = CopyTree(tup.GetTreeRoot());
@@ -89,6 +106,7 @@ public:
 		return this->mParameterName;
 	}
 
+	// related int
 	int GetIntValue()
 	{
 		if (this->mType != LTestTupleType::IntType)
@@ -99,26 +117,92 @@ public:
 
 	std::vector<int>& GetInt1DArray()
 	{
+		if (this->mType != LTestTupleType::Int1DArrType)
+			throw "This LTestTuple not Int1DArrType";
+
 		return this->mI1DArrValue;
 	}
 
 	std::vector<std::vector<int>> &GetInt2DArray()
 	{
+		if (this->mType != LTestTupleType::Int2DArrType)
+			throw "This LTestTuple not Int2DArrType";
+
 		return this->mI2DArrValue;
 	}
 
+	// related double
+	double GetDoubleValue()
+	{
+		if (this->mType != LTestTupleType::DoubleType)
+			throw "This LTestTuple not DoubleType";
+
+		return this->mDValue;
+	}
+
+	std::vector<double>& GetDouble1DArray()
+	{
+		if (this->mType != LTestTupleType::Double1DArrType)
+			throw "This LTestTuple not Double1DArrType";
+
+		return this->mD1DArrValue;
+	}
+
+	std::vector<std::vector<double>> &GetDouble2DArray()
+	{
+		if (this->mType != LTestTupleType::Double2DArrType)
+			throw "This LTestTuple not Double2DArrType";
+
+		return this->mD2DArrValue;
+	}
+
+	// related string
+	std::string GetStrValue()
+	{
+		if (this->mType != LTestTupleType::StrType)
+			throw "This LTestTuple not StrType";
+
+		return this->mSValue;
+	}
+
+	std::vector<std::string>& GetStr1DArray()
+	{
+		if (this->mType != LTestTupleType::Str1DArrType)
+			throw "This LTestTuple not Str1DArrType";
+
+		return this->mS1DArrValue;
+	}
+
+	std::vector<std::vector<std::string>> &GetStr2DArray()
+	{
+		if (this->mType != LTestTupleType::Str2DArrType)
+			throw "This LTestTuple not Str2DArrType";
+
+		return this->mS2DArrValue;
+	}
+
+	// related pointer type
 	ListNode* GetListHead()
 	{
+		if (this->mType != LTestTupleType::LinkListType)
+			throw "This LTestTuple not LinkListType";
+
 		return this->mListHeadValue;
 	}
 
 	Node* GetGraph()
 	{
+		if (this->mType != LTestTupleType::GraphType)
+			throw "This LTestTuple not GraphType";
+
 		return this->mGraphValue;
 	}
 
 	TreeNode* GetTreeRoot()
 	{
+		if (this->mType != LTestTupleType::TreeType)
+			throw "This LTestTuple not TreeType";
+
 		return this->mTreeRootValue;
 	}
 

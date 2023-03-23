@@ -20,6 +20,21 @@ TEST(TestLTestTupleClass, TestLTestTupleIntConstructor)
 	EXPECT_EQ(tuple.GetParameterName(), paramName);
 }
 
+
+TEST(TestLTestTupleClass, TestLTestTupleInt1DArrConstructor)
+{
+	// arrange
+	std::vector<int> value({1,2,3});
+	std::string paramName = "TestTuple";
+
+	// action
+	LTestTuple tuple(value, paramName);
+
+	// assert
+	EXPECT_EQ(tuple.GetType(), LTestTupleType::Int1DArrType);
+	EXPECT_EQ(tuple.GetInt1DArray(), value);
+	EXPECT_EQ(tuple.GetParameterName(), paramName);
+}
 // TODO: Here need to test different constructor with different type
 
 // TODO: Here need to test allocation as test LinkList, Graph and Tree types. Checking two address whether same(should difference) after copy constructor.
