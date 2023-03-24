@@ -58,6 +58,7 @@ TEST(TestLTestTupleClass, TestLTestTupleListHeadCopy)
 
 	// assert
 	EXPECT_NE(copied.GetListHead(), org.GetListHead());
+
 }
 
 // Other testing

@@ -41,7 +41,7 @@ public:
 	{}
 
 protected:
-	virtual std::vector<LTestTuple>& ParseInput(std::string input) = 0; // 
+	virtual std::vector<LTestTuple>&& ParseInput(std::string input) = 0; // 
 	virtual bool IsInputReasonable(std::vector<LTestTuple> &params) = 0;
 	virtual LTestTuple ExecuteAlgorithm(std::vector<LTestTuple> &params) = 0;
 	virtual void AssertAlgorithm(LTestTuple result, std::string expected) = 0;
