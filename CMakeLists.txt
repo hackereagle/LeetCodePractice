@@ -10,10 +10,6 @@ set(CMAKE_VERBOSE_MAKEFILE OFF) # opened if want to debug dependency
 set(CMAKE_RULE_MESSAGES ON)
 
 # add_subdirectory(src/LeetCode/0001Sum)
-
-# It is not finished.
-# add_subdirectory(src/LeetCode/0025ReverseNodesInKGroup)
-
 # add_subdirectory(src/LeetCode/0013Roman2Integer)
 # add_subdirectory(src/LeetCode/0128LongestConsecutiveSequence)
 # add_subdirectory(src/LeetCode/0011ContainerWithMostWater)
@@ -78,7 +74,8 @@ set(CMAKE_RULE_MESSAGES ON)
 # add_subdirectory(src/LeetCode/0224BasicCalculator)
 # add_subdirectory(src/LeetCode/0063UniquePathsII)
 # add_subdirectory(src/LeetCode/0070ClimbingStairs)
-add_subdirectory(src/LeetCode/0164MaximumGap)
-add_subdirectory(src/LeetCode/0215KthLargestElementInAnArray)
+# add_subdirectory(src/LeetCode/0164MaximumGap)
+# add_subdirectory(src/LeetCode/0215KthLargestElementInAnArray)
+add_subdirectory(src/LeetCode/0025ReverseNodesInKGroup)
 add_subdirectory(src/CommonModules.Testing)
 add_subdirectory(src/LeetcodeTestFramework.UnitTest)
