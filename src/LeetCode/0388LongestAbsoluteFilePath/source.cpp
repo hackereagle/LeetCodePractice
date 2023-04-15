@@ -98,7 +98,7 @@ private:
 		}
 		else {
 			// pop stack to coresponding level and update current level
-			while (curLevel >= level) {//} && curLevel > 1) {
+			while (curLevel >= level) {
 				int tmp = pathsLen.top();
 				//std::cout << "=== stack size = " << pathsLen.size() << ", tmp = " << tmp << std::endl; // debug
 				tmpLen = tmpLen - tmp;

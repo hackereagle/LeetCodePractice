@@ -58,21 +58,6 @@ inline std::string Vector2Str(std::vector<T> vec)
 template<class T>
 inline void PrintVector(std::vector<T> vec)
 {
-	// if(IsAcceptType<T>()){
-	// 	std::cout << "[";
-	// 	int len = vec.size();
-	// 	if(len > 0){
-	// 		std::cout << vec[0];
-	// 		for(int i = 1; i < len; i++){
-	// 			std::cout << ", " << vec[i];
-	// 		}
-	// 	}
-	// 	std::cout << "]" <<std::endl;
-	// }
-	// else{
-	// 	std::cout << "PrintVector could not print this type" << std::endl;
-	// }
-
 	std::string str = Vector2Str(vec);
 	std::cout << str << std::endl;
 }
@@ -106,24 +91,6 @@ inline std::string Vector2Str<std::vector<int>>(std::vector<std::vector<int>> ve
 template<>
 inline void PrintVector<std::vector<int>>(std::vector<std::vector<int>> vec)
 {
-	//int len = vec.size();
-	//std::cout << "[";
-	//for(int i = 0; i < len; i++){
-	//	if(i > 0)
-	//		std::cout << ", ";
-
-	//	std::cout << "[";
-	//	int _len = vec[i].size();
-	//	if(_len > 0){
-	//		std::cout << vec[i][0];
-	//		for(int j = 1; j < _len; j++){
-	//			std::cout << ", " << vec[i][j];
-	//		}
-	//	}
-	//	std::cout << "]";
-	//}
-	//std::cout << "]" <<std::endl;
-
 	std::string str = Vector2Str(vec);
 	std::cout << str << std::endl;
 }
@@ -154,7 +121,39 @@ inline bool IsTwoVectorEqual(std::vector<T> vec1, std::vector<T>vec2)
 		}
 	}
 	else{
-		std::cout << "IsTwoVectorEqual could not print this type" << std::endl;
+		std::cout << "IsTwoVectorEqual could not check this type" << std::endl;
+		isEqual = false;
+	}
+	return isEqual;
+}
+
+template<>
+inline bool IsTwoVectorEqual(std::vector<std::vector<int>> vec1, std::vector<std::vector<int>> vec2)
+{
+	bool isEqual = false;
+	size_t len1 = vec1.size(), len2 = vec2.size();
+	if(len1 == 0 && len2 == 0){
+		isEqual = true;
+	}
+	else if(len1 == len2){
+		std::vector<std::vector<int>>::iterator it1 = vec1.begin(), e1 = vec1.end();
+		std::vector<int>::iterator _it1, _it2, _e1, _e2;
+		for (std::vector<std::vector<int>>::iterator it2 = vec2.begin(); it1 != e1; it1++, it2++){
+			_it1 = it1->begin();
+			_it2 = it2->begin();
+			for (_e1 = it1->end(), _e2 = it2->end(); _it1 != _e1; _it1++, _it2++){
+				if(*_it1 != *_it2){
+					isEqual = false;
+					break;
+				}
+				else{
+					isEqual = true;
+				}
+
+			}
+		}
+	}
+	else{
 		isEqual = false;
 	}
 	return isEqual;
