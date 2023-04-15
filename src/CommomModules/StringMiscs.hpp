@@ -4,6 +4,8 @@
 #include <string>
 #include <string.h>
 #include <vector>
+#include <functional>
+#include <sstream>
 
 inline std::vector<std::string> SplitString(std::string str, std::string delimiter)
 {
@@ -71,4 +73,47 @@ inline bool IsIpFormat(const char* ipStr)
         isIpFormat = true;
     }
     return isIpFormat;
+}
+
+inline std::string ReplaceEscapeCharStr(std::string str)
+{
+    std::string ret;
+
+    std::function<bool(char)> isEscapeChar =
+    [=](char c) -> bool 
+    {
+        bool _isEscapeChar = false;
+        if ('\n' == c) {
+            _isEscapeChar = true;
+        }
+        else if ('\t' == c) {
+            _isEscapeChar = true;
+        }
+        return _isEscapeChar;
+    };
+
+    std::function<std::string(char)> convertEscapeChar2Str =
+    [=](char c) -> std::string 
+    {
+        std::string ret = "";
+        if ('\n' == c) {
+            ret = "\\n";
+        }
+        else if ('\t' == c) {
+            ret = "\\t";
+        }
+        return ret;
+    };
+
+    std::ostringstream ss;
+    for (auto c : str) {
+        if (isEscapeChar(c))
+            ss << convertEscapeChar2Str(c);
+        else
+            ss << c;
+    }
+
+    ret = ss.str();
+
+    return ret;
 }
