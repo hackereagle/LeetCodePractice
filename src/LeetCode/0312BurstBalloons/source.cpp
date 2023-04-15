@@ -1,6 +1,6 @@
 #include <iostream>
-#include <string>
 #include <vector>
+#include "VectorMiscs.hpp"
 #include "AssertClass.hpp"
 
 class Solution
@@ -85,12 +85,58 @@ public:
 
 	void Example1()
 	{
-		std::string input = "()";
-		std::cout << "===== Test input \"" << input << "\", output true =====" << std::endl;
+		// arrange
+		std::vector<int> nums({3, 1, 5, 8});
+		int expected = 167;
+		std::cout << "===== Test nums = " << Vector2Str(nums) << ", output " << expected << " =====" << std::endl;
 
-		bool result = this->mSolution.maxCoins(input);
+		// action
+		int result = this->mSolution.maxCoins(nums);
 
-		AssertClass::GetInstance().Assert(result == true);
+		// assert
+		AssertClass::GetInstance().Assert(result == expected);
+	}
+
+	void Example2()
+	{
+		// arrange
+		std::vector<int> nums({1, 5});
+		int expected = 10;
+		std::cout << "===== Test nums = " << Vector2Str(nums) << ", output " << expected << " =====" << std::endl;
+
+		// action
+		int result = this->mSolution.maxCoins(nums);
+
+		// assert
+		AssertClass::GetInstance().Assert(result == expected);
+	}
+
+	void Example3()
+	{
+		// arrange
+		std::vector<int> nums({3});
+		int expected = 3;
+		std::cout << "===== Test nums = " << Vector2Str(nums) << ", output " << expected << " =====" << std::endl;
+
+		// action
+		int result = this->mSolution.maxCoins(nums);
+
+		// assert
+		AssertClass::GetInstance().Assert(result == expected);
+	}
+
+	void Example4()
+	{
+		// arrange
+		std::vector<int> nums({100, 90, 80, 30, 70, 90});
+		int expected = 2139100;
+		std::cout << "===== Test nums = " << Vector2Str(nums) << ", output " << expected << " =====" << std::endl;
+
+		// action
+		int result = this->mSolution.maxCoins(nums);
+
+		// assert
+		AssertClass::GetInstance().Assert(result == expected);
 	}
 
 private:
@@ -101,6 +147,9 @@ int main(int argc, char** argv)
 {
 	TestMaxCoins test;
 	test.Example1();
+	test.Example2();
+	test.Example3();
+	test.Example4();
 	getchar();
 	return EXIT_SUCCESS;
 }
