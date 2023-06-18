@@ -75,7 +75,8 @@
         {
             "label": "Rebuild project(Release)",
             "type": "shell",
-            "command": "rm -r build; mkdir build; time -p cmake -E chdir build/ cmake -DCMAKE_BUILD_TYPE=Release ..; time -p cmake --build build/",
+            //"command": "rm -r build; mkdir build; time -p cmake -E chdir build/ cmake -DCMAKE_BUILD_TYPE=Release ..; time -p cmake --build build/",
+            "command": "rm -r build; mkdir build; time cmake -E chdir build/ cmake -DCMAKE_BUILD_TYPE=Release ..; time cmake --build build/",
             "problemMatcher": [],
             "group": "build",
             "options": {
