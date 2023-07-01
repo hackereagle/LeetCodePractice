@@ -132,13 +132,14 @@ inline bool IsTwoTreeEqual(TreeNode* l, TreeNode* r)
     return leftEqual & rightEqual;
 }
 
-inline void ReleaseTree(TreeNode* node)
+inline void ReleaseTree(TreeNode* &node)
 {
     if(node){
         ReleaseTree(node->left);
         ReleaseTree(node->right);
         std::cout << "node [" << node->val << "] deleted" << std::endl;
         delete node;
+        node = nullptr;
     }
 }
 

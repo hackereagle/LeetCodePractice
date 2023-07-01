@@ -20,8 +20,10 @@ public:
 
 		TreeNode* root = ConvertLeetcodeArray2BinaryTree(arr, sizeof(arr) / sizeof(std::string));
 		PrintBinaryTree(root);
+		AssertClass::GetInstance().Assert(root != nullptr, "Tree already create");
 
 		ReleaseTree(root);
+		AssertClass::GetInstance().Assert(root == nullptr, "Tree already release");
 	}
 
 	void TestCheckingTwoTreeEqual()
