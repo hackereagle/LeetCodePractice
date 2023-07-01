@@ -4,11 +4,13 @@ project(${PROJECT_NAME})
 
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
+enable_testing()
+find_package(GTest CONFIG REQUIRED)
 
 message(STATUS "In CommonModules: ${PROJECT_SOURCE_DIR}")
 include_directories(${PROJECT_SOURCE_DIR}/../CommomModules)
 
 add_executable(${PROJECT_NAME} main.cpp)
-target_link_libraries(${PROJECT_NAME} ${CMAKE_DL_LIBS} Threads::Threads)
+target_link_libraries(${PROJECT_NAME} ${CMAKE_DL_LIBS} Threads::Threads stdc++ GTest::gtest)
 
 set(CMAKE_CXX_FLAGS "-std=c++17${CMAKE_CXX_FLAGS}")

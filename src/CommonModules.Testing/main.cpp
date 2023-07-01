@@ -1,4 +1,5 @@
 #include <iostream>
+#include <gtest/gtest.h>
 #include "TestLeetcodeTreeMiscsClass.hpp"
 #include "TestVectorMiscsClass.hpp"
 #include "TestLeetcodeGraphMiscsClass.hpp"
@@ -12,10 +13,10 @@ int main(int argc, char** argv)
 	// testVectorMiscsClass.TestCheckingTwoVectorSimilar();
 	// testVectorMiscsClass.TestCheckingTwoVectorNotSimilar();
 
-	TestLeetcodeTreeMiscsClass testLeetcodeTreeMiscsClass;
-	testLeetcodeTreeMiscsClass.TestCreateTreeWithArrayAndRelease();
-	testLeetcodeTreeMiscsClass.TestCheckingTwoTreeEqual();
-	testLeetcodeTreeMiscsClass.TestCheckingTwoTreeNotEqual();
+	// TestLeetcodeTreeMiscsClass testLeetcodeTreeMiscsClass;
+	// testLeetcodeTreeMiscsClass.TestCreateTreeWithArrayAndRelease();
+	// testLeetcodeTreeMiscsClass.TestCheckingTwoTreeEqual();
+	// testLeetcodeTreeMiscsClass.TestCheckingTwoTreeNotEqual();
 
 	// TestLeetcodeGraphMiscClass testLeetcodeGraphMiscClass;
 	// testLeetcodeGraphMiscClass.TestGenerateAdjList();
@@ -24,6 +25,9 @@ int main(int argc, char** argv)
 	// testStopWatch.TestCallStopWatchOnce();
 	// testStopWatch.TestCallStopWatchMultiple();
 
-	getchar();
-	return EXIT_SUCCESS;
+	// getchar();
+	//return EXIT_SUCCESS;
+
+	testing::InitGoogleTest(&argc, argv);
+	return RUN_ALL_TESTS();
 }

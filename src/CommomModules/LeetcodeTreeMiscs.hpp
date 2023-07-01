@@ -72,13 +72,15 @@ inline void CollectAllNodes(TreeNode* node, std::vector<std::vector<TreeNode*>> 
         int nullCount = 0;
         int index = vec.size() - 1;
         for(auto e : vec[index]){
-            temp.push_back(e->left);
-            if(e->left == nullptr)
-                nullCount = nullCount + 1;
+            if (e) {
+                temp.push_back(e->left);
+                if(e->left == nullptr)
+                    nullCount = nullCount + 1;
 
-            temp.push_back(e->right);
-            if(e->right == nullptr)
-                nullCount = nullCount + 1;
+                temp.push_back(e->right);
+                if(e->right == nullptr)
+                    nullCount = nullCount + 1;
+            }
         }
 
         if(nullCount == temp.size())
