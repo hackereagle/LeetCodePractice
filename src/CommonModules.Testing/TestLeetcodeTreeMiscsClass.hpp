@@ -66,15 +66,25 @@
 
 TEST(TestLeetcodeTreeMiscsClass, TestCreateTreeWithArrayAndRelease)
 {
+	// ARRANGE
+	TreeNode* node4 = new TreeNode(4);
+	TreeNode* node5 = new TreeNode(5);
+	TreeNode* node6 = new TreeNode(6);
+	TreeNode* node7 = new TreeNode(7);
+	TreeNode* node2 = new TreeNode(2, node4, node5);
+	TreeNode* node3 = new TreeNode(3, node6, node7);
+	TreeNode* node1 = new TreeNode(1, node2, node3);
 	std::string arr[] = {"1", "2", "3", "4", "5", "6", "7"};
 
+	// ACT
 	TreeNode* root = ConvertLeetcodeArray2BinaryTree(arr, sizeof(arr) / sizeof(std::string));
 	PrintBinaryTree(root);
-	//AssertClass::GetInstance().Assert(root != nullptr, "Tree already create");
+
+	// ASSERT
 	EXPECT_NE(root, nullptr);
+	EXPECT_TRUE(IsTwoTreeEqual(node1, root));
 
 	ReleaseTree(root);
-	//AssertClass::GetInstance().Assert(root == nullptr, "Tree already release");
 	EXPECT_EQ(root, nullptr);
 }
 
@@ -101,7 +111,6 @@ TEST(TestLeetcodeTreeMiscsClass, TestCheckingTwoTreeNotEqual)
 	TreeNode* root1 = ConvertLeetcodeVector2BinaryTree(arr1);
 	TreeNode* root2 = ConvertLeetcodeVector2BinaryTree(arr2);
 
-	// AssertClass::GetInstance().Assert(!IsTwoTreeEqual(root1, root2), "Two tree not equal");
 	EXPECT_FALSE(IsTwoTreeEqual(root1, root2));
 
 	ReleaseTree(root1);
@@ -131,4 +140,7 @@ TEST(TestLeetcodeTreeMiscsClass, TestCreateLeftistTree)
 
 	// ASSERT
 	EXPECT_TRUE(IsTwoTreeEqual(node1, root));
+
+	ReleaseTree(node1);
+	ReleaseTree(root);
 }
