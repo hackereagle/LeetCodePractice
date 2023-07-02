@@ -1,10 +1,13 @@
 #pragma once
 
 #include <iostream>
+#include <sstream>
 #include <string>
 #include <vector>
 #include <memory>
 #include <string.h>
+#include <queue>
+#include "StringMiscs.hpp"
 
 struct TreeNode 
 {
@@ -37,10 +40,76 @@ inline TreeNode* CreateBinaryTreeNodeFromArray(std::string *arr, int len, int id
     return node;
 }
 
-// The function is using in Leetcode tree problem
-inline TreeNode* ConvertLeetcodeArray2BinaryTree(std::string* arr, int len)
+//inline TreeNode* CreateTreeLeetcodeInputStr(std::string &str)
+inline TreeNode* CreateTreeLeetcodeInputStr(std::string str)
 {
-    return CreateBinaryTreeNodeFromArray(arr, len, 0);
+    TreeNode* root = nullptr;
+    str = RemoveFrontAndEndSquareBracket(str);
+
+    auto createNode = [](std::string val) -> TreeNode* {
+        TreeNode* node = nullptr;
+        if (val != "null" && val != " null" && 
+            val != "" && val != " ") {
+            node = new TreeNode(std::stoi(val));
+        }
+        return node;
+    };
+
+    std::string cur;
+    if (str != "") {
+        cur = SplitOneData(str);
+        root = new TreeNode(std::stoi(cur));
+
+        std::queue<TreeNode*> q;
+        q.push(root);
+        TreeNode* curNode = nullptr;
+        std::string val;
+        while(q.size() && str.size()) {
+            curNode = q.front();
+            q.pop();
+
+            if (curNode) {
+                val = SplitOneData(str);
+                curNode->left = createNode(val);
+                q.push(curNode->left);
+
+                val = SplitOneData(str);
+                curNode->right = createNode(val);
+                q.push(curNode->right);
+            }
+        }
+    }
+
+    return root;
+}
+
+enum ConvertMethod : int
+{
+    WithArrayRepretation,
+    WithLeetcodeStr,
+};
+
+// The function is using in Leetcode tree problem
+inline TreeNode* ConvertLeetcodeArray2BinaryTree(std::string* arr, int len, ConvertMethod method = ConvertMethod::WithArrayRepretation)
+{
+    TreeNode* root = nullptr;
+    if (ConvertMethod::WithArrayRepretation == method) {
+        root = CreateBinaryTreeNodeFromArray(arr, len, 0);
+    }
+    else if (ConvertMethod::WithLeetcodeStr == method){
+        std::ostringstream ss;
+        for (int i = 0; i < len; i++){
+            if (i != len - 1)
+                ss << *(arr + i) << ",";
+            else
+                ss << *(arr + i);
+        }
+
+        std::string str = ss.str();
+        root = CreateTreeLeetcodeInputStr(str);
+    }
+    
+    return root;
 }
 
 // The function is using in Leetcode tree problem
@@ -106,13 +175,6 @@ inline void PrintBinaryTree(TreeNode* root)
         std::cout << std::endl;
     }
     std::cout << std::endl;
-}
-
-inline std::vector<std::string> ConvertTree2Vector(TreeNode* root)
-{
-    std::vector<std::string> tree;
-
-    return tree;
 }
 
 inline bool IsTwoTreeEqual(TreeNode* l, TreeNode* r)

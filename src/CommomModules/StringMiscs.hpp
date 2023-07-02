@@ -7,6 +7,26 @@
 #include <functional>
 #include <sstream>
 
+std::string SplitOneData(std::string &str, char delimeter = ',')
+{
+    if (str == "")
+        return "";
+
+    std::ostringstream ss;
+    int idx = 0;
+    while(str[idx] != delimeter && idx < str.size()) {
+        ss << str[idx];
+        idx = idx + 1;
+    }
+
+    if (str[idx] == ',')
+        str = str.substr(idx + 1);
+    else
+        str = "";
+
+    return ss.str();
+}
+
 inline std::vector<std::string> SplitString(std::string str, std::string delimiter)
 {
     std::vector<std::string> ret;
@@ -116,4 +136,19 @@ inline std::string ReplaceEscapeCharStr(std::string str)
     ret = ss.str();
 
     return ret;
+}
+
+inline std::string RemoveFrontAndEndSquareBracket(std::string str)
+{
+    std::string res;
+    int begin = 0, end = str.size();
+
+    if (str[begin] == '[')
+        begin = begin + 1;
+    
+    if (str[end] == ']')
+        end = end - 1;
+
+    res = str.substr(begin, end - begin + 1);
+    return res;
 }

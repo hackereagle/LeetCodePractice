@@ -77,7 +77,7 @@ TEST(TestLeetcodeTreeMiscsClass, TestCreateTreeWithArrayAndRelease)
 	std::string arr[] = {"1", "2", "3", "4", "5", "6", "7"};
 
 	// ACT
-	TreeNode* root = ConvertLeetcodeArray2BinaryTree(arr, sizeof(arr) / sizeof(std::string));
+	TreeNode* root = ConvertLeetcodeArray2BinaryTree(arr, sizeof(arr) / sizeof(std::string), ConvertMethod::WithLeetcodeStr);
 	PrintBinaryTree(root);
 
 	// ASSERT
@@ -118,7 +118,7 @@ TEST(TestLeetcodeTreeMiscsClass, TestCheckingTwoTreeNotEqual)
 
 }
 
-TEST(TestLeetcodeTreeMiscsClass, TestCreateLeftistTree)
+TEST(TestLeetcodeTreeMiscsClass, TestCreateMinLeftistTree)
 {
 	// ARRANGE
 	// This is expected answer
@@ -127,15 +127,42 @@ TEST(TestLeetcodeTreeMiscsClass, TestCreateLeftistTree)
 	TreeNode* node3 = new TreeNode(3);
 	TreeNode* node4 = new TreeNode(4);
 	TreeNode* node5 = new TreeNode(5);
-	node1->left = node2;
-	node2->left = node3;
-	node3->left = node4;
-	node4->left = node5;
-	PrintBinaryTree(node1);
-	std::string arr[] = {"1", "2", "null", "3", "null", "4", "null", "5"};
+	node5->left = node4;
+	node4->left = node3;
+	node3->left = node2;
+	node2->left = node1;
+	PrintBinaryTree(node5);
+	std::string arr[] = {"5", "4", "null", "3", "null", "2", "null", "1"};
 
 	// ACT
-	TreeNode* root = ConvertLeetcodeArray2BinaryTree(arr, sizeof(arr) / sizeof(std::string));
+	TreeNode* root = ConvertLeetcodeArray2BinaryTree(arr, sizeof(arr) / sizeof(std::string), ConvertMethod::WithLeetcodeStr);
+	PrintBinaryTree(root);
+
+	// ASSERT
+	EXPECT_TRUE(IsTwoTreeEqual(node5, root));
+
+	ReleaseTree(node1);
+	ReleaseTree(root);
+}
+
+TEST(TestLeetcodeTreeMiscsClass, TestCreateMaxLeftistTree)
+{
+	// ARRANGE
+	// This is expected answer
+	TreeNode* node1 = new TreeNode(1);
+	TreeNode* node2 = new TreeNode(2);
+	TreeNode* node3 = new TreeNode(3);
+	TreeNode* node4 = new TreeNode(4);
+	TreeNode* node5 = new TreeNode(5);
+	node1->right = node2;
+	node2->right = node3;
+	node3->right = node4;
+	node4->right = node5;
+	PrintBinaryTree(node1);
+	std::string arr[] = {"1", "null", "2", "null", "3", "null", "4", "null", "5"};
+
+	// ACT
+	TreeNode* root = ConvertLeetcodeArray2BinaryTree(arr, sizeof(arr) / sizeof(std::string), ConvertMethod::WithLeetcodeStr);
 	PrintBinaryTree(root);
 
 	// ASSERT
@@ -143,4 +170,34 @@ TEST(TestLeetcodeTreeMiscsClass, TestCreateLeftistTree)
 
 	ReleaseTree(node1);
 	ReleaseTree(root);
+}
+
+TEST(TestLeetcodeTreeMiscsClass, TestCreateTreeWithLeetcodeStr)
+{
+	// ARRANGE
+	TreeNode* node4 = new TreeNode(4);
+	TreeNode* node5 = new TreeNode(5);
+	TreeNode* node6 = new TreeNode(6);
+	TreeNode* node7 = new TreeNode(7);
+	TreeNode* node2 = new TreeNode(2);
+	TreeNode* node3 = new TreeNode(3);
+	TreeNode* node1 = new TreeNode(1);
+	node1->right = node2;
+	node2->left = node3;
+	node3->left = node4;
+	node3->right = node5;
+	node4->right = node6;
+	node5->left = node7;
+	std::string str = "[1,null,2,3,null,4,5,null,6,7]";
+
+	// ACT
+	TreeNode* root = CreateTreeLeetcodeInputStr(str);
+	PrintBinaryTree(root);
+
+	// ASSERT
+	EXPECT_NE(root, nullptr);
+	EXPECT_TRUE(IsTwoTreeEqual(node1, root));
+
+	ReleaseTree(root);
+	EXPECT_EQ(root, nullptr);
 }
