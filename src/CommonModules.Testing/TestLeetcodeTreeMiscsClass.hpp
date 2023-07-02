@@ -90,13 +90,39 @@ TEST(TestLeetcodeTreeMiscsClass, TestCreateTreeWithArrayAndRelease)
 
 TEST(TestLeetcodeTreeMiscsClass, TestCheckingTwoTreeEqual)
 {
-	std::vector<std::string> arr1({"1","2","3","null","null","4","5"});
-	std::vector<std::string> arr2({"1","2","3","null","null","4","5"});
+	// ARRANGE
+	// first tree
+	TreeNode* node1_1 = new TreeNode(1);
+	TreeNode* node1_2 = new TreeNode(2);
+	TreeNode* node1_3 = new TreeNode(3);
+	TreeNode* node1_4 = new TreeNode(4);
+	TreeNode* node1_5 = new TreeNode(5);
+	node1_1->left = node1_2;
+	node1_1->right = node1_3;
+	node1_3->left = node1_4;
+	node1_3->right = node1_5;
+	// second tree
+	TreeNode* node2_1 = new TreeNode(1);
+	TreeNode* node2_2 = new TreeNode(2);
+	TreeNode* node2_3 = new TreeNode(3);
+	TreeNode* node2_4 = new TreeNode(4);
+	TreeNode* node2_5 = new TreeNode(5);
+	node2_1->left = node2_2;
+	node2_1->right = node2_3;
+	node2_3->left = node2_4;
+	node2_3->right = node2_5;
 
-	TreeNode* root1 = ConvertLeetcodeVector2BinaryTree(arr1);
-	TreeNode* root2 = ConvertLeetcodeVector2BinaryTree(arr2);
+	//std::vector<std::string> arr1({"1","2","3","null","null","4","5"});
+	//std::vector<std::string> arr2({"1","2","3","null","null","4","5"});
 
-	//AssertClass::GetInstance().Assert(IsTwoTreeEqual(root1, root2), "Two tree equal");
+	//TreeNode* root1 = ConvertLeetcodeVector2BinaryTree(arr1);
+	//TreeNode* root2 = ConvertLeetcodeVector2BinaryTree(arr2);
+	
+	// ACT
+	TreeNode* root1 = node1_1;
+	TreeNode* root2 = node2_1;
+
+	// ASSERT
 	EXPECT_TRUE(IsTwoTreeEqual(root1, root2));
 
 	ReleaseTree(root1);
@@ -105,17 +131,43 @@ TEST(TestLeetcodeTreeMiscsClass, TestCheckingTwoTreeEqual)
 
 TEST(TestLeetcodeTreeMiscsClass, TestCheckingTwoTreeNotEqual)
 {
-	std::vector<std::string> arr1({"1","2","3","null","null","4","5"});
-	std::vector<std::string> arr2({"1","9","3","null","null","4","5"});
+	// ARRANGE
+	// first tree
+	TreeNode* node1_1 = new TreeNode(1);
+	TreeNode* node1_2 = new TreeNode(2);
+	TreeNode* node1_3 = new TreeNode(3);
+	TreeNode* node1_4 = new TreeNode(4);
+	TreeNode* node1_5 = new TreeNode(5);
+	node1_1->left = node1_2;
+	node1_1->right = node1_3;
+	node1_3->left = node1_4;
+	node1_3->right = node1_5;
+	// second tree
+	TreeNode* node2_1 = new TreeNode(1);
+	TreeNode* node2_2 = new TreeNode(9);
+	TreeNode* node2_3 = new TreeNode(3);
+	TreeNode* node2_4 = new TreeNode(4);
+	TreeNode* node2_5 = new TreeNode(5);
+	node2_1->left = node2_2;
+	node2_1->right = node2_3;
+	node2_3->left = node2_4;
+	node2_3->right = node2_5;
 
-	TreeNode* root1 = ConvertLeetcodeVector2BinaryTree(arr1);
-	TreeNode* root2 = ConvertLeetcodeVector2BinaryTree(arr2);
+	//std::vector<std::string> arr1({"1","2","3","null","null","4","5"});
+	//std::vector<std::string> arr2({"1","9","3","null","null","4","5"});
 
+	//TreeNode* root1 = ConvertLeetcodeVector2BinaryTree(arr1);
+	//TreeNode* root2 = ConvertLeetcodeVector2BinaryTree(arr2);
+	
+	// ACT
+	TreeNode* root1 = node1_1;
+	TreeNode* root2 = node2_1;
+
+	// ASSERT
 	EXPECT_FALSE(IsTwoTreeEqual(root1, root2));
 
 	ReleaseTree(root1);
 	ReleaseTree(root2);
-
 }
 
 TEST(TestLeetcodeTreeMiscsClass, TestCreateMinLeftistTree)
