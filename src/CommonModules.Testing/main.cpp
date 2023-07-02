@@ -13,11 +13,6 @@ int main(int argc, char** argv)
 	// testVectorMiscsClass.TestCheckingTwoVectorSimilar();
 	// testVectorMiscsClass.TestCheckingTwoVectorNotSimilar();
 
-	// TestLeetcodeTreeMiscsClass testLeetcodeTreeMiscsClass;
-	// testLeetcodeTreeMiscsClass.TestCreateTreeWithArrayAndRelease();
-	// testLeetcodeTreeMiscsClass.TestCheckingTwoTreeEqual();
-	// testLeetcodeTreeMiscsClass.TestCheckingTwoTreeNotEqual();
-
 	// TestLeetcodeGraphMiscClass testLeetcodeGraphMiscClass;
 	// testLeetcodeGraphMiscClass.TestGenerateAdjList();
 
