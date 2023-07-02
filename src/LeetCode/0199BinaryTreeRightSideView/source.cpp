@@ -3,6 +3,7 @@
 #include <string>
 #include "LeetcodeTreeMiscs.hpp"
 #include "AssertClass.hpp"
+#include "VectorMiscs.hpp"
 
 /**
  * Definition for a binary tree node.
@@ -62,13 +63,15 @@ public:
 
 	void Example1()
 	{
-		// std::string nodes = "[1,2,3,null,5,null,4]";
-		// TreeNode* input = CreateBinaryTreeNodeFromArray(nodes);
-		// std::cout << "===== Test input \"" << input << "\", output true =====" << std::endl;
+		std::string nodes = "[1,2,3,null,5,null,4]";
+		TreeNode* input = CreateTreeLeetcodeInputStr(nodes);
+		std::cout << "===== Test input \"" << input << "\", output true =====" << std::endl;
 
-		// bool reslut = this->mSolution.isValid(input);
+		std::vector<int> reslut = this->mSolution.rightSideView(input);
+		PrintVector(reslut);
 
-		// AssertClass::GetInstance().Assert(reslut == true);
+		//AssertClass::GetInstance().Assert(reslut == true);
+		ReleaseTree(input);
 	}
 
 
