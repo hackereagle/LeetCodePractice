@@ -40,7 +40,6 @@ inline TreeNode* CreateBinaryTreeNodeFromArray(std::string *arr, int len, int id
     return node;
 }
 
-//inline TreeNode* CreateTreeLeetcodeInputStr(std::string &str)
 inline TreeNode* CreateTreeLeetcodeInputStr(std::string str)
 {
     TreeNode* root = nullptr;
@@ -90,13 +89,14 @@ enum ConvertMethod : int
 };
 
 // The function is using in Leetcode tree problem
-inline TreeNode* ConvertLeetcodeArray2BinaryTree(std::string* arr, int len, ConvertMethod method = ConvertMethod::WithArrayRepretation)
+inline TreeNode* ConvertLeetcodeArray2BinaryTree(std::string* arr, int len, ConvertMethod method = ConvertMethod::WithLeetcodeStr)
 {
     TreeNode* root = nullptr;
     if (ConvertMethod::WithArrayRepretation == method) {
+        std::cout << "\e[0;31m" << "WARNING!!! Using array representation may be causing problem. Because leetcode string and array are using BFS to create BST." << std::endl;
         root = CreateBinaryTreeNodeFromArray(arr, len, 0);
     }
-    else if (ConvertMethod::WithLeetcodeStr == method){
+    else {
         std::ostringstream ss;
         for (int i = 0; i < len; i++){
             if (i != len - 1)
