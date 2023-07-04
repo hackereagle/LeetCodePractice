@@ -97,10 +97,14 @@ public:
 		std::string expectedRootStr = "[2,1,4,null,null,3]";
 		TreeNode* expectedRoot = CreateTreeLeetcodeInputStr(expectedRootStr);
 		std::cout << "===== Test root = " << rootStr << ", output = " << expectedRootStr << " =====" << std::endl;
+		// debug
+		std::cout << "expected tree = \n";
 		PrintBinaryTree(expectedRoot);
+		std::cout << "input tree = \n";
 		PrintBinaryTree(root);
 
 		this->mSolution.recoverTree(root);
+		std::cout << "after recover tree = \n";
 		PrintBinaryTree(root);
 
 		AssertClass::GetInstance().Assert(IsTwoTreeEqual(expectedRoot, root));
@@ -115,8 +119,14 @@ public:
 		std::string expectedRootStr = "[6,1,13,null,null,7,null,null,10]";
 		TreeNode* expectedRoot = CreateTreeLeetcodeInputStr(expectedRootStr);
 		std::cout << "===== Test root = " << rootStr << ", output = " << expectedRootStr << " =====" << std::endl;
+		std::cout << "expected tree = \n";
+		PrintBinaryTree(expectedRoot);
+		std::cout << "input tree = \n";
+		PrintBinaryTree(root);
 
 		this->mSolution.recoverTree(root);
+		std::cout << "after recover tree = \n";
+		PrintBinaryTree(root);
 
 		AssertClass::GetInstance().Assert(IsTwoTreeEqual(expectedRoot, root));
 		ReleaseTree(root);
@@ -130,8 +140,14 @@ public:
 		std::string expectedRootStr = "[2,1,3]";
 		TreeNode* expectedRoot = CreateTreeLeetcodeInputStr(expectedRootStr);
 		std::cout << "===== Test root = " << rootStr << ", output = " << expectedRootStr << " =====" << std::endl;
+		std::cout << "expected tree = \n";
+		PrintBinaryTree(expectedRoot);
+		std::cout << "input tree = \n";
+		PrintBinaryTree(root);
 
 		this->mSolution.recoverTree(root);
+		std::cout << "after recover tree = \n";
+		PrintBinaryTree(root);
 
 		AssertClass::GetInstance().Assert(IsTwoTreeEqual(expectedRoot, root));
 		ReleaseTree(root);

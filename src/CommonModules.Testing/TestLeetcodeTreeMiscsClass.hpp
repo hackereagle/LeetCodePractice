@@ -123,7 +123,7 @@ TEST(TestLeetcodeTreeMiscsClass, TestCreateMinLeftistTree)
 	// ASSERT
 	EXPECT_TRUE(IsTwoTreeEqual(node5, root));
 
-	ReleaseTree(node1);
+	ReleaseTree(node5);
 	ReleaseTree(root);
 }
 
