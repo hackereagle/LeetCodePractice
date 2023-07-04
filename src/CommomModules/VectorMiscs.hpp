@@ -95,6 +95,39 @@ inline void PrintVector<std::vector<int>>(std::vector<std::vector<int>> vec)
 	std::cout << str << std::endl;
 }
 
+template<>
+inline std::string Vector2Str<std::vector<char>>(std::vector<std::vector<char>> vec)
+{
+	std::ostringstream ret;
+
+	int len = vec.size();
+	ret << "[";
+	for(int i = 0; i < len; i++){
+		if(i > 0)
+			ret << ", ";
+
+		ret << "[";
+		int _len = vec[i].size();
+		if(_len > 0){
+			ret << '\"' << (char)vec[i][0] << '\"';
+			for(int j = 1; j < _len; j++){
+				ret << ", " << '\"' << (char)vec[i][j] << '\"';
+			}
+		}
+		ret << "]";
+	}
+	ret << "]";
+
+	return ret.str();
+}
+
+template<>
+inline void PrintVector<std::vector<char>>(std::vector<std::vector<char>> vec)
+{
+	std::string str = Vector2Str(vec);
+	std::cout << str << std::endl;
+}
+
 template<class T>
 inline bool IsTwoVectorEqual(std::vector<T> vec1, std::vector<T>vec2)
 {
