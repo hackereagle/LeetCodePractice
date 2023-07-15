@@ -141,7 +141,7 @@ inline std::string ReplaceEscapeCharStr(std::string str)
 inline std::string RemoveFrontAndEndSquareBracket(std::string str)
 {
     std::string res;
-    int begin = 0, end = str.size();
+    int begin = 0, end = str.size() - 1;
 
     if (str[begin] == '[')
         begin = begin + 1;
@@ -149,6 +149,11 @@ inline std::string RemoveFrontAndEndSquareBracket(std::string str)
     if (str[end] == ']')
         end = end - 1;
 
-    res = str.substr(begin, end - begin + 1);
+    if (end > begin)
+        res = str.substr(begin, end - begin + 1);
+    else
+        res = "";
+    // std::cout << "begin = " << begin << ", end = " << end << std::endl;
+    // std::cout << "In RemoveFrontAndEndSquareBracket, res = " << res << std::endl;
     return res;
 }

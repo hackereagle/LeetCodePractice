@@ -55,7 +55,7 @@ inline TreeNode* CreateTreeLeetcodeInputStr(std::string str)
     };
 
     std::string cur;
-    if (str != "") {
+    if (str.size() > 0) {
         cur = SplitOneData(str);
         root = new TreeNode(std::stoi(cur));
 
@@ -70,14 +70,15 @@ inline TreeNode* CreateTreeLeetcodeInputStr(std::string str)
             if (curNode) {
                 val = SplitOneData(str);
                 curNode->left = createNode(val);
-                q.push(curNode->left);
+                if (curNode->left) q.push(curNode->left);
 
                 val = SplitOneData(str);
                 curNode->right = createNode(val);
-                q.push(curNode->right);
+                if (curNode->right) q.push(curNode->right);
             }
         }
     }
+    else std::cout << "no create" << std::endl;
 
     return root;
 }
@@ -205,6 +206,41 @@ inline void ReleaseTree(TreeNode* &node)
         delete node;
         node = nullptr;
     }
+}
+
+inline std::string ToLeetcodeStr(TreeNode* root)
+{
+    std::ostringstream ss;
+
+    std::queue<TreeNode*> q;
+    q.push(root);
+    TreeNode* cur = nullptr;
+    size_t idx = 0;
+    std::cout << "[";
+    while (q.size() > 0) {
+        cur = q.front();
+        q.pop();
+
+        if (idx != 0)
+            ss << ",";
+
+        if (cur) {
+            ss << cur->val;
+            
+            if (cur->left != nullptr)
+                q.push(cur->left);
+
+            if (cur->right != nullptr)
+                q.push(cur->right);
+        }
+        else {
+            ss << "null";
+        }
+        idx = idx + 1;
+    }
+    ss << "]";
+
+    return ss.str();    
 }
 
 inline TreeNode* CopyTree(TreeNode* root)

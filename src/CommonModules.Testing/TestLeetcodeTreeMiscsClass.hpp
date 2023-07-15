@@ -183,3 +183,19 @@ TEST(TestLeetcodeTreeMiscsClass, TestCreateTreeWithLeetcodeStr)
 	ReleaseTree(root);
 	EXPECT_EQ(root, nullptr);
 }
+
+TEST(TestLeetcodeTreeMiscsClass, TestCreateEmptyTree)
+{
+	// ARRANGE
+	std::string str = "[]";
+	TreeNode* expected = nullptr;
+
+	// ACT
+	TreeNode* root = CreateTreeLeetcodeInputStr(str);
+	PrintBinaryTree(root);
+
+	// ASSERT
+	EXPECT_TRUE(IsTwoTreeEqual(expected, root));
+
+	ReleaseTree(root);
+}

@@ -33,17 +33,6 @@ inline std::string List2Str(ListNode *head)
 
 inline void PrintList(ListNode *head)
 {
-	// ListNode **disp = &head;
-	// std::cout << "[";
-	// if(*disp){
-	// 	std::cout << (*disp)->val;
-	// 	*disp = (*disp)->next;
-	// 	while(*disp){
-	// 		std::cout << ", " << (*disp)->val;
-	// 		*disp = (*disp)->next;
-	// 	}
-	// }
-	// std::cout << "]" << std::endl;
 	std::cout << List2Str(head) << std::endl;
 }
 
