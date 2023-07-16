@@ -14,6 +14,12 @@ public:
 	{}
 	
 	void recoverTree(TreeNode* root) {
+		this->_first = AbnormalSubTree();
+		this->_second = AbnormalSubTree();
+		this->_abnormalCount = 0;
+		this->_pre = nullptr;
+		this->_cur = nullptr;
+
         FindAbnormalSubTree(root);
         if (_abnormalCount == 1) {
             std::swap(_first.Pre->val, _first.Node->val);
@@ -28,22 +34,27 @@ private:
     {
         TreeNode* Pre = nullptr;
         TreeNode* Node = nullptr;
+
+		~_abnormalSubTree()
+		{
+			
+		}
     } AbnormalSubTree;
     AbnormalSubTree _first;
     AbnormalSubTree _second;
     int _abnormalCount = 0;
-    TreeNode* pre = nullptr;
-    TreeNode* cur = nullptr;
+    TreeNode* _pre = nullptr;
+    TreeNode* _cur = nullptr;
 
     void FindAbnormalSubTree(TreeNode* node)
     {
         if (node) {
             FindAbnormalSubTree(node->left);
 
-            pre = cur;
-            cur = node;
-            if (pre && cur) {
-                CheckCondition(pre, cur);
+            _pre = _cur;
+            _cur = node;
+            if (_pre && _cur) {
+                CheckCondition(_pre, _cur);
             }
             FindAbnormalSubTree(node->right);
         }
