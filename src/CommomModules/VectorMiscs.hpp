@@ -196,7 +196,7 @@ template<class T>
 inline bool IsTwoVectorSimilar(std::vector<T> vec1, std::vector<T>vec2)
 {
 	bool isSimilar = false;
-	if(IsAcceptType<T>()){
+	if(IsAcceptType<T>() || std::is_same<T, std::string>::value){
 		size_t len1 = vec1.size(), len2 = vec2.size();
 		if(len1 == len2){
 			std::unordered_map<T, int> count;
