@@ -28,13 +28,14 @@ public:
 	{
 		// ARRANGE
 		std::string input = "()";
-		std::cout << "===== Test input " << input << ", output true =====" << std::endl;
+		bool expectedOutput = true;
+		std::cout << "===== Test input " << input << "; output true =====" << std::endl;
 
 		// ACT
 		bool result = this->mSolution.isValid(input);
 
 		// ASSERT
-		AssertClass::GetInstance().Assert(result == true);
+		AssertClass::GetInstance().Assert(result == expectedOutput);
 	}
 
 private:
