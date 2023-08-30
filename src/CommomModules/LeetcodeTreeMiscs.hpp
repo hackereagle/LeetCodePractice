@@ -132,51 +132,6 @@ inline TreeNode* ConvertLeetcodeVector2BinaryTree(std::vector<std::string> vec)
     return node; 
 }
 
-inline void CollectAllNodes(TreeNode* node, std::vector<std::vector<TreeNode*>> &vec)
-{
-    std::vector<TreeNode*> temp;
-    if(vec.size() == 0){
-        temp.push_back(node);
-    }
-    else{
-        int nullCount = 0;
-        int index = vec.size() - 1;
-        for(auto e : vec[index]){
-            if (e) {
-                temp.push_back(e->left);
-                if(e->left == nullptr)
-                    nullCount = nullCount + 1;
-
-                temp.push_back(e->right);
-                if(e->right == nullptr)
-                    nullCount = nullCount + 1;
-            }
-        }
-
-        if(nullCount == temp.size())
-            return;
-    }
-    vec.push_back(temp);
-
-    CollectAllNodes(node, vec);
-}
-
-inline void PrintBinaryTree(TreeNode* root)
-{
-    std::vector<std::vector<TreeNode*>> nodes;
-    CollectAllNodes(root, nodes);
-
-    for(auto v : nodes){
-        for(auto e : v){
-            if(e != nullptr)
-                std::cout << e->val << " ";
-            else
-                std::cout << "n ";
-        }
-        std::cout << std::endl;
-    }
-    std::cout << std::endl;
-}
 
 inline bool IsTwoTreeEqual(TreeNode* l, TreeNode* r)
 {
@@ -249,4 +204,60 @@ inline TreeNode* CopyTree(TreeNode* root)
         return nullptr;
     
     throw "CopyTree not be implement";
+}
+
+// Display tree feature
+typedef struct _DispTreeNodeInfon
+{
+    TreeNode* Node = nullptr;
+    int Index = -1;
+
+    _DispTreeNodeInfon(TreeNode* n, int idx) : Node(n), Index(idx) { }
+}DispTreeNodeInfon;
+
+inline void CollectAllNodes(TreeNode* node, std::vector<std::vector<DispTreeNodeInfon>> &vec, int level)
+{
+    // std::vector<TreeNode*> temp;
+    std::vector<DispTreeNodeInfon> temp;
+    if(vec.size() == 0){
+        temp.push_back(DispTreeNodeInfon(node, 1));
+    }
+    else{
+        int nullCount = 0;
+        int index = vec.size() - 1;
+        for(auto e : vec[index]){
+            if (e.Node) {
+                temp.push_back(DispTreeNodeInfon(e.Node->left, e.Index * 2));
+                if(e.Node->left == nullptr)
+                    nullCount = nullCount + 1;
+
+                temp.push_back(DispTreeNodeInfon(e.Node->right, (e.Index * 2) + 1));
+                if(e.Node->right == nullptr)
+                    nullCount = nullCount + 1;
+            }
+        }
+
+        if(nullCount == temp.size())
+            return;
+    }
+    vec.push_back(temp);
+
+    CollectAllNodes(node, vec, level + 1);
+}
+
+inline void PrintBinaryTree(TreeNode* root)
+{
+    std::vector<std::vector<DispTreeNodeInfon>> nodes;
+    CollectAllNodes(root, nodes, 0);
+
+    for(auto v : nodes){
+        for(auto e : v){
+            if(e.Node != nullptr)
+                std::cout << e.Node->val << " ";
+            else
+                std::cout << "n ";
+        }
+        std::cout << std::endl;
+    }
+    std::cout << std::endl;
 }
