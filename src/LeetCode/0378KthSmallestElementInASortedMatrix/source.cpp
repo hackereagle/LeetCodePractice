@@ -49,6 +49,9 @@ int main(int argc, char** argv)
 	MyPriorityQueueTest myPriorityQueueTest;	
 	myPriorityQueueTest.TestSameResultWithCppStlPriorityQueue_Default();
 	myPriorityQueueTest.TestSameResultWithCppStlPriorityQueue_Greater();
+	myPriorityQueueTest.TestPriorityQueueEmpty();
+	myPriorityQueueTest.TestPriorityQueueEmptyAfterPop();
+	myPriorityQueueTest.TestPriorityQueueAfterEmpty();
 
 	// TestIsValid test;
 	// test.Example1();
