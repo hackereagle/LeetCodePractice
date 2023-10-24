@@ -91,7 +91,7 @@ public:
 		// ARRANGE
 		std::string s = "aab";
 		std::vector<std::vector<std::string>> expectedOutput({{"a","a","b"},{"aa","b"}});
-		std::cout << "===== Test s = " << s << "; output = " << Vector2Str(expectedOutput) << " true =====" << std::endl;
+		// std::cout << "===== Test s = " << s << "; output = " << Vector2Str(expectedOutput) << " true =====" << std::endl;
 
 		// ACT
 		std::vector<std::vector<std::string>> result = this->mSolution.partition(s);
