@@ -4,6 +4,7 @@
 #include <sstream>
 #include <vector>
 #include <unordered_map>
+#include <functional>
 #include "StringMiscs.hpp"
 #include "OtherMiscs.hpp"
 
@@ -55,74 +56,89 @@ inline std::string Vector2Str(std::vector<T> vec)
 	return ret.str();
 }
 
+
+template<class T>
+inline std::string Vector2Str(std::vector<std::vector<T>> vec)
+{
+	if (!IsAcceptType<T>() && 
+		!std::is_same<T, char>::value &&
+		!std::is_same<T, std::string>::value) {
+		return "PrintVector could not print this type";
+	}
+
+	std::function<std::string(std::vector<std::vector<T>>&, int, int)> getVectorElem = 
+	[](std::vector<std::vector<T>> &vec, int i, int j) -> std::string
+	{
+		std::string ret;
+		if (std::is_same<T, std::string>::value) {
+			ret.append("\"");
+			ret.append(std::to_string(vec[i][j]));
+			ret.append("\"");
+		}
+		else if (std::is_same<T, char>::value) {
+			ret.push_back('\"');
+			ret.push_back(vec[i][j]);
+			ret.push_back('\"');
+		}
+		else {
+			ret = std::to_string(vec[i][j]);
+		}
+
+		return ret;
+	};
+
+	std::ostringstream ret;
+
+	int len = vec.size();
+	ret << "[";
+	for(int i = 0; i < len; i++){
+		if(i > 0)
+			ret << ", ";
+
+		ret << "[";
+		int _len = vec[i].size();
+		if(_len > 0){
+			ret << getVectorElem(vec, i, 0);
+			for(int j = 1; j < _len; j++){
+				ret << ", " << getVectorElem(vec, i, j);
+			}
+		}
+		ret << "]";
+	}
+	ret << "]";
+
+	return ret.str();
+}
+
+
+// template<>
+// inline std::string Vector2Str<std::vector<char>>(std::vector<std::vector<char>> vec)
+// {
+// 	std::ostringstream ret;
+
+// 	int len = vec.size();
+// 	ret << "[";
+// 	for(int i = 0; i < len; i++){
+// 		if(i > 0)
+// 			ret << ", ";
+
+// 		ret << "[";
+// 		int _len = vec[i].size();
+// 		if(_len > 0){
+// 			ret << '\"' << (char)vec[i][0] << '\"';
+// 			for(int j = 1; j < _len; j++){
+// 				ret << ", " << '\"' << (char)vec[i][j] << '\"';
+// 			}
+// 		}
+// 		ret << "]";
+// 	}
+// 	ret << "]";
+
+// 	return ret.str();
+// }
+
 template<class T>
 inline void PrintVector(std::vector<T> vec)
-{
-	std::string str = Vector2Str(vec);
-	std::cout << str << std::endl;
-}
-
-template<>
-inline std::string Vector2Str<std::vector<int>>(std::vector<std::vector<int>> vec)
-{
-	std::ostringstream ret;
-
-	int len = vec.size();
-	ret << "[";
-	for(int i = 0; i < len; i++){
-		if(i > 0)
-			ret << ", ";
-
-		ret << "[";
-		int _len = vec[i].size();
-		if(_len > 0){
-			ret << vec[i][0];
-			for(int j = 1; j < _len; j++){
-				ret << ", " << vec[i][j];
-			}
-		}
-		ret << "]";
-	}
-	ret << "]";
-
-	return ret.str();
-}
-
-template<>
-inline void PrintVector<std::vector<int>>(std::vector<std::vector<int>> vec)
-{
-	std::string str = Vector2Str(vec);
-	std::cout << str << std::endl;
-}
-
-template<>
-inline std::string Vector2Str<std::vector<char>>(std::vector<std::vector<char>> vec)
-{
-	std::ostringstream ret;
-
-	int len = vec.size();
-	ret << "[";
-	for(int i = 0; i < len; i++){
-		if(i > 0)
-			ret << ", ";
-
-		ret << "[";
-		int _len = vec[i].size();
-		if(_len > 0){
-			ret << '\"' << (char)vec[i][0] << '\"';
-			for(int j = 1; j < _len; j++){
-				ret << ", " << '\"' << (char)vec[i][j] << '\"';
-			}
-		}
-		ret << "]";
-	}
-	ret << "]";
-
-	return ret.str();
-}
-
-template<>
-inline void PrintVector<std::vector<char>>(std::vector<std::vector<char>> vec)
 {
 	std::string str = Vector2Str(vec);
 	std::cout << str << std::endl;

@@ -92,6 +92,7 @@ TEST(TestVectorMiscsClass, TestVector2Str_VectorVectorChar)
 
 	// ACT
 	std::string str = Vector2Str(data);
+	std::cout << str << std::endl;
 
 	// ASSERT
 	EXPECT_EQ(str, "[[\"a\", \"b\", \"c\"], [\"d\", \"e\", \"f\"]]");
