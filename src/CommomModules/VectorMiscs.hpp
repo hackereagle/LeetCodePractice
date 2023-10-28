@@ -376,6 +376,8 @@ inline std::vector<T> ConvertArrayToVector(T arr[], int count)
 	return ret;
 }
 
+// TODO: Let this function can parse string which have array or vector to vector<std::string>
+//		 My idea is iterator input string. If occur "[", combine character before "]". Otherwise combine character befor ",".
 inline std::vector<int> ConvertStringToVector(std::string input)
 {
 	std::vector<int> ret;
