@@ -12,9 +12,8 @@ template<class T>
 inline bool IsAcceptType()
 {
 	bool isAcceptType = false;
-	if(std::is_same<T, int>::value ||
-	   std::is_same<T, float>::value ||
-	   std::is_same<T, double>::value){
+	if(std::is_arithmetic<T>::value &&
+		std::is_same<char, T>::value == false){
 		isAcceptType = true;
 	}
 	else{
@@ -56,37 +55,15 @@ inline std::string Vector2Str(std::vector<T> vec)
 	return ret.str();
 }
 
-
 template<class T>
-inline std::string Vector2Str(std::vector<std::vector<T>> vec)
+inline void PrintVector(std::vector<T> vec)
 {
-	if (!IsAcceptType<T>() && 
-		!std::is_same<T, char>::value &&
-		!std::is_same<T, std::string>::value) {
-		return "PrintVector could not print this type";
-	}
+	std::string str = Vector2Str(vec);
+	std::cout << str << std::endl;
+}
 
-	std::function<std::string(std::vector<std::vector<T>>&, int, int)> getVectorElem = 
-	[](std::vector<std::vector<T>> &vec, int i, int j) -> std::string
-	{
-		std::string ret;
-		if (std::is_same<T, std::string>::value) {
-			ret.append("\"");
-			ret.append(std::to_string(vec[i][j]));
-			ret.append("\"");
-		}
-		else if (std::is_same<T, char>::value) {
-			ret.push_back('\"');
-			ret.push_back(vec[i][j]);
-			ret.push_back('\"');
-		}
-		else {
-			ret = std::to_string(vec[i][j]);
-		}
-
-		return ret;
-	};
-
+inline std::string Vector2Str(std::vector<std::vector<std::string>> vec)
+{
 	std::ostringstream ret;
 
 	int len = vec.size();
@@ -98,9 +75,9 @@ inline std::string Vector2Str(std::vector<std::vector<T>> vec)
 		ret << "[";
 		int _len = vec[i].size();
 		if(_len > 0){
-			ret << getVectorElem(vec, i, 0);
+			ret << "\"" << vec[i][0] << "\"";
 			for(int j = 1; j < _len; j++){
-				ret << ", " << getVectorElem(vec, i, j);
+				ret << ", \"" << vec[i][j] << "\"";
 			}
 		}
 		ret << "]";
@@ -110,35 +87,59 @@ inline std::string Vector2Str(std::vector<std::vector<T>> vec)
 	return ret.str();
 }
 
+inline std::string Vector2Str(std::vector<std::vector<char>> vec)
+{
+	std::ostringstream ret;
 
-// template<>
-// inline std::string Vector2Str<std::vector<char>>(std::vector<std::vector<char>> vec)
-// {
-// 	std::ostringstream ret;
+	int len = vec.size();
+	ret << "[";
+	for(int i = 0; i < len; i++){
+		if(i > 0)
+			ret << ", ";
 
-// 	int len = vec.size();
-// 	ret << "[";
-// 	for(int i = 0; i < len; i++){
-// 		if(i > 0)
-// 			ret << ", ";
+		ret << "[";
+		int _len = vec[i].size();
+		if(_len > 0){
+			ret << "\"" << (char)vec[i][0] << "\"";
+			for(int j = 1; j < _len; j++){
+				ret << ", \"" << (char)vec[i][j] << "\"";
+			}
+		}
+		ret << "]";
+	}
+	ret << "]";
 
-// 		ret << "[";
-// 		int _len = vec[i].size();
-// 		if(_len > 0){
-// 			ret << '\"' << (char)vec[i][0] << '\"';
-// 			for(int j = 1; j < _len; j++){
-// 				ret << ", " << '\"' << (char)vec[i][j] << '\"';
-// 			}
-// 		}
-// 		ret << "]";
-// 	}
-// 	ret << "]";
+	return ret.str();
+}
 
-// 	return ret.str();
-// }
+template<class T, typename = typename std::enable_if<std::is_arithmetic<T>::value && std::is_same<char, T>::value == false, T>::type>
+inline std::string Vector2Str(std::vector<std::vector<T>> vec)
+{
+	std::ostringstream ret;
+
+	int len = vec.size();
+	ret << "[";
+	for(int i = 0; i < len; i++){
+		if(i > 0)
+			ret << ", ";
+
+		ret << "[";
+		int _len = vec[i].size();
+		if(_len > 0){
+			ret << vec[i][0];
+			for(int j = 1; j < _len; j++){
+				ret << ", " << vec[i][j];
+			}
+		}
+		ret << "]";
+	}
+	ret << "]";
+
+	return ret.str();
+}
 
 template<class T>
-inline void PrintVector(std::vector<T> vec)
+inline void PrintVector(std::vector<std::vector<T>> vec)
 {
 	std::string str = Vector2Str(vec);
 	std::cout << str << std::endl;
@@ -176,8 +177,8 @@ inline bool IsTwoVectorEqual(std::vector<T> vec1, std::vector<T>vec2)
 	return isEqual;
 }
 
-template<>
-inline bool IsTwoVectorEqual(std::vector<std::vector<int>> vec1, std::vector<std::vector<int>> vec2)
+template<class T, typename = typename std::enable_if<std::is_arithmetic<T>::value && std::is_same<char, T>::value == false, T>::type>
+inline bool IsTwoVectorEqual(std::vector<std::vector<T>> vec1, std::vector<std::vector<T>> vec2)
 {
 	bool isEqual = false;
 	size_t len1 = vec1.size(), len2 = vec2.size();
@@ -185,9 +186,9 @@ inline bool IsTwoVectorEqual(std::vector<std::vector<int>> vec1, std::vector<std
 		isEqual = true;
 	}
 	else if(len1 == len2){
-		std::vector<std::vector<int>>::iterator it1 = vec1.begin(), e1 = vec1.end();
-		std::vector<int>::iterator _it1, _it2, _e1, _e2;
-		for (std::vector<std::vector<int>>::iterator it2 = vec2.begin(); it1 != e1; it1++, it2++){
+		typename std::vector<std::vector<T>>::iterator it1 = vec1.begin(), e1 = vec1.end();
+		typename std::vector<T>::iterator _it1, _it2, _e1, _e2;
+		for (typename std::vector<std::vector<T>>::iterator it2 = vec2.begin(); it1 != e1; it1++, it2++){
 			_it1 = it1->begin();
 			_it2 = it2->begin();
 			for (_e1 = it1->end(), _e2 = it2->end(); _it1 != _e1; _it1++, _it2++){

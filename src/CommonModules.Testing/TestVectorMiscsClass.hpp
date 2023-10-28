@@ -97,3 +97,16 @@ TEST(TestVectorMiscsClass, TestVector2Str_VectorVectorChar)
 	// ASSERT
 	EXPECT_EQ(str, "[[\"a\", \"b\", \"c\"], [\"d\", \"e\", \"f\"]]");
 }
+
+TEST(TestVectorMiscsClass, TestVector2Str_VectorVectorStr)
+{
+	// ARRANGE
+	std::vector<std::vector<std::string>> data({{"abc", "def", "gih"}, {"jkl", "mno", "pqr"}});
+
+	// ACT
+	std::string str = Vector2Str(data);
+	std::cout << str << std::endl;
+
+	// ASSERT
+	EXPECT_EQ(str, "[[\"abc\", \"def\", \"gih\"], [\"jkl\", \"mno\", \"pqr\"]]");
+}
