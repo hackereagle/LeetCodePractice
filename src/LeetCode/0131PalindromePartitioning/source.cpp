@@ -91,7 +91,63 @@ public:
 		// ARRANGE
 		std::string s = "aab";
 		std::vector<std::vector<std::string>> expectedOutput({{"a","a","b"},{"aa","b"}});
-		// std::cout << "===== Test s = " << s << "; output = " << Vector2Str(expectedOutput) << " true =====" << std::endl;
+		std::cout << "===== Test s = " << s << "; output = " << Vector2Str(expectedOutput) << " true =====" << std::endl;
+
+		// ACT
+		std::vector<std::vector<std::string>> result = this->mSolution.partition(s);
+
+		// ASSERT
+		AssertClass::GetInstance().Assert(IsTwoVectorEqual(result, expectedOutput));
+	}
+
+	void Example2()
+	{
+		// ARRANGE
+		std::string s = "a";
+		std::vector<std::vector<std::string>> expectedOutput({{"a"}});
+		std::cout << "===== Test s = " << s << "; output = " << Vector2Str(expectedOutput) << " true =====" << std::endl;
+
+		// ACT
+		std::vector<std::vector<std::string>> result = this->mSolution.partition(s);
+
+		// ASSERT
+		AssertClass::GetInstance().Assert(IsTwoVectorEqual(result, expectedOutput));
+	}
+
+	void Example3()
+	{
+		// ARRANGE
+		std::string s = "abcdcba";
+		std::vector<std::vector<std::string>> expectedOutput({{"a","b","c","d","c","b","a"},{"a","b","cdc","b","a"},{"a","bcdcb","a"},{"abcdcba"}});
+		std::cout << "===== Test s = " << s << "; output = " << Vector2Str(expectedOutput) << " true =====" << std::endl;
+
+		// ACT
+		std::vector<std::vector<std::string>> result = this->mSolution.partition(s);
+
+		// ASSERT
+		AssertClass::GetInstance().Assert(IsTwoVectorEqual(result, expectedOutput));
+	}
+
+	void Example4()
+	{
+		// ARRANGE
+		std::string s = "sdfghihgfkoi";
+		std::vector<std::vector<std::string>> expectedOutput({{"s","d","f","g","h","i","h","g","f","k","o","i"},{"s","d","f","g","hih","g","f","k","o","i"},{"s","d","f","ghihg","f","k","o","i"},{"s","d","fghihgf","k","o","i"}});
+		std::cout << "===== Test s = " << s << "; output = " << Vector2Str(expectedOutput) << " true =====" << std::endl;
+
+		// ACT
+		std::vector<std::vector<std::string>> result = this->mSolution.partition(s);
+
+		// ASSERT
+		AssertClass::GetInstance().Assert(IsTwoVectorEqual(result, expectedOutput));
+	}
+
+	void Example5()
+	{
+		// ARRANGE
+		std::string s = "sdfghihgfkoiiok";
+		std::vector<std::vector<std::string>> expectedOutput({{"s","d","f","g","h","i","h","g","f","k","o","i","i","o","k"},{"s","d","f","g","h","i","h","g","f","k","o","ii","o","k"},{"s","d","f","g","h","i","h","g","f","k","oiio","k"},{"s","d","f","g","h","i","h","g","f","koiiok"},{"s","d","f","g","hih","g","f","k","o","i","i","o","k"},{"s","d","f","g","hih","g","f","k","o","ii","o","k"},{"s","d","f","g","hih","g","f","k","oiio","k"},{"s","d","f","g","hih","g","f","koiiok"},{"s","d","f","ghihg","f","k","o","i","i","o","k"},{"s","d","f","ghihg","f","k","o","ii","o","k"},{"s","d","f","ghihg","f","k","oiio","k"},{"s","d","f","ghihg","f","koiiok"},{"s","d","fghihgf","k","o","i","i","o","k"},{"s","d","fghihgf","k","o","ii","o","k"},{"s","d","fghihgf","k","oiio","k"},{"s","d","fghihgf","koiiok"}});
+		std::cout << "===== Test s = " << s << "; output = " << Vector2Str(expectedOutput) << " true =====" << std::endl;
 
 		// ACT
 		std::vector<std::vector<std::string>> result = this->mSolution.partition(s);
@@ -108,6 +164,10 @@ int main(int argc, char** argv)
 {
 	TestPartition test;
 	test.Example1();
+	test.Example2();
+	test.Example3();
+	test.Example4();
+	test.Example5();
 	getchar();
 	return EXIT_SUCCESS;
 }

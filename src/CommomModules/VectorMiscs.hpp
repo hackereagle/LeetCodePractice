@@ -241,6 +241,38 @@ inline bool IsTwoVectorEqual(std::vector<std::vector<char>> vec1, std::vector<st
 	return isEqual;
 }
 
+template<>
+inline bool IsTwoVectorEqual(std::vector<std::vector<std::string>> vec1, std::vector<std::vector<std::string>> vec2)
+{
+	bool isEqual = false;
+	size_t len1 = vec1.size(), len2 = vec2.size();
+	if(len1 == 0 && len2 == 0){
+		isEqual = true;
+	}
+	else if(len1 == len2){
+		std::vector<std::vector<std::string>>::iterator it1 = vec1.begin(), e1 = vec1.end();
+		std::vector<std::string>::iterator _it1, _it2, _e1, _e2;
+		for (std::vector<std::vector<std::string>>::iterator it2 = vec2.begin(); it1 != e1; it1++, it2++){
+			_it1 = it1->begin();
+			_it2 = it2->begin();
+			for (_e1 = it1->end(), _e2 = it2->end(); _it1 != _e1; _it1++, _it2++){
+				if(*_it1 != *_it2){
+					isEqual = false;
+					break;
+				}
+				else{
+					isEqual = true;
+				}
+
+			}
+		}
+	}
+	else{
+		isEqual = false;
+	}
+	return isEqual;
+}
+
 template<class T>
 inline bool IsTwoVectorSimilar(std::vector<T> vec1, std::vector<T>vec2)
 {
