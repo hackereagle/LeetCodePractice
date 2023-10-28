@@ -149,7 +149,7 @@ template<class T>
 inline bool IsTwoVectorEqual(std::vector<T> vec1, std::vector<T>vec2)
 {
 	bool isEqual = false;
-	if(IsAcceptType<T>()){
+	if(std::is_arithmetic<T>::value || std::is_same<std::string, T>::value){
 		size_t len1 = vec1.size(), len2 = vec2.size();
 		if(len1 == 0 && len2 == 0){
 			isEqual = true;
