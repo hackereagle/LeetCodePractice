@@ -34,6 +34,32 @@ TEST(TestVectorMiscsClass, TestPrintNotAcceptTypeVector)
 	test.push_back(OtherStruct(1));
 	PrintVector<struct otherStruct>(test);
 }
+///// Test IsTwoVectorEqual /////
+TEST(TestVectorMiscsClass, TestCheckingTwoVectorEqual)
+{
+	std::vector<int> v1({1, 2, 3});
+	PrintVector<int>(v1);
+
+	std::vector<int> v2({1, 2, 3});
+	PrintVector<int>(v2);
+
+	bool isEqual = IsTwoVectorEqual(v1, v2);
+	EXPECT_TRUE(isEqual);
+}
+
+TEST(TestVectorMiscsClass, TestCheckingTwoVectorNotEqual)
+{
+	std::vector<int> v1({1, 2, 3});
+	PrintVector<int>(v1);
+
+	std::vector<int> v2({2, 3, 1});
+	PrintVector<int>(v2);
+
+	bool isEqual = IsTwoVectorEqual(v1, v2);
+	EXPECT_FALSE(isEqual);
+}
+
+///// Test IsVectorSimilar /////
 
 TEST(TestVectorMiscsClass, TestCheckingTwoVectorSimilar)
 {
@@ -70,6 +96,8 @@ TEST(TestVectorMiscsClass, TestCheckingTwoVectorNotSimilar)
 	bool isSimilar = IsTwoVectorSimilar<int>(v1, v2);
 	EXPECT_FALSE(isSimilar);
 }
+
+///// Test Vector2Str /////
 
 TEST(TestVectorMiscsClass, TestVector2Str_VectorVectorInt)
 {
