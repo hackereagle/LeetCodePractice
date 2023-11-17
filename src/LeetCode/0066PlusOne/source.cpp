@@ -92,6 +92,34 @@ public:
 		AssertClass::GetInstance().Assert(IsTwoVectorEqual(result,expectedOutput));
 	}
 
+	void Example4()
+	{
+		// ARRANGE
+		std::vector<int> digits({9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9});
+		std::vector<int> expectedOutput({1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0});
+		std::cout << "===== Test digits = " << Vector2Str(digits) << "; output = " << Vector2Str(expectedOutput) << " =====" << std::endl;
+
+		// ACT
+		std::vector<int> result = this->mSolution.plusOne(digits);
+
+		// ASSERT
+		AssertClass::GetInstance().Assert(IsTwoVectorEqual(result,expectedOutput));
+	}
+
+	void Example5()
+	{
+		// ARRANGE
+		std::vector<int> digits({9,9,9,9,9,9,9,9,9,9,  9,9,9,9,9,9,9,9,9,9,  9,9,9,9,9,9,9,9,9,9,  9,9,9,9,9,9,9,9,9,9,  9,9,9,9,9,9,9,9,9,9,    9,9,9,9,9,9,9,9,9,9,  9,9,9,9,9,9,9,9,9,9,  9,9,9,9,9,9,9,9,9,9,  9,9,9,9,9,9,9,9,9,9,  9,9,9,9,9,9,9,9,9,9});
+		std::vector<int> expectedOutput({1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0});
+		std::cout << "===== Test digits = " << Vector2Str(digits) << "; output = " << Vector2Str(expectedOutput) << " =====" << std::endl;
+
+		// ACT
+		std::vector<int> result = this->mSolution.plusOne(digits);
+
+		// ASSERT
+		AssertClass::GetInstance().Assert(IsTwoVectorEqual(result,expectedOutput));
+	}
+
 private:
 	Solution mSolution;
 };
@@ -102,6 +130,8 @@ int main(int argc, char** argv)
 	test.Example1();
 	test.Example2();
 	test.Example3();
+	test.Example4();
+	test.Example5();
 	getchar();
 	return EXIT_SUCCESS;
 }
