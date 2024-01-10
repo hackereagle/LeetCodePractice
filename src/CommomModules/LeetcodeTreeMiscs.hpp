@@ -171,7 +171,7 @@ inline std::string ToLeetcodeStr(TreeNode* root)
     q.push(root);
     TreeNode* cur = nullptr;
     size_t idx = 0;
-    std::cout << "[";
+    ss << "[";
     while (q.size() > 0) {
         cur = q.front();
         q.pop();
