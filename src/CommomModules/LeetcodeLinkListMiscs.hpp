@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include <sstream>
+#include "StringMiscs.hpp"
 
 #define CONVERT_ARRAY_2_LINK_LIST(arr) ConvertArrayToLinkList((arr), sizeof((arr)) / sizeof((arr)[0]))
 
@@ -67,6 +68,23 @@ inline ListNode* ConvertArrayToLinkList(int arr[], int count)
 			}
 		}
 	}
+	return head;
+}
+
+inline ListNode* CreateListFromLeetcodeString(std::string str)
+{
+	std::string arr = RemoveFrontAndEndSquareBracket(str);
+
+	ListNode* head = nullptr;
+	if (str.size() > 0) {
+		std::vector<std::string> vec = SplitString(arr, ",");
+		std::vector<int> vecInt;
+		for (auto &e : vec) {
+			vecInt.push_back(std::stoi(e));
+		}
+		head = ConvertVector2LinkList(vecInt);
+	}
+	
 	return head;
 }
 
