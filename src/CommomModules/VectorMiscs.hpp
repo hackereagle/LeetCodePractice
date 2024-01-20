@@ -246,6 +246,7 @@ inline bool IsTwoVectorEqual(std::vector<std::vector<std::string>> vec1, std::ve
 {
 	bool isEqual = false;
 	size_t len1 = vec1.size(), len2 = vec2.size();
+	// std::cout << "len1: " << len1 << ", len2: " << len2 << std::endl;
 	if(len1 == 0 && len2 == 0){
 		isEqual = true;
 	}
