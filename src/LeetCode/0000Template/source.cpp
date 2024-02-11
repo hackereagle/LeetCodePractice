@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include "StopWatch.hpp"
 #include "AssertClass.hpp"
 
 class Solution
@@ -32,10 +33,14 @@ public:
 		std::cout << "===== Test input " << input << "; output true =====" << std::endl;
 
 		// ACT
+		StopWatch stopWatch;
+		stopWatch.Start();
 		bool result = this->mSolution.isValid(input);
+		stopWatch.Stop();
 
 		// ASSERT
 		AssertClass::GetInstance().Assert(result == expectedOutput);
+		std::cout << "elapsed time = " << stopWatch.GetElapsed() << " ms\n" << std::endl;
 	}
 
 private:
