@@ -4,6 +4,7 @@
 #include "TestVectorMiscsClass.hpp"
 #include "TestLeetcodeGraphMiscsClass.hpp"
 #include "TestStopWatch.hpp"
+#include "TestLeetcodeLinkListMiscsClass.hpp"
 
 int main(int argc, char** argv)
 {

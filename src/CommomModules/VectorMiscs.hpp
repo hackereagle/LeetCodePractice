@@ -399,3 +399,11 @@ inline std::vector<int> ConvertStringToVector(std::string input)
 
 	return ret;
 }
+
+// refer to https://stackoverflow.com/questions/4077609/overloading-output-stream-operator-for-vectort
+template < class T >
+inline std::ostream& operator << (std::ostream& os, const std::vector<T>& v) 
+{
+    os << Vector2Str(v);
+    return os;
+}

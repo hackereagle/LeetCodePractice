@@ -142,3 +142,10 @@ inline ListNode* CopyListNode(ListNode* head)
 	}
 	return ret;
 }
+
+template < class T >
+inline std::ostream& operator << (std::ostream& os, ListNode* v) 
+{
+    os << List2Str(v);
+    return os;
+}

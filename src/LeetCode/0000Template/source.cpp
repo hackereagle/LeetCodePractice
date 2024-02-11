@@ -37,10 +37,10 @@ public:
 		stopWatch.Start();
 		bool result = this->mSolution.isValid(input);
 		stopWatch.Stop();
+		std::cout << "elapsed time = " << stopWatch.GetElapsed() << " ms\n" << std::endl;
 
 		// ASSERT
 		AssertClass::GetInstance().Assert(result == expectedOutput);
-		std::cout << "elapsed time = " << stopWatch.GetElapsed() << " ms\n" << std::endl;
 	}
 
 private:
