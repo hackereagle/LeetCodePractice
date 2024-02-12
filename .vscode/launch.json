@@ -9,7 +9,7 @@
             "type": "cppdbg",
             "request": "launch",
             //"program": "${workspaceFolder}/build/ReverseNodesInKGroup/ReverseListNodeInKGroup",
-            "program": "${workspaceFolder}/build/0019RemoveNthFromeEndOfList/RemoveNthFromeEndOfList",
+            "program": "${workspaceFolder}/build/bin/CommonModulesTesting",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
@@ -24,6 +24,19 @@
                     "ignoreFailures": true
                 }
             ]
+        },
+        {
+            "name": "(lldb) Launch",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/bin/CommonModulesTesting",
+            "args": [],
+            "stopAtEntry": false,
+            // "cwd": "${fileDirname}",
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "lldb",
         }
     ]
 }

@@ -39,18 +39,18 @@ TEST(TestLeetcodeLinkListMiscsClass, TestCreateListFromLeetcodeString)
 // The catch std::cout way refer to https://stackoverflow.com/questions/3803465/how-to-capture-stdout-stderr-with-googletest
 TEST(TestLeetcodeLinkListMiscsClass, TestStdCout)
 {
-	// // arrange
-	// testing::internal::CaptureStdout();
-	// std::string leetcodeStr = "[1,2,3,4,5]";
-	// ListNode* head = CreateListFromLeetcodeString(leetcodeStr);
+	// arrange
+	testing::internal::CaptureStdout();
+	std::string leetcodeStr = "[1,2,3,4,5]";
+	ListNode* head = CreateListFromLeetcodeString(leetcodeStr);
 
-	// // action
-	// std::cout << head;
-	// std::string output = testing::internal::GetCapturedStdout();
+	// action
+	std::cout << head;
+	std::string output = testing::internal::GetCapturedStdout();
 
-	// // assert
-	// EXPECT_EQ(output, leetcodeStr);
+	// assert
+	EXPECT_EQ(output, "[1, 2, 3, 4, 5]");
 	
-	// // release
-	// ReleaseList(head);
+	// release
+	ReleaseList(head);
 }
