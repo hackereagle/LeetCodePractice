@@ -32,7 +32,6 @@
             "program": "${workspaceFolder}/build/bin/CommonModulesTesting",
             "args": [],
             "stopAtEntry": false,
-            // "cwd": "${fileDirname}",
             "cwd": "${workspaceFolder}",
             "environment": [],
             "externalConsole": false,
