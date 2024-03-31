@@ -29,7 +29,7 @@
             "name": "(lldb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/build/bin/CommonModulesTesting",
+            "program": "${workspaceFolder}/build/bin/RangeSumQueryImmutable",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
