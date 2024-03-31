@@ -10,35 +10,35 @@ class NumArray
 {
 public:
 	NumArray(std::vector<int>& nums) {
-        _nums = nums;
-        int len = nums.size();
-        _integralArr = std::vector<int>(len, 0);
-        for (int i = 0; i < len; i++) {
-            if (i == 0) {
-                _integralArr[i] = nums[i];
-            }
-            else {
-                _integralArr[i] = _integralArr[i - 1] + nums[i];
-            }
-        }
-        //PrintVector(_integralArr);
-    }
-    
-    int sumRange(int left, int right) {
-        return _integralArr[right] - _integralArr[left] + _nums[left];
-    }
+		_nums = nums;
+		int len = nums.size();
+		_integralArr = std::vector<int>(len, 0);
+		for (int i = 0; i < len; i++) {
+			if (i == 0) {
+				_integralArr[i] = nums[i];
+			}
+			else {
+				_integralArr[i] = _integralArr[i - 1] + nums[i];
+			}
+		}
+		//PrintVector(_integralArr);
+	}
+	
+	int sumRange(int left, int right) {
+		return _integralArr[right] - _integralArr[left] + _nums[left];
+	}
 
 private:
-    std::vector<int> _nums;
-    std::vector<int> _integralArr;
+	std::vector<int> _nums;
+	std::vector<int> _integralArr;
 
-    void PrintVector(std::vector<int> &vec)
-    {
-        std::cout << "[";
-        for (auto v : vec)
-            std::cout << v << " ";
-        std::cout << "]" << std::endl;
-    }
+	void PrintVector(std::vector<int> &vec)
+	{
+		std::cout << "[";
+		for (auto v : vec)
+			std::cout << v << " ";
+		std::cout << "]" << std::endl;
+	}
 };
 /**
  * Your NumArray object will be instantiated and called as such:
