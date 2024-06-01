@@ -16,6 +16,9 @@ struct ListNode {
 
 inline std::string List2Str(ListNode *head)
 {
+	if (head == nullptr)
+		return "[]";
+
 	std::ostringstream ss;
 
 	ListNode **disp = &head;
@@ -76,7 +79,8 @@ inline ListNode* CreateListFromLeetcodeString(std::string str)
 	std::string arr = RemoveFrontAndEndSquareBracket(str);
 
 	ListNode* head = nullptr;
-	if (str.size() > 0) {
+	// if (str.size() > 0) {
+	if (arr.size() > 0) {
 		std::vector<std::string> vec = SplitString(arr, ",");
 		std::vector<int> vecInt;
 		for (auto &e : vec) {
