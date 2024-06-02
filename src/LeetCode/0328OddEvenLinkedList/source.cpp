@@ -7,11 +7,11 @@
 /**
  * Definition for singly-linked list.
  * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ *	 int val;
+ *	 ListNode *next;
+ *	 ListNode() : val(0), next(nullptr) {}
+ *	 ListNode(int x) : val(x), next(nullptr) {}
+ *	 ListNode(int x, ListNode *next) : val(x), next(next) {}
  * };
  */
 class Solution
@@ -25,39 +25,39 @@ public:
 	
 	ListNode* oddEvenList(ListNode* head) {
 		if (head == nullptr || head->next == nullptr)
-            return head;
+			return head;
 
-        ListNode* cur = head;
-        int count = 1;
+		ListNode* cur = head;
+		int count = 1;
 
-        ListNode* oddHead = head;
-        ListNode* evenHead = nullptr;
-        cur = cur->next;
+		ListNode* oddHead = head;
+		ListNode* evenHead = nullptr;
+		cur = cur->next;
 
-        count = count + 1;
-        evenHead = cur;
+		count = count + 1;
+		evenHead = cur;
 
-        cur = cur->next;
-        ListNode* oddCur = oddHead;
-        ListNode* evenCur = evenHead;
-        while (cur) {
-            count = count + 1;
-            
-            if ((count & 1) == 1) {
-                oddCur->next = cur;
-                oddCur = oddCur->next;
-            }
-            else {
-                evenCur->next = cur;
-                evenCur = evenCur->next;
-            }
-            cur = cur->next;
-        }
-        evenCur->next = nullptr;
+		cur = cur->next;
+		ListNode* oddCur = oddHead;
+		ListNode* evenCur = evenHead;
+		while (cur) {
+			count = count + 1;
+			
+			if ((count & 1) == 1) {
+				oddCur->next = cur;
+				oddCur = oddCur->next;
+			}
+			else {
+				evenCur->next = cur;
+				evenCur = evenCur->next;
+			}
+			cur = cur->next;
+		}
+		evenCur->next = nullptr;
 
-        oddCur->next = evenHead;
-        return oddHead;
-    }
+		oddCur->next = evenHead;
+		return oddHead;
+	}
 };
 
 class TestOddEvenList
