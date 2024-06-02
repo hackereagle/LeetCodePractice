@@ -12,11 +12,24 @@
 struct TreeNode 
 {
     int val;
-    TreeNode *left;
-    TreeNode *right;
+    TreeNode *left = nullptr;
+    TreeNode *right = nullptr;
     TreeNode() : val(0), left(nullptr), right(nullptr) {}
     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+    ~TreeNode() {
+        if (left) {
+            delete left;
+            left = nullptr;
+        }
+
+        if (right) {
+            delete right;
+            right = nullptr;
+        }
+
+        std::cout << "node [" << val << "] deleted" << std::endl;
+    }
 };
 
 inline TreeNode* CreateBinaryTreeNodeFromArray(std::string *arr, int len, int idx)
@@ -155,9 +168,9 @@ inline bool IsTwoTreeEqual(TreeNode* l, TreeNode* r)
 inline void ReleaseTree(TreeNode* &node)
 {
     if(node){
-        ReleaseTree(node->left);
-        ReleaseTree(node->right);
-        std::cout << "node [" << node->val << "] deleted" << std::endl;
+        // ReleaseTree(node->left);
+        // ReleaseTree(node->right);
+        // std::cout << "node [" << node->val << "] deleted" << std::endl;
         delete node;
         node = nullptr;
     }
